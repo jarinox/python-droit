@@ -15,6 +15,7 @@
 import time, importlib, os
 
 
+
 def isValidLine(ddaFileLine):
 		valid = True
 		if not("->" in ddaFileLine) or (len(ddaFileLine.split("->")) != 2):
