@@ -2,8 +2,8 @@
 # droit core for python
 #
 # Author               Jakob Stolze
-# Version              v0.4.0.1
-# Date last modified   11.05.2019
+# Version              v0.4.0.2
+# Date last modified   13.06.2019
 # Date created         08.05.2019
 # Python Version       3.x
 #
@@ -110,6 +110,7 @@ def useRules(rules, userinput):
 						if(rules[i][0][j][1] == "" or userinput[k] in rules[i][0][j][1].split(",")):
 							variables.append([rules[i][0][j][0].split("*")[1], userinput[k]])
 							rcount += 1
+							ranking += 1
 				
 				elif("INP2" == rules[i][0][j][0].split("*")[0]):
 					if(len(userinput) > j and k == j):
@@ -119,6 +120,7 @@ def useRules(rules, userinput):
 						if(rules[i][0][j][1] == "" or varadd in rules[i][0][j][1].split(",")):
 							variables.append([rules[i][0][j][0].split("*")[1], varadd])
 							rcount += 1
+							ranking += 1
 				
 				elif(rules[i][0][j][0].lower() in os.listdir("plugins/input")):
 					p = importlib.import_module("plugins.input." + rules[i][0][j][0].lower() + ".main")
@@ -219,4 +221,4 @@ def simpleIO(userinput, databasePath):
 		return ""
 
 # print(simpleIO("wie geht es dir", "main.dda"))
-print(parseDDA("main.dda"))
+# print(parseDDA("main.dda"))
