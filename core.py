@@ -188,7 +188,8 @@ def runOutputPlugin(plugin, variables):
 	# The current problem is to pass multiple arguments from a string to the method
 	
 	open("plug.py", "w").write("from plugins.output." + plugin[0] + " import main as " + plugin[0] + "\ndef main():\n    return " + plugin[0] + "." + plugin[1])
-	import plug
+	plug = importlib.import_module("plug")
+	importlib.reload(plug)
 	return plug.main()
 	
 	# --------------------------------------------------------------------
