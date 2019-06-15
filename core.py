@@ -3,7 +3,7 @@
 #
 # Author               Jakob Stolze
 # Version              v0.4.0.2
-# Date last modified   13.06.2019
+# Date last modified   15.06.2019
 # Date created         08.05.2019
 # Python Version       3.x
 #
@@ -67,7 +67,6 @@ def prepareInput(userinput):
 	for i in range(0, len(rmchars)): # remove unnecessary characters
 		userinput = userinput.replace(rmchars[i], "")
 	userinput = userinput.replace("  ", " ") # double blank to single blank
-	userinput = userinput.lower() # characters to lower
 	userinput = userinput.split(" ") # split up words at blank
 	return userinput
 
@@ -87,13 +86,13 @@ def useRules(rules, userinput):
 			for k in range(0, len(userinput)): # user every word of the userinput
 				
 				if("TEXT" == rules[i][0][j][0]):
-					if(userinput[k] in rules[i][0][j][1].split(",")):
+					if(userinput[k].lower() in rules[i][0][j][1].split(",")):
 						rcount += 1
 				
 				elif("NOTX" == rules[i][0][j][0]):
 					notx = True
 					for l in range(0, len(userinput)):
-						if(userinput[l] in rules[i][0][j][1].split(",")):
+						if(userinput[l].lower() in rules[i][0][j][1].split(",")):
 							notx = False
 					if(notx):
 						rcount += 1
@@ -101,7 +100,7 @@ def useRules(rules, userinput):
 					break
 				
 				elif("SRTX" == rules[i][0][j][0]):
-					if(uip in rules[i][0][j][1].split(",")):
+					if(uip.lower() in rules[i][0][j][1].split(",")):
 						rcount = len(rules[i][0])
 						srtx = True
 				
