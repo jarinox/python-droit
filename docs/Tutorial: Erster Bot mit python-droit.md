@@ -58,7 +58,7 @@ Damit dieser Bot funktioniert, benötigen wir eine DDS Datei. Für den Anfang ka
 ## Eigener DDS Script
 
 Die erste Methode um dem Bot weiter Funktionen hinzuzufügen ist, die .dda Datei (mit dem DDS) zu erweitern.
-Hilfreich um die Skriptsprache zu lernen ist die [Dokumentation zum Droit Database Script](https://github.com/jaybeejs/python-droit/blob/master/docs/Documentation.md). Diese Dokumentation ist sehr hilfreich - du kannst immer zu ihr zurückkehren und die Funktionsweiße des DDS nachschlagen.
+Hilfreich um die Skriptsprache zu lernen ist die [Dokumentation zum Droit Database Script](https://github.com/jaybeejs/python-droit/blob/master/docs/Droit%20Database%20Script.md). Diese Dokumentation ist sehr hilfreich - du kannst immer zu ihr zurückkehren und die Funktionsweiße des DDS nachschlagen.
 
 Wir wollen nun das `math` Plugin von python-droit ansprechen. Der DDS Script sieht so aus:
 
