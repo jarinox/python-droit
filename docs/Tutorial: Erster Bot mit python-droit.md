@@ -35,11 +35,12 @@ from pydroit import core as droit
 
 running = True
 
+dda = droit.parseDDA("dateiname-der-datenbank.dda")      # Zuweißungen werden aus einer Datei eingelesen
+
 while(running):
     try:
         eingabe = input("Geben Sie etwas ein: ")                 # Nutzereingabe einlesen
         eingabe-vorbereitet = droit.prepareInput(eingabe)        # Nutzereingabe wird für den Computer leserlich gemacht
-        dda = droit.parseDDA("dateiname-der-datenbank.dda")      # Zuweißungen werden aus einer Datei eingelesen
         zuweissungen = droit.useRules(dda, eingabe-vorbereitet)  # Es wird eine passende Zuweißung gesucht
         if(zuweissungen != []):                                                               # Falls ein Ergebnis gefunden wird...
             variablen = droit.createVariables(inpVars=zuweissungen[0][1], userinput=eingabe)  # Erstelle Variablen
