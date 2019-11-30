@@ -6,10 +6,10 @@
 - bool **isValidLine**(String *ddaFileLine*)
 - List **parseDDA**(String *filename*, \[String *mode="strict"*\])
 - List **prepareInput**(String *userinput*)
-- List **useRules**(List *rules*, String *userinput*)
+- List **useRules**(List *rules*, String *userinput*, ResourcePackage *rpack=None*)
 - List **createVariables**(List *inpVars=[]*, String *username="unknown"*, String *droitname="Droit"*, String *userinput=""* )
-- String **runOutputPlugin**(String *plugin*, List *variables*)
-- String **formatOut**(List *outRules*, List *variables*)
+- String **runOutputPlugin**(String *plugin*, List *variables*, ResourcePackage *rpack=None*)
+- String **formatOut**(List *outRules*, List *variables*, ResourcePackage *rpack=None*)
 - String **simpleIO**(String *userinput*, String *databasePath*)
 
 ## Method Documentation
@@ -25,7 +25,7 @@ returnValue\[*line*\]\[*input_or_output*\]\[*block*\]\[*blockname_or_value*\]
 #### List prepareInput(String *userinput*)
 Removes unneccesarry characters from userinput and splits it up at spaces.
 
-#### List useRules(List *rules*, String *userinput*)
+#### List useRules(List *rules*, String *userinput*, ResourcePackage *rpack=None*)
 Uses rules gathered with `parseDDA()` on an userinput which was prepared with `prepareInput()`.
 Returns a list of all possible output-rules sorted by relevance.
 
@@ -38,12 +38,20 @@ Creates a list of variables. To the optionally given input-variables there are s
 - global.droitname
 - global.userinput
 
-#### String runOutputPlugin(String *plugin*, List *variables*)
+#### String runOutputPlugin(String *plugin*, List *variables*, ResourcePackage *rpack=None*)
 Runs a plugin and returns the plugins return value.
 The string *plugin* is the text given after the exclamation mark of the `EVAL` block.
 
-#### String formatOut(List *outRules*, List *variables*)
+#### String formatOut(List *outRules*, List *variables*, ResourcePackage *rpack=None*)
 Runs the output-rules and returns an answer. Therefore it needs variables prepared by `createVariables()`.
 
 #### String simpleIO(String *userinput*, String *databasePath*)
 Can be used to build a very simple chat bot. Uses the userinput on a given .dda file and returns an answer. It runs throug all the methods explained aboth.
+
+
+## Classes
+- ResourcePackage(*gmrModule=None*, *gmrDatabase=None*)
+
+## Class Documentation
+#### ResourcePackage(*gmrModule=None*, *gmrDatabase=None*)
+Package to provide the initialized grammar module to the plugins.
