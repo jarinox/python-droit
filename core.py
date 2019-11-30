@@ -2,18 +2,23 @@
 # droit core for python
 #
 # Author               Jakob Stolze
-# Version              v0.4.0.2
-# Date last modified   15.06.2019
+# Version              v0.4.1.2
+# Date last modified   30.11.2019
 # Date created         08.05.2019
 # Python Version       3.x
 #
-# DDS Version          v0.4
+# DDS Version          v0.5
 #
 # Copyright 2019 Jakob Stolze 
 
 
-import time, importlib, os
+import time, importlib, os, json
 
+
+class ResourcePackage:
+	def __init__(self, gmrModule=None, gmrDatabase=None):
+		self.gmrModule = gmrModule
+		self.gmrDatabase = gmrDatabase
 
 
 def isValidLine(ddaFileLine):
@@ -71,7 +76,7 @@ def prepareInput(userinput):
 	return userinput
 
 
-def useRules(rules, userinput):
+def useRules(rules, userinput, rpack=None):
 	hits = []
 	uip = userinput[0]
 	for i in range(1, len(userinput)):
@@ -123,7 +128,7 @@ def useRules(rules, userinput):
 				
 				elif(rules[i][0][j][0].lower() in os.listdir("plugins/input")):
 					p = importlib.import_module("plugins.input." + rules[i][0][j][0].lower() + ".main")
-					pback = p.block(userinput, k, rules[i][0][j][1])
+					pback = p.block(userinput, k, rules[i][0][j][1], rpack)
 					if(pback[0]):
 						if(p.rcountAdd):
 							rcount += 1
@@ -160,41 +165,35 @@ def createVariables(inpVars=[], username="unknown", droitname="Droit", userinput
 	return variables
 
 
-def runOutputPlugin(plugin, variables):
+def runOutputPlugin(plugin, variables, rpack=None):
 	plugin = plugin.split(".", 1)
 	for i in range(0, len(variables)):
 		if("*" + variables[i][0] in plugin[1]):
 			plugin[1] = plugin[1].replace("*" + variables[i][0], "\"" + variables[i][1] + "\"")
 	
-	# ~ isMethod = False
-	# ~ if("(" in plugin[1]):
-		# ~ isMethod = True
-		# ~ plugin.append(plugin[1].split("(")[1][:-1].replace('"', ""))
-		# ~ plugin[1] = plugin[1].split("(")[0]
+	isMethod = False
+	if("(" in plugin[1]):
+		isMethod = True
+		plugin.append(plugin[1].split("(")[1][:-1].replace('"', ""))
+		plugin[1] = plugin[1].split("(")[0]
 	
-	# ~ plug = importlib.import_module("plugins.output." + plugin[0] + ".main")
-	# ~ method = getattr(plug, plugin[1])
-	# ~ if(isMethod):
-		# ~ if(plugin[1][1] != ""):
-			# ~ return method(plugin[2])
-		# ~ else:
-			# ~ return method()
-	# ~ else:
-		# ~ return method
+	params = []
+	for i in range(2, len(plugin)):
+		params.append(plugin[i])
 	
-	# --------------------------------------------------------------------
-	# This is just a temporal work-around for the outcommented script above
-	# The current problem is to pass multiple arguments from a string to the method
+	plug = importlib.import_module("plugins.output." + plugin[0] + ".main")
+	method = getattr(plug, plugin[1])
 	
-	open("plug.py", "w").write("from plugins.output." + plugin[0] + " import main as " + plugin[0] + "\ndef main():\n    return " + plugin[0] + "." + plugin[1])
-	plug = importlib.import_module("plug")
-	importlib.reload(plug)
-	return plug.main()
-	
-	# --------------------------------------------------------------------
+	if(isMethod):
+		if(plugin[1][1] != ""):
+			return method(params, rpack)
+		else:
+			return method(rpack)
+	else:
+		return methodW
 
 
-def formatOut(outRules, variables):
+def formatOut(outRules, variables, rpack=None):
 	output = ""
 	for i in range(0, len(outRules)):
 		
@@ -207,7 +206,7 @@ def formatOut(outRules, variables):
 					output += variables[j][1]
 				
 		if("EVAL" == outRules[i][0]):
-			output += runOutputPlugin(outRules[i][1], variables)
+			output += runOutputPlugin(outRules[i][1], variables, rpack=rpack)
 	
 	output = output.replace("&arz;", "!").replace("&dpp;", ":")
 	return output
@@ -220,5 +219,4 @@ def simpleIO(userinput, databasePath):
 	else:
 		return ""
 
-# print(simpleIO("wie geht es dir", "main.dda"))
-# print(parseDDA("main.dda"))
+

@@ -14,5 +14,5 @@ brk = False             # perform a break?
 
 
 # Code your block here
-def block(userinput, k, options):
+def block(userinput, k, options, rpack=None):
 	return [(userinput[k] in options.split(",")), ""]
