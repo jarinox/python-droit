@@ -53,7 +53,7 @@ while(running):
 ```
 
 
-Damit dieser Bot funktioniert, benötigen wir eine DDS Datei. Für den Anfang kannst du dir eine vorgefertigte Datei hier [herunterladen](http://localhost:3000/droit/general-resources/src/branch/master/DDS/german-sample.dda).
+Damit dieser Bot funktioniert, benötigen wir eine DDS Datei. Für den Anfang kannst du dir eine vorgefertigte Datei hier [herunterladen](https://github.com/jaybeejs/python-droit/blob/master/sample/german-sample.dda).
 
 
 ## Eigener DDS Script
