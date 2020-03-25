@@ -16,35 +16,41 @@ import time, importlib, os, json
 
 
 class ResourcePackage:
+	"""
+	Object used to provide resources like the grammar database
+	from the main script to the plugins.
+	"""
 	def __init__(self, gmrModule=None, gmrDatabase=None):
 		self.gmrModule = gmrModule
 		self.gmrDatabase = gmrDatabase
 
 
 def isValidLine(ddaFileLine):
-		valid = True
-		if not("->" in ddaFileLine) or (len(ddaFileLine.split("->")) != 2):
+	"""Checks wether a Droit Database rule is valid or e.g. a comment."""
+	valid = True
+	if not("->" in ddaFileLine) or (len(ddaFileLine.split("->")) != 2):
+		valid = False
+	if valid:
+		if(ddaFileLine.split("->")[0] == "" or ddaFileLine.split("->")[1] == ""):
 			valid = False
-		if valid:
-			if(ddaFileLine.split("->")[0] == "" or ddaFileLine.split("->")[1] == ""):
+	if valid:
+		lin = ddaFileLine.split("->")[0].split(":")
+		for i in range(0, len(lin)):
+			block = lin[i].split("!")[0]
+			if("*" in block):
+				block = block.split("*")[0]
+			if(len(lin[i].split("!")) != 2):
 				valid = False
-		if valid:
-			lin = ddaFileLine.split("->")[0].split(":")
-			for i in range(0, len(lin)):
-				block = lin[i].split("!")[0]
-				if("*" in block):
-					block = block.split("*")[0]
-				if(len(lin[i].split("!")) != 2):
-					valid = False
-		if valid:
-			lout = ddaFileLine.split("->")[1].split(":")
-			for i in range(0, len(lout)):
-				block = lout[i].split("!")[0]
-				if(len(lout[i].split("!")) != 2):
-					valid = False
-		return valid
+	if valid:
+		lout = ddaFileLine.split("->")[1].split(":")
+		for i in range(0, len(lout)):
+			block = lout[i].split("!")[0]
+			if(len(lout[i].split("!")) != 2):
+				valid = False
+	return valid
 
 def parseDDA(filename, mode="strict"):
+	"""Parse a Droit Database (.dda) file."""
 	ddaFile = open(filename, "r").read().split("\n")
 	ddaData = []
 	for i in range(0, len(ddaFile)):
@@ -68,6 +74,10 @@ def parseDDA(filename, mode="strict"):
 
 
 def prepareInput(userinput):
+	"""
+	Removes unnecessary characters and splits the words at blanks.
+	Returns a list.
+	"""
 	rmchars = [",", ":", "!", ".", "-", "?", ";", "'", "\"", "(", ")", "$"]
 	for i in range(0, len(rmchars)): # remove unnecessary characters
 		userinput = userinput.replace(rmchars[i], "")
@@ -77,6 +87,10 @@ def prepareInput(userinput):
 
 
 def useRules(rules, userinput, rpack=None):
+	"""
+	Uses a parsed Droit Database and runs every rule onto the userinput.
+	Returns all possible rules sorted by relevance.
+	"""
 	hits = []
 	uip = userinput[0]
 	for i in range(1, len(userinput)):
@@ -154,6 +168,10 @@ def useRules(rules, userinput, rpack=None):
 
 
 def createVariables(inpVars=[], username="unknown", droitname="Droit", userinput=""):
+	"""
+	Create a list of variables containing all necessary pieces of data
+	for formatOut and runOutputPlugin.
+	"""
 	variables = []
 	variables.append(["global.time", time.strftime("%H:%M")])
 	variables.append(["global.date", time.strftime("%d.%m.%Y")])
@@ -166,6 +184,7 @@ def createVariables(inpVars=[], username="unknown", droitname="Droit", userinput
 
 
 def runOutputPlugin(plugin, variables, rpack=None):
+	"""Evaluates a plugin."""
 	plugin = plugin.split(".", 1)
 	for i in range(0, len(variables)):
 		if("*" + variables[i][0] in plugin[1]):
@@ -194,6 +213,7 @@ def runOutputPlugin(plugin, variables, rpack=None):
 
 
 def formatOut(outRules, variables, rpack=None):
+	"""Evaluates a Droit Database rule."""
 	output = ""
 	for i in range(0, len(outRules)):
 		
@@ -213,6 +233,12 @@ def formatOut(outRules, variables, rpack=None):
 
 
 def simpleIO(userinput, databasePath):
+	"""
+	Simple function to test a database and to create simple bots.
+	The use is restricted and not recommended because no resources
+	can be provided.
+	Use an own script to create more complex bots.
+	"""
 	x = useRules(parseDDA(databasePath), prepareInput(userinput))
 	if(x != []):
 		return formatOut(x[0][0], createVariables(inpVars=x[0][1], userinput=userinput))

@@ -1,0 +1,25 @@
+    Datenbank fuer Droit: Beispiel auf Deutsch
+
+
+    SRTX!hallo,guten tag,hay,hoi->TEXT!Hallo
+    TEXT!wie:TEXT!geht,gehts,geht's:TEXT!dir->TEXT!Mir geht es gut&arz;
+    SRTX!wie gehts->TEXT!Gut&arz;
+    TEXT!ich:TEXT!bin,heiße:INP*name!->TEXT!Hallo :VAR!inp.name
+    TEXT!wer,wie:TEXT!bist,heißt:TEXT!du->TEXT!Ich bin Droit
+    SRTX!guten abend,gute nacht,guten mittag,guten morgen->TEXT!Wünsche ich dir auch&arz;
+
+    TEXT!du:TEXT!bist:TEXT!toll,nett:NOTX!nicht->TEXT!Danke, du auch&arz;
+    TEXT!ich:TEXT!mag,gern,liebe:TEXT!dich:NOTX!nicht->TEXT!Ich hab dich auch gern
+    SRTX!magst du mich,sind wir freunde->TEXT!Klar&arz;
+    SRTX!tschüss,bis bald->TEXT!Auf wiedersehen&arz;
+    SRTX!lol,haha->TEXT!lustig
+    TEXT!tut:TEXT!mir:TEXT!leid:NOTX!nicht,garnicht->TEXT!Kein Problem
+    SRTX!ja,jep->TEXT!ok
+    SRTX!danke,thx->TEXT!Gern geschehen.
+
+    TEXT!wie,wieviel,wie viel:TEXT!uhr,uhrzeit->TEXT!Es ist :VAR!global.time:TEXT! Uhr.
+    SRTX!uhrzeit->VAR!global.time:TEXT! Uhr
+    TEXT!datum,wievielten,wievielte:TEXT!welches,was,haben,wie,ist->TEXT!Heute ist der :VAR!global.date
+    SRTX!datum->TEXT!Heute ist der :VAR!global.date
+
+
