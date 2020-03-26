@@ -35,7 +35,7 @@ Usage: `INP*varname!`
 or: `INP*varname!montag,dienstag,mittwoch,donnerstag,freitag`
 
 #### INP2 (input)
-Platzhalter für ein mehrere Wörter. Argumente sind optional - wenn gegeben beschränken sie die möglichen Eingaben. Dieser Block muss der Letzte der Inputblöcke sein.
+Platzhalter für mehrere Wörter. Argumente sind optional - wenn gegeben beschränken sie die möglichen Eingaben. Dieser Block muss der Letzte der Inputblöcke sein.
 Usage: `INP2*varname!`
 or: `INP2*varname!erster möglicher satz,ebenfalls möglich`
 
