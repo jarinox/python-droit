@@ -24,7 +24,7 @@ rcountAdd = True        # add 1 to rcount?
 rcountIs = False        # set rcount to a specific value?
 rcountIsValue = 0       # value of rcount to set (if rcountIs == True)
 ranking = False         # improve the ranking of this block?
-var = False             # returns this block variables?
+var = False             # does this block return variables?
 brk = False             # perform a break?
 
 

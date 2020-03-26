@@ -30,7 +30,7 @@ Ein minimaler Bot für Droit macht das folgende:
 
 Der Code sieht so aus:
 
-```
+```python
 from pydroit import core as droit
 
 running = True
@@ -64,7 +64,7 @@ Hilfreich um die Skriptsprache zu lernen ist die [Dokumentation zum Droit Databa
 Wir wollen nun das `math` Plugin von python-droit ansprechen. Der DDS Script sieht so aus:
 
 ``` no-highlight
-TEXT!berechne:INP2*formel!->VAR!inp.formal:TEXT! = :EVAL!math.equal(*inp.formel)
+TEXT!berechne:INP2*formel!->VAR!inp.formel:TEXT! = :EVAL!math.equal(*inp.formel)
 ```
 
 Diese Zuweißung sagt das folgende aus:
