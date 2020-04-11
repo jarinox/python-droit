@@ -1,0 +1,320 @@
+<?xml version="1.0" ?>
+<droitdb>
+	<droitxml>
+		<rule>
+			<input>
+				<SRTX>
+					<item>hallo</item>
+					<item>guten tag</item>
+					<item>hay</item>
+					<item>hoi</item>
+				</SRTX>
+			</input>
+			<output>
+				<TEXT>
+					<item>Hallo</item>
+				</TEXT>
+			</output>
+		</rule>
+		<rule>
+			<input>
+				<TEXT>
+					<item>wie</item>
+				</TEXT>
+				<TEXT>
+					<item>geht</item>
+					<item>gehts</item>
+					<item>geht's</item>
+				</TEXT>
+				<TEXT>
+					<item>dir</item>
+				</TEXT>
+			</input>
+			<output>
+				<TEXT>
+					<item>Mir geht es gut!</item>
+				</TEXT>
+			</output>
+		</rule>
+		<rule>
+			<input>
+				<SRTX>
+					<item>wie gehts</item>
+				</SRTX>
+			</input>
+			<output>
+				<TEXT>
+					<item>Gut!</item>
+				</TEXT>
+			</output>
+		</rule>
+		<rule>
+			<input>
+				<TEXT>
+					<item>ich</item>
+				</TEXT>
+				<TEXT>
+					<item>bin</item>
+					<item>heiße</item>
+				</TEXT>
+				<INP var="name">
+					<item/>
+				</INP>
+			</input>
+			<output>
+				<TEXT>
+					<item>Hallo </item>
+				</TEXT>
+				<VAR>
+					<item>inp.name</item>
+				</VAR>
+			</output>
+		</rule>
+		<rule>
+			<input>
+				<TEXT>
+					<item>wer</item>
+					<item>wie</item>
+				</TEXT>
+				<TEXT>
+					<item>bist</item>
+					<item>heißt</item>
+				</TEXT>
+				<TEXT>
+					<item>du</item>
+				</TEXT>
+			</input>
+			<output>
+				<TEXT>
+					<item>Ich bin Droit</item>
+				</TEXT>
+			</output>
+		</rule>
+		<rule>
+			<input>
+				<SRTX>
+					<item>guten abend</item>
+					<item>gute nacht</item>
+					<item>guten mittag</item>
+					<item>guten morgen</item>
+				</SRTX>
+			</input>
+			<output>
+				<TEXT>
+					<item>Wünsche ich dir auch!</item>
+				</TEXT>
+			</output>
+		</rule>
+		<rule>
+			<input>
+				<TEXT>
+					<item>du</item>
+				</TEXT>
+				<TEXT>
+					<item>bist</item>
+				</TEXT>
+				<TEXT>
+					<item>toll</item>
+					<item>nett</item>
+				</TEXT>
+				<TEXT not="true">
+					<item>nicht</item>
+				</TEXT>
+			</input>
+			<output>
+				<TEXT>
+					<item>Danke</item>
+					<item> du auch!</item>
+				</TEXT>
+			</output>
+		</rule>
+		<rule>
+			<input>
+				<TEXT>
+					<item>ich</item>
+				</TEXT>
+				<TEXT>
+					<item>mag</item>
+					<item>gern</item>
+					<item>liebe</item>
+				</TEXT>
+				<TEXT>
+					<item>dich</item>
+				</TEXT>
+				<TEXT not="true">
+					<item>nicht</item>
+				</TEXT>
+			</input>
+			<output>
+				<TEXT>
+					<item>Ich hab dich auch gern</item>
+				</TEXT>
+			</output>
+		</rule>
+		<rule>
+			<input>
+				<SRTX>
+					<item>magst du mich</item>
+					<item>sind wir freunde</item>
+				</SRTX>
+			</input>
+			<output>
+				<TEXT>
+					<item>Klar!</item>
+				</TEXT>
+			</output>
+		</rule>
+		<rule>
+			<input>
+				<SRTX>
+					<item>tschüss</item>
+					<item>bis bald</item>
+				</SRTX>
+			</input>
+			<output>
+				<TEXT>
+					<item>Auf wiedersehen!</item>
+				</TEXT>
+			</output>
+		</rule>
+		<rule>
+			<input>
+				<SRTX>
+					<item>lol</item>
+					<item>haha</item>
+				</SRTX>
+			</input>
+			<output>
+				<TEXT>
+					<item>lustig</item>
+				</TEXT>
+			</output>
+		</rule>
+		<rule>
+			<input>
+				<TEXT>
+					<item>tut</item>
+				</TEXT>
+				<TEXT>
+					<item>mir</item>
+				</TEXT>
+				<TEXT>
+					<item>leid</item>
+				</TEXT>
+				<TEXT not="true">
+					<item>nicht</item>
+					<item>garnicht</item>
+				</TEXT>
+			</input>
+			<output>
+				<TEXT>
+					<item>Kein Problem</item>
+				</TEXT>
+			</output>
+		</rule>
+		<rule>
+			<input>
+				<SRTX>
+					<item>ja</item>
+					<item>jep</item>
+				</SRTX>
+			</input>
+			<output>
+				<TEXT>
+					<item>ok</item>
+				</TEXT>
+			</output>
+		</rule>
+		<rule>
+			<input>
+				<SRTX>
+					<item>danke</item>
+					<item>thx</item>
+				</SRTX>
+			</input>
+			<output>
+				<TEXT>
+					<item>Gern geschehen.</item>
+				</TEXT>
+			</output>
+		</rule>
+		<rule>
+			<input>
+				<TEXT>
+					<item>wie</item>
+					<item>wieviel</item>
+					<item>wie viel</item>
+				</TEXT>
+				<TEXT>
+					<item>uhr</item>
+					<item>uhrzeit</item>
+				</TEXT>
+			</input>
+			<output>
+				<TEXT>
+					<item>Es ist </item>
+				</TEXT>
+				<VAR>
+					<item>global.time</item>
+				</VAR>
+				<TEXT>
+					<item> Uhr.</item>
+				</TEXT>
+			</output>
+		</rule>
+		<rule>
+			<input>
+				<SRTX>
+					<item>uhrzeit</item>
+				</SRTX>
+			</input>
+			<output>
+				<VAR>
+					<item>global.time</item>
+				</VAR>
+				<TEXT>
+					<item> Uhr</item>
+				</TEXT>
+			</output>
+		</rule>
+		<rule>
+			<input>
+				<TEXT>
+					<item>datum</item>
+					<item>wievielten</item>
+					<item>wievielte</item>
+				</TEXT>
+				<TEXT>
+					<item>welches</item>
+					<item>was</item>
+					<item>haben</item>
+					<item>wie</item>
+					<item>ist</item>
+				</TEXT>
+			</input>
+			<output>
+				<TEXT>
+					<item>Heute ist der </item>
+				</TEXT>
+				<VAR>
+					<item>global.date</item>
+				</VAR>
+			</output>
+		</rule>
+		<rule>
+			<input>
+				<SRTX>
+					<item>datum</item>
+				</SRTX>
+			</input>
+			<output>
+				<TEXT>
+					<item>Heute ist der </item>
+				</TEXT>
+				<VAR>
+					<item>global.date</item>
+				</VAR>
+			</output>
+		</rule>
+	</droitxml>
+</droitdb>
