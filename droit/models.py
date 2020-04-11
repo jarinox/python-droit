@@ -10,7 +10,7 @@ import importlib
 class DroitResourcePackage:
 	def __init__(self):
 		self.tools = importlib.import_module("lib.tools")
-		self.io = self.tools.io()
+		self.io = self.io.DroitIO()
 		self.settings = self.tools.settings
 
 

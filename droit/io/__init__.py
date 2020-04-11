@@ -4,9 +4,11 @@
 # This file is part of python-droit (https://github.com/jaybeejs/python-droit)
 
 
-from droit.tools import SettingsObject()
+from droit.tools import SettingsObject
 
-def __init__(self):
+
+class DroitIO:
+	def __init__(self):
 		self.mode = SettingsObject().settings["ioMode"]
 		self.activeModule = importlib.import_module("droit.io." + self.mode)
 		self.moduleList = os.listdir("droit/io/")

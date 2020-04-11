@@ -17,6 +17,7 @@ from droit.loader import *
 from droit.tools import *
 import droit.dumper
 import droit.models
+import droit.io
 
 
 def useRules(rules, userinput, rpack=None):
