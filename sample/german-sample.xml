@@ -316,5 +316,25 @@
 				</VAR>
 			</output>
 		</rule>
+		<rule>
+			<input>
+				<TEXT>
+					<item>berechne</item>
+				</TEXT>
+				<INP var="term">
+				</INP>
+			</input>
+			<output>
+				<VAR>
+					<item>inp.term</item>
+				</VAR>
+				<TEXT>
+					<item> = </item>
+				</TEXT>
+				<EVAL>
+					<item>math.calc(*inp.term)</item>
+				</EVAL>
+			</output>
+		</rule>
 	</droitxml>
 </droitdb>
