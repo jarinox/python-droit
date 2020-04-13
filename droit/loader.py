@@ -5,8 +5,7 @@
 
 
 import xml.etree.cElementTree as ET
-import droit.models
-import droit.legacy
+from droit import models, legacy
 
 
 

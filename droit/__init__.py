@@ -13,11 +13,7 @@
 
 
 import os, importlib
-from droit.loader import *
-from droit.tools import *
-import droit.dumper
-import droit.models
-import droit.io
+from droit import loader, dumper, tools, models, legacy
 
 
 def useRules(rules, userinput, rpack=None):
@@ -114,10 +110,10 @@ def simpleIO(rawInput, databasePath):
 	can be provided. This function is intended to be used for testing.
 	Use an own script to create more complex bots.
 	"""
-	userinput = DroitUserinput(rawInput)
-	x = useRules(parseDroitXML(databasePath), userinput)
+	userinput = models.DroitUserinput(rawInput)
+	x = useRules(loader.parseDroitXML(databasePath), userinput)
 	if(x != []):
-		return formatOut(x[0][0], createVariables(inpVars=x[0][1], userinput=userinput))
+		return formatOut(x[0][0], tools.createVariables(inpVars=x[0][1], userinput=userinput))
 	else:
 		return ""
 
