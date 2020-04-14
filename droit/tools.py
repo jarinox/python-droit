@@ -8,16 +8,21 @@ import os, time, json, importlib
 
 
 class SettingsObject:
-	def __init__(self):
+	def __init__(self, location=""):
+		self.location = location
 		self.loadSettings()
 	
 	def loadSettings(self):
-		raw = open("config.json", "r").read()
-		self.settings = json.loads(raw)
+		try:
+			raw = open(self.location + "config.json", "r").read()
+			self.settings = json.loads(raw)
+			return True
+		except:
+			return False
 		
 	def saveSettings(self):
 		data = json.dumps(self.settings)
-		open("config.json", "w").write(data)
+		open(self.location + "config.json", "w").write(data)
 	
 	def initSettings(self):
 		self.settings = {"username": "", "droitname": "", "ioMode": "console"}
