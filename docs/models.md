@@ -7,6 +7,7 @@ Your can find the source-code of python-droit and this documentation on [Github]
 - **DroitRule**(inputRules, outputRules)
 - **DroitRuleInOut**(tag, attrib, children, mode)
 - **DroitUserinput**(rawInput)
+- **DroitPlugin**(mode, name)
 
 ### Classes documentation
 #### DroitResourcePackage()
@@ -17,6 +18,7 @@ Provides useful tools and information to any part of python-droit.
 - settings: droit.tools.SettingsObject()
 - io: droit.tools.io()
 - tools: droit.tools
+- plugins: a list containing droit.models.DroitPlugin() items
 
 #### DroitRule(inputRules, outputRules)
 Stores a list of inputRules and a list of outputRules.
@@ -43,3 +45,12 @@ Stores the raw userinput as well as a list of the words the userinput consists o
 
 - rawInput: the raw userinput as a string
 - words: processed list containig the words of the raw userinput
+
+#### DroitPlugin(mode, name)
+Loads a plugin.
+
+**Attributes**
+
+- mode: "input" or "output"
+- name: name of the plugin e.g. "text" or "inp"
+- plugin: contains the plugin

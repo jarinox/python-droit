@@ -4,6 +4,7 @@
 # This file is part of python-droit (https://github.com/jaybeejs/python-droit)
 
 
+import importlib, os
 from droit.tools import SettingsObject
 
 
