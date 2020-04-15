@@ -1,14 +1,6 @@
 # droit core for python
 # Copyright 2020 Jakob Stolze
 #
-# Version              v1.0.0.1
-# Date last modified   11.04.2020
-# Date created         08.05.2019
-# Python Version       3.x
-#
-# DDS Version          v1.0
-#
-#
 # This file is part of python-droit (https://github.com/jaybeejs/python-droit)
 
 
@@ -34,9 +26,19 @@ def useRules(rules, userinput, rpack=None):
 		
 		inPlugs = os.listdir("droit/plugins/input")
 		for block in blocks:			
-			if(block.lower() in inPlugs):
-				p = importlib.import_module("droit.plugins.input." + rules[i].input[j].tag.lower() + ".main")
-				passRule, newVars, rankMod = p.block(userinput, rules[i].input, block, rpack)
+			if(block.lower() in inPlugs):				
+				plug = None
+				useCache = False
+				if(rpack != None):
+					for inPlug in rpack.plugins:
+						if(inPlug.name == block.lower() and inPlug.mode == "input"):
+							useCache = True
+							plug = inPlug.plugin
+				
+				if not(useCache):
+					plug = importlib.import_module("droit.plugins.input." + rules[i].input[j].tag.lower() + ".main")
+				
+				passRule, newVars, rankMod = plug.block(userinput, rules[i].input, block, rpack)
 				for var in newVars:
 					variables[var] = newVars[var]
 				if(passRule):
@@ -89,7 +91,17 @@ def formatOut(outputRules, variables, rpack=None):
 			for i in range(2, len(plugin)):
 				params.append(plugin[i])
 			
-			plug = importlib.import_module("droit.plugins.output." + plugin[0] + ".main")
+			plug = None
+			useCache = False
+			if(rpack != None):
+				for outPlug in rpack.plugins:
+					if(outPlug.name == plugin[0] and outPlug.mode == "output"):
+						useCache = True
+						plug = outPlug.plugin
+
+			if not(useCache):
+				plug = importlib.import_module("droit.plugins.output." + plugin[0] + ".main")
+			
 			method = getattr(plug, plugin[1])
 			
 			if(isMethod):

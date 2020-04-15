@@ -9,7 +9,7 @@ def output(text):
 
 def binaryQuestion(question):
 	answer = ""
-	while(answer != "Y" && answer != "n"):
+	while(answer != "Y" and answer != "n"):
 		answer = input(question + " [Y/n]: ")
 	return (answer == "Y")
 

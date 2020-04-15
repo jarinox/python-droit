@@ -5,13 +5,15 @@
 
 
 import importlib
+from droit.io import DroitIO
 
 
 class DroitResourcePackage:
-	def __init__(self):
+	def __init__(self, settings=None):
 		self.tools = importlib.import_module("droit.tools")
-		self.io = self.io.DroitIO()
-		self.settings = self.tools.SettingsObject()
+		self.io = DroitIO()
+		self.settings = settings
+		self.plugins = []
 
 
 class DroitGmrResource:
@@ -45,3 +47,10 @@ class DroitUserinput:
 			pin = pin.replace("  ", " ") # double blank to single blank
 		pin = pin.lower()
 		self.words = pin.split(" ") # split up words at blank
+
+
+class DroitPlugin:
+	def __init__(self, mode, name):
+		self.mode = mode.lower()
+		self.name = name.lower()
+		self.plugin = importlib.import_module("droit.plugins." + mode + "." + name + ".main")
