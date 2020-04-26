@@ -233,9 +233,9 @@
 				</SRTX>
 			</input>
 			<output>
-				<TEXT>
-					<item>Gern geschehen.</item>
-				</TEXT>
+				<EVAL>
+					<item>rand.text("Danke.", "Gern geschehen.")</item>
+				</EVAL>
 			</output>
 		</rule>
 		<rule>

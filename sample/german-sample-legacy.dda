@@ -14,7 +14,7 @@ SRTX!tschüss,bis bald->TEXT!Auf wiedersehen&arz;
 SRTX!lol,haha->TEXT!lustig
 TEXT!tut:TEXT!mir:TEXT!leid:NOTX!nicht,garnicht->TEXT!Kein Problem
 SRTX!ja,jep->TEXT!ok
-SRTX!danke,thx->TEXT!Gern geschehen.
+SRTX!danke,thx->EVAL!rand.text("Bitte.", "Gern geschehen.")
 
 TEXT!wie,wieviel,wie viel:TEXT!uhr,uhrzeit->TEXT!Es ist :VAR!global.time:TEXT! Uhr.
 SRTX!uhrzeit->VAR!global.time:TEXT! Uhr
