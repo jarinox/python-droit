@@ -60,7 +60,10 @@ def parseLegacy(filename):
 		for outrule in rule[1]:
 			attr = {}
 			outrule[1] = outrule[1].replace("&arz;", "!").replace("&dpp;", ":")
-			dro = models.DroitRuleInOut(outrule[0].upper(), attr, outrule[1].split(","), "output")
+			if(outrule[0].upper() == "EVAL"):
+				dro = models.DroitRuleInOut(outrule[0].upper(), attr, outrule[1], "output")
+			else:
+				dro = models.DroitRuleInOut(outrule[0].upper(), attr, outrule[1].split(","), "output")
 			outputrules.append(dro)
 		dr = models.DroitRule(inputrules, outputrules)
 		rules.append(dr)

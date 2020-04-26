@@ -80,16 +80,16 @@ def formatOut(outputRules, variables, rpack=None):
 			for var in variables:
 				if("*" + var in plugin[1]):
 					plugin[1] = plugin[1].replace("*" + var, "\"" + variables[var] + "\"")
-			
+
 			isMethod = False
 			if("(" in plugin[1]):
 				isMethod = True
-				plugin.append(plugin[1].split("(")[1][:-1].replace('"', ""))
+				plugin.append(plugin[1].split("(")[1][:-1].replace('"', "").replace(", ", ",").split(","))
 				plugin[1] = plugin[1].split("(")[0]
-			
+
 			params = []
-			for i in range(2, len(plugin)):
-				params.append(plugin[i])
+			for i in range(0, len(plugin[2])):
+				params.append(plugin[2][i])
 			
 			plug = None
 			useCache = False
