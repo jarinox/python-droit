@@ -5,12 +5,13 @@
 
 
 import importlib, os
-from droit.tools import SettingsObject
 
 
 class DroitIO:
-	def __init__(self):
-		self.mode = SettingsObject().settings["ioMode"]
+	"""input and output from and to multiple sources"""
+
+	def __init__(self, mode="console"):
+		self.mode = mode
 		self.activeModule = importlib.import_module("droit.io." + self.mode)
 		self.moduleList = os.listdir("droit/io/")
 	

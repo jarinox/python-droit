@@ -4,16 +4,43 @@
 # This file is part of python-droit (https://github.com/jaybeejs/python-droit)
 
 
-import importlib
+import importlib, json
 from droit.io import DroitIO
 
 
+class DroitSettings:
+	"""Read and write settings from and to config.json"""
+
+	def __init__(self, location=""):
+		self.location = location
+		self.loadSettings()
+	
+	def loadSettings(self):
+		"""load settings from config.json"""
+		try:
+			raw = open(self.location + "config.json", "r").read()
+			self.settings = json.loads(raw)
+			return True
+		except:
+			return False
+		
+	def saveSettings(self):
+		"""save settings to config.json"""
+		data = json.dumps(self.settings)
+		open(self.location + "config.json", "w").write(data)
+	
+	def initSettings(self):
+		"""create basic config.json file"""
+		self.settings = {"username": "", "droitname": "", "ioMode": "console"}
+		self.saveSettings()
+
+
 class DroitResourcePackage:
-	def __init__(self, settings=None):
+	def __init__(self, settings=DroitSettings(), plugins=[]):
 		self.tools = importlib.import_module("droit.tools")
 		self.io = DroitIO()
 		self.settings = settings
-		self.plugins = []
+		self.plugins = plugins
 
 
 class DroitGmrResource:

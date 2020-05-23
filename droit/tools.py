@@ -5,28 +5,7 @@
 
 
 import os, time, json, importlib
-
-
-class SettingsObject:
-	def __init__(self, location=""):
-		self.location = location
-		self.loadSettings()
-	
-	def loadSettings(self):
-		try:
-			raw = open(self.location + "config.json", "r").read()
-			self.settings = json.loads(raw)
-			return True
-		except:
-			return False
-		
-	def saveSettings(self):
-		data = json.dumps(self.settings)
-		open(self.location + "config.json", "w").write(data)
-	
-	def initSettings(self):
-		self.settings = {"username": "", "droitname": "", "ioMode": "console"}
-		self.saveSettings()
+from droit.models import DroitPlugin
 
 
 def createVariables(inpVars={}, username="", droitname="Droit", userinput=""):
@@ -44,3 +23,21 @@ def createVariables(inpVars={}, username="", droitname="Droit", userinput=""):
 		variables["inp." + inpVar] = inpVars[inpVar]
 		
 	return variables
+
+
+def loadPlugins(location="droit/"):
+	"""
+	Loads all plugins from the given location and returns them in a
+	list containing DroitPlugin items.
+	"""
+	plugins = []
+	inList = os.listdir(path=location+"plugins/input")
+	outList = os.listdir(path=location+"plugins/output")
+	
+	for name in inList:
+		plugins.append(DroitPlugin("input", name))
+	
+	for name in outList:
+		plugins.append(DroitPlugin("output", name))
+	
+	return plugins
