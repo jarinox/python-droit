@@ -8,6 +8,7 @@ import xml.dom.minidom
 
 
 def writeDroitXML(dda, filename):
+	"""Write a parse Droit Database to XML"""
 	droitdb = ET.Element("droitdb")
 	droitxml = ET.SubElement(droitdb, "droitxml")
 	

@@ -12,6 +12,6 @@ Droit v0.4 ([stable release](https://github.com/jaybeejs/python-droit/releases/t
 
 Droit v1.0:
 
-- [Dokumentation](https://github.com/jaybeejs/python-droit/blob/9570529c601ce08a4e1519887f4f73de141b07e0/docs/docs.md)
+- [Dokumentation](https://github.com/jaybeejs/python-droit/blob/master/docs/docs.md)
 
 Copyright 2019-2020 Jakob Stolze

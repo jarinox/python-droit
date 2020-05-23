@@ -10,6 +10,7 @@ from droit import models, legacy
 
 
 def parseDroitXML(filename):
+	"""Parse a Droit XML Database"""
 	tree = ET.parse(filename)
 	root = tree.getroot()
 	rules = []
@@ -41,6 +42,7 @@ def parseDroitXML(filename):
 
 
 def parseLegacy(filename):
+	"""Parse a legacy Droit Database (.dda)"""
 	dda = legacy.parseDDA(filename)
 	rules = []
 	for rule in dda:

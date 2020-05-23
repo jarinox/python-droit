@@ -3,6 +3,7 @@ Your can find the source-code of python-droit and this documentation on [Github]
 
 
 ## Classes
+- **DroitSettings**(location="")
 - **DroitResourcePackage**()
 - **DroitRule**(inputRules, outputRules)
 - **DroitRuleInOut**(tag, attrib, children, mode)
@@ -10,6 +11,19 @@ Your can find the source-code of python-droit and this documentation on [Github]
 - **DroitPlugin**(mode, name)
 
 ### Classes documentation
+#### DroitSettings(location="")
+Read and write settings from and to config.json  
+  
+**Functions**
+
+- loadSettings() - loads settings from file to the settings attribute
+- saveSettings() - saves the settings from the attribute to the file
+- initSettings() - creates a config file to store the settings inside
+
+**Attribute**
+
+- settings - a dict containing some settings
+
 #### DroitResourcePackage()
 Provides useful tools and information to any part of python-droit.
 

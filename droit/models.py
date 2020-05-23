@@ -36,6 +36,7 @@ class DroitSettings:
 
 
 class DroitResourcePackage:
+	"""Provides useful tools and information to any part of python-droit"""
 	def __init__(self, settings=DroitSettings(), plugins=[]):
 		self.tools = importlib.import_module("droit.tools")
 		self.io = DroitIO()
@@ -50,6 +51,7 @@ class DroitGmrResource:
 
 
 class DroitRuleInOut:
+	"""Stores an input-rule or an output-rule"""
 	def __init__(self, tag, attrib, children, mode):
 		self.mode = mode
 		self.tag = tag
@@ -58,12 +60,17 @@ class DroitRuleInOut:
 
 
 class DroitRule:
+	"""Stores a list of inputRules and a list of outputRules."""
 	def __init__(self, inputRules, outputRules):
 		self.input = inputRules
 		self.output = outputRules
 
 
 class DroitUserinput:
+	"""
+	Stores the raw userinput as well as a list of the words the userinput
+	consists of. The list is created on init.
+	"""
 	def __init__(self, rawInput):
 		self.rawInput = rawInput
 		pin = rawInput
@@ -77,6 +84,7 @@ class DroitUserinput:
 
 
 class DroitPlugin:
+	"""Loads a plugin."""
 	def __init__(self, mode, name):
 		self.mode = mode.lower()
 		self.name = name.lower()
