@@ -1,5 +1,5 @@
 # Documentation - droit.models
-Your can find the source-code of python-droit and this documentation on [Github](https://github.com/jaybeejs/python-droit).
+You can find the source-code of python-droit and this documentation on [Github](https://github.com/jaybeejs/python-droit).
 
 
 ## Classes
@@ -29,18 +29,18 @@ Provides useful tools and information to any part of python-droit.
 
 **Attributes**
 
-- settings: droit.tools.SettingsObject()
-- io: droit.tools.io()
-- tools: droit.tools
-- plugins: a list containing droit.models.DroitPlugin() items
+- settings: [droit.models.DroitSettings()](#droitsettingslocation)
+- io: [droit.io.DroitIO()](https://github.com/jaybeejs/python-droit/blob/master/docs/io.md)
+- tools: [droit.tools](https://github.com/jaybeejs/python-droit/blob/master/docs/tools.md)
+- plugins: a list containing [droit.models.DroitPlugin()](#droitpluginmode-name) items
 
 #### DroitRule(inputRules, outputRules)
 Stores a list of inputRules and a list of outputRules.
 
 **Attributes**
 
-- input: a list containing droit.models.DroitRuleInOut() items
-- output: a list containing droit.models.DroitRuleInOut() items
+- input: a list containing [droit.models.DroitRuleInOut()](#droitruleinouttag-attrib-children-mode) items
+- output: a list containing [droit.models.DroitRuleInOut()](#droitruleinouttag-attrib-children-mode) items
 
 #### DroitRuleInOut(tag, attrib, children, mode)
 Stores an input-rule or an output-rule.

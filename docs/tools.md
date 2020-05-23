@@ -1,5 +1,5 @@
 # Documentation - droit.tools
-Your can find the source-code of python-droit and this documentation on [Github](https://github.com/jaybeejs/python-droit).
+You can find the source-code of python-droit and this documentation on [Github](https://github.com/jaybeejs/python-droit).
 
 
 ## Functions
@@ -19,4 +19,4 @@ Creates useful variables:
 Input variables get appended. Returns them all in one dict.
 
 #### loadPlugins(location="droit/")
-Loads all plugins from the given location and returns them in a list containing DroitPlugin items. The parameter `location` shows contains the path to the `plugins` folder.
+Loads all plugins from the given location and returns them in a list containing [droit.models.DroitPlugin()](https://github.com/jaybeejs/python-droit/blob/master/docs/models.md#droitpluginmode-name) items. The parameter `location` shows contains the path to the `plugins` folder.

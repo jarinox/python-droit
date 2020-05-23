@@ -1,5 +1,5 @@
 # Documentation for python-droit
-Your can find the source-code of python-droit and this documentation on [Github](https://github.com/jaybeejs/python-droit).
+You can find the source-code of python-droit and this documentation on [Github](https://github.com/jaybeejs/python-droit).
 
 
 ## Submodules
