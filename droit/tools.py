@@ -4,7 +4,7 @@
 # This file is part of python-droit (https://github.com/jaybeejs/python-droit)
 
 
-import os, time, json, importlib
+import os, time, importlib
 from droit.models import DroitPlugin
 
 
