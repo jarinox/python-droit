@@ -16,15 +16,19 @@ class DroitIO:
 		self.moduleList = os.listdir("droit/io/")
 	
 	def activateModule(self, name):
+		"""Change the currently active input/output module"""
 		if(name in self.moduleList):
 			self.activeModule = importlib.import_module("droit.io." + name)
 			self.mode = name
 		
 	def output(self, text):
+		"""Output text to the user."""
 		return self.activeModule.output(text)
 	
 	def binaryQuestion(self, question):
+		"""Ask a yes or no question. True or False will be returned."""
 		return self.activeModule.binaryQuestion(question)
 	
 	def input(self, question):
-		return self.activeModule.input(question)
+		"""Get an input from the user."""
+		return self.activeModule.getinput(question)
