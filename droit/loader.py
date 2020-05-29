@@ -25,7 +25,8 @@ def parseDroitXML(filename):
 							for inrule in inrules:
 								children = []
 								for inchild in inrule:
-									children.append(inchild.text)
+									if(inchild.text != None):
+										children.append(inchild.text)
 								dri = models.DroitRuleInOut(inrule.tag.upper(), inrule.attrib, children, "input")
 								inputrules.append(dri)
 					for outrules in rule:
@@ -33,7 +34,8 @@ def parseDroitXML(filename):
 							for outrule in outrules:
 								children = []
 								for outchild in outrule:
-									children.append(outchild.text)
+									if(outchild.text != None):
+										children.append(outchild.text)
 								dro = models.DroitRuleInOut(outrule.tag.upper(), outrule.attrib, children, "output")
 								outputrules.append(dro)
 					dr = models.DroitRule(inputrules, outputrules)
@@ -63,7 +65,7 @@ def parseLegacy(filename):
 			attr = {}
 			outrule[1] = outrule[1].replace("&arz;", "!").replace("&dpp;", ":")
 			if(outrule[0].upper() == "EVAL"):
-				dro = models.DroitRuleInOut(outrule[0].upper(), attr, outrule[1], "output")
+				dro = models.DroitRuleInOut(outrule[0].upper(), attr, [outrule[1]], "output")
 			else:
 				dro = models.DroitRuleInOut(outrule[0].upper(), attr, outrule[1].split(","), "output")
 			outputrules.append(dro)
