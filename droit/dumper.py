@@ -34,3 +34,48 @@ def prettifyXML(filename):
 	dom = xml.dom.minidom.parse(filename)
 	pretty = dom.toprettyxml()
 	open(filename, "w").write(pretty)
+
+
+def writeLegacy(dda, filename):
+	"""Write a parse Droit Database to Droit Database Script"""
+	out = "Created using python-droit and 'writeLegacy'\n\n"
+
+	for rule in dda:
+		for inRule in rule.input:
+			out += inRule.tag.upper()
+
+			if(inRule.attrib):
+				out += "*" + list(inRule.attrib.items())[0][1]
+			out += "!"
+			
+			print(inRule)
+			print(inRule.children)
+
+			for value in inRule.children:
+				if(out[len(out) - 1] != "!"):
+					out += ","
+				out += value.replace(":", "&dpp;").replace("!", "&arz;")
+			
+			out += ":"
+		
+		out = out[0:len(out) - 1] + "->"
+
+		for outRule in rule.output:
+			out += outRule.tag.upper()
+			
+			if(outRule.attrib):
+				out += "*" + list(outRule.attrib.items())[0][1]
+			out += "!"
+			
+			for value in outRule.children:
+				if(out[len(out) - 1] != "!"):
+					out += ","
+				print(value)
+				out += value.replace(":", "&dpp;").replace("!", "&arz;")
+			
+			out += ":"
+		
+		out = out[0:len(out) - 1] + "\n"
+	
+	out = out.replace("TEXT*true!", "NOTX!")
+	open(filename, "w").write(out)
