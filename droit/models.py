@@ -85,7 +85,19 @@ class DroitUserinput:
 
 class DroitPlugin:
 	"""Loads a plugin."""
-	def __init__(self, mode, name):
+	def __init__(self, mode, name, path="droit/"):
 		self.mode = mode.lower()
 		self.name = name.lower()
-		self.plugin = importlib.import_module("droit.plugins." + mode + "." + name + ".main")
+		self.plugin = importlib.import_module(path.replace("/", ".") + "plugins." + mode + "." + name + ".main")
+		self.info = DroitPluginInfo(mode, name, path=path)
+
+
+class DroitPluginInfo:
+	"""Contains information about a DroitPlugin"""
+	def __init__(self, mode, name, path="droit/"):
+		self.mode = mode
+		self.name = name
+		if(mode == "input"):
+			info = json.loads(open(path+ "plugins/" + mode + "/" + name + "/info.json", "r").read())
+			self.description = info["description"]
+			self.attrib = info["attributes"]

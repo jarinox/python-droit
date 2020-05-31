@@ -5,7 +5,7 @@
 
 
 def isValidLine(ddaFileLine):
-	"""Checks wether a Droit Database rule is valid or e.g. a comment."""
+	"""Checks whether a Droit Database rule is valid or e.g. a comment."""
 	valid = True
 	if not("->" in ddaFileLine) or (len(ddaFileLine.split("->")) != 2):
 		valid = False
@@ -28,7 +28,9 @@ def isValidLine(ddaFileLine):
 				valid = False
 	return valid
 
+
 def parseDDA(filename):
+	"""Parses a Droit Database Script file to the legacy list standard"""
 	ddaFile = open(filename, "r").read().split("\n")
 	ddaData = []
 	for i in range(0, len(ddaFile)):

@@ -5,7 +5,7 @@
 
 
 import os, time, importlib
-from droit.models import DroitPlugin
+from droit.models import DroitPlugin, DroitPluginInfo
 
 
 def createVariables(inpVars={}, username="", droitname="Droit", userinput=""):
@@ -35,9 +35,27 @@ def loadPlugins(location="droit/"):
 	outList = os.listdir(path=location+"plugins/output")
 	
 	for name in inList:
-		plugins.append(DroitPlugin("input", name))
+		plugins.append(DroitPlugin("input", name, path=location))
 	
 	for name in outList:
-		plugins.append(DroitPlugin("output", name))
+		plugins.append(DroitPlugin("output", name, path=location))
 	
 	return plugins
+
+
+def loadPluginInfos(location="droit/"):
+	"""
+	Loads all plugin infos from the given location and returns them in a
+	list containing DroitPluginInfo items.
+	"""
+	infos = []
+	inList = os.listdir(path=location+"plugins/input")
+	outList = os.listdir(path=location+"plugins/output")
+	
+	for name in inList:
+		infos.append(DroitPluginInfo("input", name, path=location))
+	
+	for name in outList:
+		infos.append(DroitPluginInfo("output", name, path=location))
+	
+	return infos

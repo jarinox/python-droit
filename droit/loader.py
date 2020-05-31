@@ -5,7 +5,7 @@
 
 
 import xml.etree.cElementTree as ET
-from droit import models, legacy
+from droit import models, legacy, tools
 
 
 
@@ -47,15 +47,20 @@ def parseLegacy(filename):
 	"""Parse a legacy Droit Database (.dda)"""
 	dda = legacy.parseDDA(filename)
 	rules = []
+	pinfos = tools.loadPluginInfos()
 	for rule in dda:
 		inputrules = []
 		outputrules = []
 		for inrule in rule[0]:
 			attr = {}
 			inrule[1] = inrule[1].replace("&arz;", "!").replace("&dpp;", ":")
-			if("INP" in inrule[0]):
-				attr["var"] = inrule[0].split("*")[1]
+			if("*" in inrule[0]):
+				for info in pinfos:
+					if(info.name.lower() == inrule[0].split("*")[0].lower()):
+						ipkey = list(info.attrib.keys())[0]
+						attr[ipkey] = inrule[0].split("*")[1]
 				inrule[0] = inrule[0].split("*")[0]
+
 			if("NOTX" == inrule[0]):
 				inrule[0] = "TEXT"
 				attr["not"] = "true"

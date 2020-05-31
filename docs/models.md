@@ -8,7 +8,8 @@ You can find the source-code of python-droit and this documentation on [Github](
 - **DroitRule**(inputRules, outputRules)
 - **DroitRuleInOut**(tag, attrib, children, mode)
 - **DroitUserinput**(rawInput)
-- **DroitPlugin**(mode, name)
+- **DroitPlugin**(mode, name, path="droit/")
+- **DroitPluginInfo**(mode, name, path="droit/")
 
 ### Classes documentation
 #### DroitSettings(location="")
@@ -60,7 +61,7 @@ Stores the raw userinput as well as a list of the words the userinput consists o
 - rawInput: the raw userinput as a string
 - words: processed list containig the words of the raw userinput
 
-#### DroitPlugin(mode, name)
+#### DroitPlugin(mode, name, path="droit/")
 Loads a plugin.
 
 **Attributes**
@@ -68,3 +69,13 @@ Loads a plugin.
 - mode: "input" or "output"
 - name: name of the plugin e.g. "text" or "inp"
 - plugin: contains the plugin
+
+#### DroitPluginInfo(mode, name, path="droit/")
+Loads info from input plugin.
+
+**Attributes**
+
+- mode: "input" or "output"
+- name: name of the plugin e.g. "text" or "inp"
+- attrib: contains a list of possible attributes
+- description: a short description of the plugin
