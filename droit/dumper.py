@@ -47,9 +47,6 @@ def writeLegacy(dda, filename):
 			if(inRule.attrib):
 				out += "*" + list(inRule.attrib.items())[0][1]
 			out += "!"
-			
-			print(inRule)
-			print(inRule.children)
 
 			for value in inRule.children:
 				if(out[len(out) - 1] != "!"):
@@ -70,7 +67,6 @@ def writeLegacy(dda, filename):
 			for value in outRule.children:
 				if(out[len(out) - 1] != "!"):
 					out += ","
-				print(value)
 				out += value.replace(":", "&dpp;").replace("!", "&arz;")
 			
 			out += ":"
