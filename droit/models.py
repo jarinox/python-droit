@@ -101,3 +101,11 @@ class DroitPluginInfo:
 			info = json.loads(open(path+ "plugins/" + mode + "/" + name + "/info.json", "r").read())
 			self.description = info["description"]
 			self.attrib = info["attributes"]
+
+
+class DroitSearchHit:
+	"""Object returned by useRules()"""
+	def __init__(self, rule, variables, ranking):
+		self.rule = rule
+		self.variables = variables
+		self.ranking = ranking

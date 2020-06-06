@@ -65,10 +65,11 @@ def useRules(rules, userinput, rpack=None):
 				ruleOk = False
 		
 		if(ruleOk):
-			hits.append([rules[i].output, variables, len(userinput.words) - len(rules[i].input) + ranking])
+			hit = models.DroitSearchHit(rules[i], variables, len(userinput.words) - len(rules[i].input) + ranking)
+			hits.append(hit)
 
 	if(hits != []):
-		hits = sorted(hits, key=lambda hit: hit[2])
+		hits = sorted(hits, key=lambda hit: hit.ranking)
 	return hits
 
 
@@ -138,9 +139,9 @@ def simpleIO(rawInput, databasePath):
 	Use an own script to create more complex bots.
 	"""
 	userinput = models.DroitUserinput(rawInput)
-	x = useRules(loader.parseDroitXML(databasePath), userinput)
-	if(x != []):
-		return formatOut(x[0][0], tools.createVariables(inpVars=x[0][1], userinput=userinput))
+	hits = useRules(loader.parseDroitXML(databasePath), userinput)
+	if(len(hits) > 0):
+		return formatOut(hits[0].rule.output, tools.createVariables(inpVars=hits[0].variables, userinput=userinput))
 	else:
 		return ""
 

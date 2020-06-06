@@ -2,3 +2,4 @@
 test-*.py
 test.dda
 test.xml
+.vscode

@@ -21,13 +21,13 @@ while(running):
         rawInput = rpack.io.input("Droit> ") # Get input from the currently active input/output module
         userinput = droit.models.DroitUserinput(rawInput) # Create DroitUserinput object
 
-        outRules = droit.useRules(rules, userinput, rpack=rpack) # Run userinput on database
+        hits = droit.useRules(rules, userinput, rpack=rpack) # Run userinput on database
 
-        if(len(outRules) > 0):
-            outRule = outRules[0] # Select the first (best fitting) rule
-            variables = droit.tools.createVariables(inpVars=outRule[1], userinput=userinput) #  Create a dict containig variables
+        if(len(hits) > 0):
+            hit = hits[0] # Select the first (best fitting) rule
+            variables = droit.tools.createVariables(inpVars=hit.variables, userinput=userinput) #  Create a dict containig variables
 
-            output = droit.formatOut(outRule[0], variables, rpack=rpack) #  Generate the output from using an output-rule
+            output = droit.formatOut(hit.rule.output, variables, rpack=rpack) #  Generate the output from using an output-rule
 
             rpack.io.output(output) # Output the output-text using the currently active input/output module
         else:
