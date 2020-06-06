@@ -27,7 +27,7 @@ Runs each entry of a Droit Database onto the userinput and returns all possible 
 - userinput: a [droit.models.DroitUserinput()](https://github.com/jaybeejs/python-droit/blob/master/docs/models.md#droituserinputrawinput)
 - rpack: a [droit.models.DroitResourcePackage()](https://github.com/jaybeejs/python-droit/blob/master/docs/models.md#droitresourcepackage)
 
-**Returns:** a list containing [droit.models.DroitRuleInOut()](https://github.com/jaybeejs/python-droit/blob/master/docs/models.md#droitruleinouttag-attrib-children-mode) items
+**Returns:** a list containing [droit.models.DroitSearchHit()](https://github.com/jaybeejs/python-droit/blob/master/docs/models.md#droitsearchhit-rule-variables-ranking) items
 
 
 #### formatOut(outputRules, variables, rpack=None)

@@ -10,6 +10,7 @@ You can find the source-code of python-droit and this documentation on [Github](
 - **DroitUserinput**(rawInput)
 - **DroitPlugin**(mode, name, path="droit/")
 - **DroitPluginInfo**(mode, name, path="droit/")
+- **DroitSearchHit**(rule, variables, ranking)
 
 ### Classes documentation
 #### DroitSettings(location="")
@@ -79,3 +80,12 @@ Loads info from input plugin.
 - name: name of the plugin e.g. "text" or "inp"
 - attrib: contains a list of possible attributes
 - description: a short description of the plugin
+
+#### DroitSearchHit(rule, variables, ranking)
+List item returned by `useRules()`
+
+**Attributes**
+
+- rule: a [DroitRule()](#droitruleinputrules-outputrules)
+- variables: dict containing variables
+- ranking: int index showing relevancen

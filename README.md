@@ -1,10 +1,11 @@
 # python-droit
 Droit is a simple library for creating bots
 
-The current Version 1.0 of Droit is not stable nor fully documented yet. If you are looking for more stable version please use the previouse version. If you prefere a feature-rich and developer-friendly version you can use the current version 1.0. Please note that major changes can be applied until the next upcoming stable release. Programs using the current version of python-droit may have to adapt when switching to the next stable version.
+The current Version 1.0 of Droit still in a prerelease phase. If you are looking for a stable version please consider using the previouse version. If you prefere a feature-rich and developer-friendly version you can use the current version 1.0. Please note that minor changes can be applied until the next upcoming stable release. Programs using the current version of python-droit may have to adapt when switching to the next stable version.
 
-Droit v1.0:
+Droit v1.0 ([pre1](https://github.com/jaybeejs/python-droit/releases/tag/v1.0.0pre1)):
 
+- [Wiki > Getting started](https://github.com/jaybeejs/python-droit/wiki)
 - [Documentation](https://github.com/jaybeejs/python-droit/blob/master/docs/docs.md)
 - [Example](https://github.com/jaybeejs/python-droit/blob/master/sample/sample-bot.py)
 

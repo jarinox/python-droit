@@ -64,7 +64,10 @@ def parseLegacy(filename):
 			if("NOTX" == inrule[0]):
 				inrule[0] = "TEXT"
 				attr["not"] = "true"
-			dri = models.DroitRuleInOut(inrule[0], attr, inrule[1].split(","), "input")
+			children = inrule[1].split(",")
+			if(inrule[1] == ""):
+				children = []
+			dri = models.DroitRuleInOut(inrule[0], attr, children, "input")
 			inputrules.append(dri)
 		for outrule in rule[1]:
 			attr = {}
@@ -72,7 +75,10 @@ def parseLegacy(filename):
 			if(outrule[0].upper() == "EVAL"):
 				dro = models.DroitRuleInOut(outrule[0].upper(), attr, [outrule[1]], "output")
 			else:
-				dro = models.DroitRuleInOut(outrule[0].upper(), attr, outrule[1].split(","), "output")
+				children = outrule[1].split(",")
+				if(outrule[1] == ""):
+					children = []
+				dro = models.DroitRuleInOut(outrule[0].upper(), attr, children, "output")
 			outputrules.append(dro)
 		dr = models.DroitRule(inputrules, outputrules)
 		rules.append(dr)
