@@ -17,7 +17,7 @@ class DroitIO:
 	
 	def activateModule(self, name):
 		"""Change the currently active input/output module"""
-		if(name in self.moduleList):
+		if(name in self.moduleList or name + ".py" in self.moduleList):
 			self.activeModule = importlib.import_module("droit.io." + name)
 			self.mode = name
 		
