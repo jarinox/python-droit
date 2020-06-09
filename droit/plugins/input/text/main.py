@@ -32,4 +32,4 @@ def block(userinput, inputRules, block, rpack):
 			if not(thisRule):
 				passRule = False
 	
-	return passRule, variables, rankMod
+	return passRule, variables, rankMod, rpack

@@ -56,7 +56,7 @@ def useRules(rules, userinput, rpack=None):
 				if not(useCache):
 					plug = importlib.import_module("droit.plugins.input." + rules[i].input[j].tag.lower() + ".main")
 				
-				passRule, newVars, rankMod = plug.block(userinput, rules[i].input, block, rpack)
+				passRule, newVars, rankMod, rpack = plug.block(userinput, rules[i].input, block, rpack)
 				for var in newVars:
 					variables[var] = newVars[var]
 				if(passRule):

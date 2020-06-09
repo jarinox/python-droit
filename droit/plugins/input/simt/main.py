@@ -25,4 +25,4 @@ def block(userinput, inputRules, block, rpack):
                     passRule = False
                     rankMod = 0
 
-    return passRule, variables, rankMod
+    return passRule, variables, rankMod, rpack

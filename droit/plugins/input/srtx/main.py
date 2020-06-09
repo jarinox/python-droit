@@ -12,5 +12,5 @@ def block(userinput, inputRules, block, rpack):
 		if(userinput.rawInput in inputRules[0].children):
 			passRule = True
 	
-	return passRule, variables, rankMod
+	return passRule, variables, rankMod, rpack
 

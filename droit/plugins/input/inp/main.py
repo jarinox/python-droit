@@ -59,4 +59,4 @@ def block(userinput, inputRules, name, rpack):
 	for variable in variables:
 		outVars[variable.replace("strict.", "")] = variables[variable]
 
-	return passRule, outVars, rankMod
+	return passRule, outVars, rankMod, rpack
