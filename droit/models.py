@@ -35,6 +35,33 @@ class DroitSettings:
 		self.saveSettings()
 
 
+class DroitCache:
+	"""Cache the return value of slow functions"""
+	def __init__(self):
+		self.storage = []
+	
+	def run(self, function, param1=None, param2=None, param3=None):
+		name = function.__module__ +  "." + function.__name__
+		params = [param1, param2, param3]
+
+		for item in self.storage:
+			if(item["name"] == name and item["params"] == params):
+				return item["value"]
+			
+		value = None
+		if(param1 == None):
+			value = function()
+		elif(param2 == None):
+			value = function(param1)
+		elif(param3 == None):
+			value = function(param1, param2)
+		else:
+			value = function(param1, param2, param3)
+		
+		self.storage.append({"name": name, "params": params, "value": value})
+		return value
+
+
 class DroitResourcePackage:
 	"""Provides useful tools and information to any part of python-droit"""
 	def __init__(self, settings=DroitSettings(), plugins=[]):
@@ -42,6 +69,7 @@ class DroitResourcePackage:
 		self.io = DroitIO()
 		self.settings = settings
 		self.plugins = plugins
+		self.cache = DroitCache()
 
 
 class DroitGmrResource:

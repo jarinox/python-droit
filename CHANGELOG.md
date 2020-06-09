@@ -1,6 +1,15 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## master branch
+### Added
+- class `DroitCache` added to `droit.models`
+- telegram io module added
+
+### Changed
+- class `DroitResourcePackage` has new attribute cache which contains a `DroitCache` object
+- [#17](https://github.com/jaybeejs/python-droit/issues/17) input plugins return rpack
+
 ## 1.0.0 pre1
 ### Added
 - class `DroitSearchHit` added to `droit.models`

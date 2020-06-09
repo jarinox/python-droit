@@ -4,7 +4,8 @@ You can find the source-code of python-droit and this documentation on [Github](
 
 ## Classes
 - **DroitSettings**(location="")
-- **DroitResourcePackage**()
+- **DroitCache**()
+- **DroitResourcePackage**(settings=None, plugins=[])
 - **DroitRule**(inputRules, outputRules)
 - **DroitRuleInOut**(tag, attrib, children, mode)
 - **DroitUserinput**(rawInput)
@@ -26,7 +27,15 @@ Read and write settings from and to config.json
 
 - settings - a dict containing some settings
 
-#### DroitResourcePackage()
+#### DroitCache()
+Cache the return value of slow functions.
+
+##### Functions
+- **run**(function, param1=None, param2=None, param3=None)  
+  Returns the value of function() and uses cached if available. Hands over parameters when given.
+
+
+#### DroitResourcePackage(settings=None, plugins=[])
 Provides useful tools and information to any part of python-droit.
 
 **Attributes**
