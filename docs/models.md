@@ -34,6 +34,22 @@ Cache the return value of slow functions.
 - **run**(function, param1=None, param2=None, param3=None)  
   Returns the value of function() and uses cached if available. Hands over parameters when given.
 
+#### DroitHistory()
+List of inputs and outputs of python-droit.
+
+**Attributes**
+- inputs: list of [DroitUserinput](#droituserinputrawinput) objects
+- outputs: list of output strings
+- rules: list of [DroitRule](#droitruleinputrules-outputrules) objects that have been used to get the output from the userinput
+
+##### Functions
+- **newEntry**(userinput, rule, output)  
+  Creates a new entry in the history
+- **loadHistory**(filename)
+  Load settings from a json file
+- **saveHistory**(filename)
+  Save history to a json file
+
 
 #### DroitResourcePackage(settings=None, plugins=[])
 Provides useful tools and information to any part of python-droit.

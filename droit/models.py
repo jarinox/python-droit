@@ -62,6 +62,28 @@ class DroitCache:
 		return value
 
 
+class DroitHistory:
+	"""List of inputs and outputs of python-droit."""
+	def __init__(self):
+		self.inputs = []
+		self.outputs = []
+		self.rules = []
+
+	def newEntry(self, userinput, rule, output):
+		self.inputs.append(userinput)
+		self.rules.append(rule)
+		self.outputs.append(output)
+
+	def saveHistory(self, filename):
+		m = {"inputs": self.inputs, "outputs": self.outputs}
+		open(filename, "w").write(json.dumps(m))
+	
+	def loadHistory(self, filename):
+		m = json.loads(open(filename, "r").read())
+		self.inputs = m["inputs"]
+		self.outputs = m["outputs"]
+
+
 class DroitResourcePackage:
 	"""Provides useful tools and information to any part of python-droit"""
 	def __init__(self, settings=DroitSettings(), plugins=[]):
@@ -70,6 +92,7 @@ class DroitResourcePackage:
 		self.settings = settings
 		self.plugins = plugins
 		self.cache = DroitCache()
+		self.history = DroitHistory()
 
 
 class DroitGmrResource:
