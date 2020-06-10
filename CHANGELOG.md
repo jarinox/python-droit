@@ -8,6 +8,8 @@ All notable changes to this project will be documented in this file.
 - telegram io module added
 
 ### Changed
+- `formatOut()` optionally returns `rpack` - the `rpack` parameter is no longer optional
+- [#19](https://github.com/jaybeejs/python-droit/issues/19) output plugins return rpack
 - `useRules()` optionally returns `rpack` - the `rpack` parameter is no longer optional
 - class `DroitResourcePackage` has new attribute `hisotry` which contains a `DroitHistory` object
 - class `DroitResourcePackage` has new attribute `cache` which contains a `DroitCache` object

@@ -14,8 +14,8 @@ Each submodule has it's own documentation.
 
 ## Functions
 
-- **useRules**(rules, userinput, rpack=None)
-- **formatOut**(outputRules, variables, rpack=None)
+- **useRules**(rules, userinput, rpack, rback=False)
+- **formatOut**(outputRules, variables, rpack, rback=False)
 - **simpleIO**(rawInput, databasePath)
 
 ### Functions documentation
@@ -32,7 +32,7 @@ Runs each entry of a Droit Database onto the userinput and returns all possible 
 If `rback` is set to `True` it returns a tuple containing ([droit.models.DroitSearchHit()](https://github.com/jaybeejs/python-droit/blob/master/docs/models.md#droitsearchhit-rule-variables-ranking), [droit.models.DroitResourcePackage()](https://github.com/jaybeejs/python-droit/blob/master/docs/models.md#droitsearchhit-rule-variables-ranking))
 
 
-#### formatOut(outputRules, variables, rpack=None)
+#### formatOut(outputRules, variables, rpack, rback=False)
 Runs output-rules and returns an answer string.
 
 **Parameters:**
@@ -40,7 +40,8 @@ Runs output-rules and returns an answer string.
 - variables: a dict containing read-in variables from useRules. It is recommended to prepare those with [droit.tools.createVariables()](https://github.com/jaybeejs/python-droit/blob/master/docs/tools.md#createvariablesinpvars-username-droitnamedroit-userinput)
 - rpack: a [droit.models.DroitResourcePackage()](https://github.com/jaybeejs/python-droit/blob/master/docs/models.md#droitresourcepackagesettingsnone-plugins)
 
-**Returns:** an answer string
+**Returns:** If `rback` is set to `False`: an answer string  
+If `rback` is set to `True`: a tuple (output, rpack)
 
 
 #### simpleIO(rawInput, databasePath)

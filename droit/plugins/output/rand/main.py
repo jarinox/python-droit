@@ -5,4 +5,4 @@ import random
 
 def text(data, rpack):
     rint = random.randint(0, len(data) - 1)
-    return data[rint]
+    return data[rint], rpack

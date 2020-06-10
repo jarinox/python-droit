@@ -81,7 +81,7 @@ def useRules(rules, userinput, rpack, rback=False):
 
 
 
-def formatOut(outputRules, variables, rpack=None):
+def formatOut(outputRules, variables, rpack, rback=False):
 	"""Evaluates a DroitRuleOutput"""
 	output = ""
 	
@@ -129,12 +129,17 @@ def formatOut(outputRules, variables, rpack=None):
 			
 			if(isMethod):
 				if(plugin[1][1] != ""):
-					return method(params, rpack)
+					output, rpack = method(params, rpack)
+					break
 				else:
-					return method(rpack)
+					output, rpack = method(rpack)
+					break				
 
 
-	return output
+	if(rback):
+		return output, rpack
+	else:
+		return output
 
 
 
@@ -146,9 +151,10 @@ def simpleIO(rawInput, databasePath):
 	Use an own script to create more complex bots.
 	"""
 	userinput = models.DroitUserinput(rawInput)
-	hits = useRules(loader.parseDroitXML(databasePath), userinput)
+	rpack = models.DroitResourcePackage()
+	hits = useRules(loader.parseDroitXML(databasePath), userinput, rpack)
 	if(len(hits) > 0):
-		return formatOut(hits[0].rule.output, tools.createVariables(inpVars=hits[0].variables, userinput=userinput))
+		return formatOut(hits[0].rule.output, tools.createVariables(inpVars=hits[0].variables, userinput=userinput), rpack)
 	else:
 		return ""
 
