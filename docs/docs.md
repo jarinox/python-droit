@@ -19,15 +19,17 @@ Each submodule has it's own documentation.
 - **simpleIO**(rawInput, databasePath)
 
 ### Functions documentation
-#### useRules(rules, userinput, rpack=None)
+#### useRules(rules, userinput, rpack, rback=False)
 Runs each entry of a Droit Database onto the userinput and returns all possible output-rules sorted by relevance.
 
 **Parameters:**
 - rules: a list containing [droit.models.DroitRule()](https://github.com/jaybeejs/python-droit/blob/master/docs/models.md#droitruleinputrules-outputrules) items
 - userinput: a [droit.models.DroitUserinput()](https://github.com/jaybeejs/python-droit/blob/master/docs/models.md#droituserinputrawinput)
-- rpack: a [droit.models.DroitResourcePackage()](https://github.com/jaybeejs/python-droit/blob/master/docs/models.md#droitresourcepackage)
+- rpack: a [droit.models.DroitResourcePackage()](https://github.com/jaybeejs/python-droit/blob/master/docs/models.md#droitresourcepackagesettingsnone-plugins)
 
-**Returns:** a list containing [droit.models.DroitSearchHit()](https://github.com/jaybeejs/python-droit/blob/master/docs/models.md#droitsearchhit-rule-variables-ranking) items
+**Returns:** If `rback` is set to `False`: a list containing [droit.models.DroitSearchHit()](https://github.com/jaybeejs/python-droit/blob/master/docs/models.md#droitsearchhit-rule-variables-ranking) items  
+  
+If `rback` is set to `True` it returns a tuple containing ([droit.models.DroitSearchHit()](https://github.com/jaybeejs/python-droit/blob/master/docs/models.md#droitsearchhit-rule-variables-ranking), [droit.models.DroitResourcePackage()](https://github.com/jaybeejs/python-droit/blob/master/docs/models.md#droitsearchhit-rule-variables-ranking))
 
 
 #### formatOut(outputRules, variables, rpack=None)
@@ -36,7 +38,7 @@ Runs output-rules and returns an answer string.
 **Parameters:**
 - outputRules: a list containing [droit.models.DroitRuleInOut()](https://github.com/jaybeejs/python-droit/blob/master/docs/models.md#droitruleinouttag-attrib-children-mode) items
 - variables: a dict containing read-in variables from useRules. It is recommended to prepare those with [droit.tools.createVariables()](https://github.com/jaybeejs/python-droit/blob/master/docs/tools.md#createvariablesinpvars-username-droitnamedroit-userinput)
-- rpack: a [droit.models.DroitResourcePackage()](https://github.com/jaybeejs/python-droit/blob/master/docs/models.md#droitresourcepackage)
+- rpack: a [droit.models.DroitResourcePackage()](https://github.com/jaybeejs/python-droit/blob/master/docs/models.md#droitresourcepackagesettingsnone-plugins)
 
 **Returns:** an answer string
 

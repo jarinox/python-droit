@@ -26,7 +26,7 @@ import os, importlib
 from droit import loader, dumper, tools, models, legacy
 
 
-def useRules(rules, userinput, rpack=None):
+def useRules(rules, userinput, rpack, rback=False):
 	"""
 	Uses a parsed Droit Database and runs every rule onto the userinput.
 	Returns all possible DroitRulesOutput sorted by relevance.
@@ -73,7 +73,11 @@ def useRules(rules, userinput, rpack=None):
 
 	if(hits != []):
 		hits = sorted(hits, key=lambda hit: hit.ranking)
-	return hits
+	
+	if(rback):
+		return hits, rpack
+	else:
+		return hits
 
 
 
