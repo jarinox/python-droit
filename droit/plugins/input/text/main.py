@@ -6,7 +6,7 @@
 def block(userinput, inputRules, block, rpack):
 	passRule = True
 	variables = []
-	rankMod = 0
+	rankMod = 1
 	
 	for j in range(0, len(inputRules)):
 		if(block == inputRules[j].tag):
@@ -14,7 +14,7 @@ def block(userinput, inputRules, block, rpack):
 			if "not" in inputRules[j].attrib:
 				dont = (inputRules[j].attrib["not"] == "true")
 				if(dont):
-					rankMod = 1
+					rankMod = 2
 			
 			thisRule = False
 			for i in range(0, len(inputRules[j].children)):

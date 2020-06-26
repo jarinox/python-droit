@@ -8,7 +8,7 @@ import difflib
 def block(userinput, inputRules, block, rpack):
     passRule = True
     variables = []
-    rankMod = 1
+    rankMod = 0
 
     for j in range(0, len(inputRules)):
         if(block == inputRules[j].tag):
@@ -23,6 +23,5 @@ def block(userinput, inputRules, block, rpack):
                 difference = difflib.SequenceMatcher(None, child, userinput.rawInput).ratio()
                 if(difference < limit):
                     passRule = False
-                    rankMod = 0
 
     return passRule, variables, rankMod, rpack

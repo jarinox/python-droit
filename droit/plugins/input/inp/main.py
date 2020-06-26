@@ -45,7 +45,6 @@ def block(userinput, inputRules, name, rpack):
 		results = parse(pText.lower(), userinput.rawInput.lower())
 		if(results != None):
 			passRule = True
-			rankMod = 1
 			
 			variables = results.__dict__["named"]
 			for variable in variables:
@@ -53,7 +52,6 @@ def block(userinput, inputRules, name, rpack):
 					value = variables[variable]
 					if not(value in varChildren[variable]):
 						passRule = False
-						rankMod = 0
 	
 	outVars = {}
 	for variable in variables:

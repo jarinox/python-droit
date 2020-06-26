@@ -6,7 +6,7 @@
 def block(userinput, inputRules, block, rpack):
 	passRule = False
 	variables = []
-	rankMod = 0
+	rankMod = 2
 
 	if(len(inputRules) == 1 and inputRules[0].tag == block):
 		if(userinput.rawInput in inputRules[0].children):

@@ -68,12 +68,16 @@ def useRules(rules, userinput, rpack, rback=False):
 				ruleOk = False
 		
 		if(ruleOk):
-			hit = models.DroitSearchHit(rules[i], variables, len(userinput.words) - len(rules[i].input) + ranking)
+			rankmod = len(rules[i].input) * 0.3 + ranking
+			hit = models.DroitSearchHit(rules[i], variables, rankmod)
 			hits.append(hit)
 
 	if(hits != []):
-		hits = sorted(hits, key=lambda hit: hit.ranking)
+		hits = sorted(hits, key=lambda hit: hit.ranking, reverse=True)
 	
+	for hit in hits:
+		print(hit.ranking)
+
 	if(rback):
 		return hits, rpack
 	else:
