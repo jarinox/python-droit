@@ -1,7 +1,7 @@
 # __init__.py - io - easy printing to multiple outputs
 # Copyright 2020 - Jakob Stolze
 #
-# This file is part of python-droit (https://github.com/jaybeejs/python-droit)
+# This file is part of python-droit (https://github.com/jarinox/python-droit)
 
 
 import importlib, os

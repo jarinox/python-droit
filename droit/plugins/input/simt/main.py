@@ -1,7 +1,7 @@
 # main.py - plugins.input - SIMT (similar text) plugin for python-droit
 # Copyright 2020 - Jakob Stolze
 #
-# This file is part of python-droit (https://github.com/jaybeejs/python-droit)
+# This file is part of python-droit (https://github.com/jarinox/python-droit)
 
 import difflib
 

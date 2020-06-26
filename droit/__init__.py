@@ -1,5 +1,5 @@
 # python-droit - a simple library for creating bots
-# Copyright 2020 Jakob Stolze <https://github.com/jaybeejs>
+# Copyright 2020 Jakob Stolze <https://github.com/jarinox>
 #
 # Version 1.0.0
 #
@@ -19,7 +19,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301
 # USA
 #
-# This file is part of python-droit (https://github.com/jaybeejs/python-droit)
+# This file is part of python-droit (https://github.com/jarinox/python-droit)
 
 
 import os, importlib

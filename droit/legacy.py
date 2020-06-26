@@ -1,7 +1,7 @@
 # legacy.py - parse legacy (v0.4) Droit Databases
 # Copyright 2019 - Jakob Stolze
 #
-# This file is part of python-droit (https://github.com/jaybeejs/python-droit)
+# This file is part of python-droit (https://github.com/jarinox/python-droit)
 
 
 def isValidLine(ddaFileLine):

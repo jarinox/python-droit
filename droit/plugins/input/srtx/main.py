@@ -1,7 +1,7 @@
 # main.py - plugins.input - SRTX plugin for python-droit
 # Copyright 2020 - Jakob Stolze
 #
-# This file is part of python-droit (https://github.com/jaybeejs/python-droit)
+# This file is part of python-droit (https://github.com/jarinox/python-droit)
 
 def block(userinput, inputRules, block, rpack):
 	passRule = False

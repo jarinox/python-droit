@@ -1,7 +1,7 @@
 # dumper.py - write a parsed Droit Databases to XML
 # Copyright 2020 - Jakob Stolze
 #
-# This file is part of python-droit (https://github.com/jaybeejs/python-droit)
+# This file is part of python-droit (https://github.com/jarinox/python-droit)
 
 import xml.etree.cElementTree as ET
 import xml.dom.minidom
