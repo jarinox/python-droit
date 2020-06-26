@@ -24,9 +24,9 @@ def block(userinput, inputRules, block, rpack):
 					if(not(inputRules[j].children[i] in userinput.words) and dont):
 						thisRule = True
 				else:
-					if(inputRules[j].children[i] in userinput.rawInput and not(dont)):
+					if(inputRules[j].children[i] in userinput.simpleInput and not(dont)):
 						thisRule = True
-					if(not(inputRules[j].children[i] in userinput.rawInput) and dont):
+					if(not(inputRules[j].children[i] in userinput.simpleInput) and dont):
 						thisRule = True
 			
 			if not(thisRule):

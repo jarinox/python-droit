@@ -1,17 +1,19 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## master branch
+## 1.0.0 release
 ### Added
 - class `DroitHistory` added to `droit.models`
 - class `DroitCache` added to `droit.models`
 - telegram io module added
 
 ### Changed
+- [#21](https://github.com/jaybeejs/python-droit/issues/21) class `DroitUserinput` has new attribute `simpleInput`
+- fix [#20](https://github.com/jaybeejs/python-droit/issues/20) rules ranking
 - `formatOut()` optionally returns `rpack` - the `rpack` parameter is no longer optional
 - [#19](https://github.com/jaybeejs/python-droit/issues/19) output plugins return rpack
 - `useRules()` optionally returns `rpack` - the `rpack` parameter is no longer optional
-- class `DroitResourcePackage` has new attribute `hisotry` which contains a `DroitHistory` object
+- class `DroitResourcePackage` has new attribute `history` which contains a `DroitHistory` object
 - class `DroitResourcePackage` has new attribute `cache` which contains a `DroitCache` object
 - [#17](https://github.com/jaybeejs/python-droit/issues/17) input plugins return rpack
 

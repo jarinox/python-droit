@@ -85,6 +85,7 @@ Stores the raw userinput as well as a list of the words the userinput consists o
 **Attributes**
 
 - rawInput: the raw userinput as a string
+- simpleInput: lowercase version of raw userinput with unnecessary characters removed
 - words: processed list containig the words of the raw userinput
 
 #### DroitPlugin(mode, name, path="droit/")

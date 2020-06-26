@@ -1,7 +1,7 @@
 # python-droit - a simple library for creating bots
 # Copyright 2020 Jakob Stolze <https://github.com/jaybeejs>
 #
-# Version 1.0.0 pre1
+# Version 1.0.0
 #
 #
 # This library is free software; you can redistribute it and/or

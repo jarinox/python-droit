@@ -130,8 +130,8 @@ class DroitUserinput:
 			pin = pin.replace(rmchars[i], "")
 		while("  " in pin):
 			pin = pin.replace("  ", " ") # double blank to single blank
-		pin = pin.lower()
-		self.words = pin.split(" ") # split up words at blank
+		self.simpleInput = pin.lower()
+		self.words = self.simpleInput.split(" ") # split up words at blank
 
 
 class DroitPlugin:

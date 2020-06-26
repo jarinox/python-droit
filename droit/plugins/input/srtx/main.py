@@ -9,7 +9,7 @@ def block(userinput, inputRules, block, rpack):
 	rankMod = 2
 
 	if(len(inputRules) == 1 and inputRules[0].tag == block):
-		if(userinput.rawInput in inputRules[0].children):
+		if(userinput.simpleInput in inputRules[0].children):
 			passRule = True
 	
 	return passRule, variables, rankMod, rpack

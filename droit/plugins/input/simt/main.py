@@ -20,7 +20,7 @@ def block(userinput, inputRules, block, rpack):
                     print("python-droit, error: plugins.input.simt, parsing 'limit' attrib failed")
 
             for child in inputRules[j].children:
-                difference = difflib.SequenceMatcher(None, child, userinput.rawInput).ratio()
+                difference = difflib.SequenceMatcher(None, child, userinput.simpleInput).ratio()
                 if(difference < limit):
                     passRule = False
 
