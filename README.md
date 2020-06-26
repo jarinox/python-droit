@@ -1,20 +1,19 @@
 # python-droit
 Droit is a simple library for creating bots
 
-The current Version 1.0 of Droit still in a prerelease phase. If you are looking for a stable version please consider using the previous version. If you prefer a feature-rich and developer-friendly version you can use the current version 1.0. Please note that minor changes can be applied until the next upcoming stable release. Programs using the current version of python-droit may have to adapt when switching to the next stable version.
+## Features
+- Simple definition of question-to-answer rules using Droit Database Script
+- Multiple input/output devices such as console or telegram
+- Extendable: create your own sub-rules ("plugins")
 
-Droit v1.0 ([pre1](https://github.com/jaybeejs/python-droit/releases/tag/v1.0.0pre1)):
+
+Version 1.0 has been released! This new version of python-droit comes with many new features. Beside implementing new features and restructuring python-droit developer-friendliness was also improved. There is a documentation for the code as well as some tutorials on how to use python-droit. The Droit Database Script will still be supported and even extended. It won't be abolished because it has a lot of advantages compared to Droit XML.
+
+Droit v1.0 ([release](https://github.com/jaybeejs/python-droit/releases/tag/v1.0.0-release)):
 
 - [Wiki > Getting started](https://github.com/jaybeejs/python-droit/wiki)
 - [Documentation](https://github.com/jaybeejs/python-droit/blob/master/docs/docs.md)
 - [Example](https://github.com/jaybeejs/python-droit/blob/master/sample/sample-bot.py)
-
-Droit v0.4 ([stable release](https://github.com/jaybeejs/python-droit/releases/tag/v0.4)):
-
-- [Documentation](https://github.com/jaybeejs/python-droit/blob/v0.4/docs/Documentation.md)
-- [Droit Database Script (german)](https://github.com/jaybeejs/python-droit/blob/v0.4/docs/Droit%20Database%20Script.md)
-- [Tutorial: Erster Bot mit python-droit (german)](https://github.com/jaybeejs/python-droit/blob/v0.4/docs/Tutorial:%20Erster%20Bot%20mit%20python-droit.md)
-
 
 This library is published under the terms of the GNU LESSER GENERAL PUBLIC LICENSE. Please see LICENCE for more information.  
 Copyright 2019-2020 Jakob Stolze
