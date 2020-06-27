@@ -6,7 +6,7 @@ SRTX!wie gehts->TEXT!Gut&arz;
 TEXT!ich:TEXT!bin,heiße:INP*name!->TEXT!Hallo :VAR!inp.name
 SRTX!wer bin ich->TEXT!Du bist :VAR!global.username
 SRTX!wer bist du,wie heißt du->TEXT!Ich bin :VAR!global.droitname
-TEXT!guten :INP*zeit!morgen,mittag,abend,tag->TEXT!Dir auch einen schönen :VAR!inp.zeit
+TEXT!guten:INP*zeit!morgen,mittag,abend,tag->TEXT!Dir auch einen schönen :VAR!inp.zeit
 
 TEXT!du:TEXT!bist:TEXT!toll,nett,cool:NOTX!nicht,garnicht->TEXT!Danke, du auch&arz;
 TEXT!ich:TEXT!mag,gern,liebe:TEXT!dich:NOTX!nicht->TEXT!Ich hab dich auch gern
