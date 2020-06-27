@@ -29,6 +29,7 @@ try:
             success = False
 except:
     success = False
+    raise
 
 if success:
     print("test: 'rules' successfull")

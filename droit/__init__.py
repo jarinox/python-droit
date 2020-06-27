@@ -1,7 +1,7 @@
 # python-droit - a simple library for creating bots
 # Copyright 2020 Jakob Stolze <https://github.com/jarinox>
 #
-# Version 1.0.0
+# Version 1.0.1
 #
 #
 # This library is free software; you can redistribute it and/or
@@ -54,7 +54,7 @@ def useRules(rules, userinput, rpack, rback=False):
 							plug = inPlug.plugin
 				
 				if not(useCache):
-					plug = importlib.import_module("droit.plugins.input." + rules[i].input[j].tag.lower() + ".main")
+					plug = importlib.import_module("droit.plugins.input." + block.lower() + ".main")
 				
 				passRule, newVars, rankMod, rpack = plug.block(userinput, rules[i].input, block, rpack)
 				for var in newVars:
@@ -74,9 +74,6 @@ def useRules(rules, userinput, rpack, rback=False):
 
 	if(hits != []):
 		hits = sorted(hits, key=lambda hit: hit.ranking, reverse=True)
-	
-	for hit in hits:
-		print(hit.ranking)
 
 	if(rback):
 		return hits, rpack
