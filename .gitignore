@@ -1,5 +1,4 @@
 /**/__pycache__/*
-test-*.py
-test.dda
-test.xml
 .vscode
+/tests/dump.xml
+/tests/dump.dda
