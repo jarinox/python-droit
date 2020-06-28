@@ -23,7 +23,12 @@
 
 
 import os, importlib
-from droit import loader, dumper, tools, models, legacy
+
+from .loader import *
+from .dumper import *
+from .tools import *
+from .models import *
+from .legacy import *
 
 
 def useRules(rules, userinput, rpack, rback=False):
@@ -42,7 +47,8 @@ def useRules(rules, userinput, rpack, rback=False):
 			if not(rules[i].input[j].tag in blocks):
 				blocks.append(rules[i].input[j].tag)
 		
-		inPlugs = os.listdir("droit/plugins/input")
+		path = os.path.dirname(__file__)+"/"
+		inPlugs = os.listdir(path+"plugins/input")
 		for block in blocks:			
 			if(block.lower() in inPlugs):				
 				plug = None
@@ -54,7 +60,10 @@ def useRules(rules, userinput, rpack, rback=False):
 							plug = inPlug.plugin
 				
 				if not(useCache):
-					plug = importlib.import_module("droit.plugins.input." + block.lower() + ".main")
+					spec = importlib.util.spec_from_file_location("main", path + "plugins/input/" + block.lower() + "/main.py")
+					plug = importlib.util.module_from_spec(spec)
+					spec.loader.exec_module(plug)
+
 				
 				passRule, newVars, rankMod, rpack = plug.block(userinput, rules[i].input, block, rpack)
 				for var in newVars:
@@ -124,7 +133,9 @@ def formatOut(outputRules, variables, rpack, rback=False):
 						plug = outPlug.plugin
 
 			if not(useCache):
-				plug = importlib.import_module("droit.plugins.output." + plugin[0] + ".main")
+				spec = importlib.util.spec_from_file_location("main", os.path.dirname(__file__) + "/plugins/output/" + plugin[0] + "/main.py")
+				plug = importlib.util.module_from_spec(spec)
+				spec.loader.exec_module(plug)
 			
 			method = getattr(plug, plugin[1])
 			

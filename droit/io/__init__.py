@@ -13,7 +13,7 @@ class DroitIO:
 	def __init__(self, mode="console"):
 		self.mode = mode
 		self.activeModule = importlib.import_module("droit.io." + self.mode)
-		self.moduleList = os.listdir("droit/io/")
+		self.moduleList = os.listdir(os.path.dirname(__file__))
 	
 	def activateModule(self, name):
 		"""Change the currently active input/output module"""

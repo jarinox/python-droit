@@ -1,6 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## master
+### Changed
+- [#23](https://github.com/jarinox/python-droit/issues/22) make package pypi compatible
+
+## 1.0.1 release
+### Changed
+- fix [#22](https://github.com/jarinox/python-droit/issues/22) block rule name
+
 ## 1.0.0 release
 ### Added
 - class `DroitHistory` added to `droit.models`

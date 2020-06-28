@@ -1,0 +1,3 @@
+include droit/config.json
+include droit/plugins/input/*/*
+include droit/plugins/output/*/*

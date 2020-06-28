@@ -4,14 +4,15 @@
 # This file is part of python-droit (https://github.com/jarinox/python-droit)
 
 
-import importlib, json
-from droit.io import DroitIO
+import importlib, json, os
+
+from .io import DroitIO
 
 
 class DroitSettings:
 	"""Read and write settings from and to config.json"""
 
-	def __init__(self, location=""):
+	def __init__(self, location=os.path.dirname(__file__)+"/"):
 		self.location = location
 		self.loadSettings()
 	
@@ -87,7 +88,6 @@ class DroitHistory:
 class DroitResourcePackage:
 	"""Provides useful tools and information to any part of python-droit"""
 	def __init__(self, settings=DroitSettings(), plugins=[]):
-		self.tools = importlib.import_module("droit.tools")
 		self.io = DroitIO()
 		self.settings = settings
 		self.plugins = plugins
@@ -136,16 +136,18 @@ class DroitUserinput:
 
 class DroitPlugin:
 	"""Loads a plugin."""
-	def __init__(self, mode, name, path="droit/"):
+	def __init__(self, mode, name, path=os.path.dirname(__file__)+"/"):
 		self.mode = mode.lower()
 		self.name = name.lower()
-		self.plugin = importlib.import_module(path.replace("/", ".") + "plugins." + mode + "." + name + ".main")
+		spec = importlib.util.spec_from_file_location("main", path + "plugins/" + mode + "/" + name + "/main.py")
+		self.plugin = importlib.util.module_from_spec(spec)
+		spec.loader.exec_module(self.plugin)
 		self.info = DroitPluginInfo(mode, name, path=path)
 
 
 class DroitPluginInfo:
 	"""Contains information about a DroitPlugin"""
-	def __init__(self, mode, name, path="droit/"):
+	def __init__(self, mode, name, path=os.path.dirname(__file__)+"/"):
 		self.mode = mode
 		self.name = name
 		if(mode == "input"):

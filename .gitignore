@@ -2,3 +2,7 @@
 .vscode
 /tests/dump.xml
 /tests/dump.dda
+benchmark.py
+*.pyc
+/*.egg-info
+/dist/
