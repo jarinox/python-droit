@@ -1,8 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+| Latest release | Version of master branch |  
+|----------------|--------------------------|
+| 1.0.1          | 1.0.2 non-release        |
+
 ## master
 ### Changed
+- imports fixed
 - [#23](https://github.com/jarinox/python-droit/issues/22) make package pypi compatible
 
 ## 1.0.1 release

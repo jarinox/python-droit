@@ -1,7 +1,7 @@
 # python-droit - a simple library for creating bots
 # Copyright 2020 Jakob Stolze <https://github.com/jarinox>
 #
-# Version 1.0.1
+# Version 1.0.2
 #
 #
 # This library is free software; you can redistribute it and/or
@@ -21,14 +21,13 @@
 #
 # This file is part of python-droit (https://github.com/jarinox/python-droit)
 
-
 import os, importlib
 
-from .loader import *
-from .dumper import *
-from .tools import *
-from .models import *
-from .legacy import *
+from . import loader
+from . import dumper
+from . import tools
+from . import models
+from . import legacy
 
 
 def useRules(rules, userinput, rpack, rback=False):
