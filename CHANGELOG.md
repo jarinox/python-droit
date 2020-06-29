@@ -6,7 +6,12 @@ All notable changes to this project will be documented in this file.
 | 1.0.1          | 1.0.2 non-release        |
 
 ## master
+### Added
+- test "io" added
+- tests introduced: "convert", "models" and "rules" tests added
+
 ### Changed
+- "Droit" as standard droitname in `config.json`
 - imports fixed
 - [#23](https://github.com/jarinox/python-droit/issues/22) make package pypi compatible
 

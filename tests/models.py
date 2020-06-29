@@ -43,6 +43,6 @@ if(rpack.history.outputs[1] != "Sehr gut!"):
 
 
 if success:
-    print("test: 'models' successfull")
+    print("test: 'models' successful")
 else:
     print("test: 'models' failed")

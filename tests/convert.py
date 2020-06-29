@@ -29,6 +29,6 @@ else:
                 success = False
 
 if success:
-    print("test: 'convert' successfull")
+    print("test: 'convert' successful")
 else:
     print("test: 'convert' failed")

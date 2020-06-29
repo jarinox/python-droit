@@ -32,6 +32,6 @@ except:
     raise
 
 if success:
-    print("test: 'rules' successfull")
+    print("test: 'rules' successful")
 else:
     print("test: 'rules' failed")
