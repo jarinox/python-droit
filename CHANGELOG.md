@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 - tests introduced: "convert", "models" and "rules" tests added
 
 ### Changed
+- tools.createVariables bug fixed
 - "Droit" as standard droitname in `config.json`
 - imports fixed
 - [#23](https://github.com/jarinox/python-droit/issues/22) make package pypi compatible

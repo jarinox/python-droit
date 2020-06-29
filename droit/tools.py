@@ -8,7 +8,7 @@ import os, time, importlib
 from .models import DroitPlugin, DroitPluginInfo
 
 
-def createVariables(inpVars={}, username="", droitname="Droit", userinput=""):
+def createVariables(inpVars={}, username="", droitname="Droit", userinput=None):
 	"""
 	Create a list of variables containing all necessary pieces of data
 	for formatOut
@@ -18,7 +18,10 @@ def createVariables(inpVars={}, username="", droitname="Droit", userinput=""):
 	variables["global.date"] = time.strftime("%d.%m.%Y")
 	variables["global.username"] = username
 	variables["global.droitname"] = droitname
-	variables["global.userinput"] = userinput.rawInput
+	if userinput:
+		variables["global.userinput"] = userinput.rawInput
+	else:
+		variables["global.userinput"] = ""
 	for inpVar in inpVars:
 		variables["inp." + inpVar] = inpVars[inpVar]
 		
