@@ -1,7 +1,7 @@
 # python-droit - a simple library for creating bots
 # Copyright 2020 Jakob Stolze <https://github.com/jarinox>
 #
-# Version 1.0.2
+# Version 1.0.2 release
 #
 #
 # This library is free software; you can redistribute it and/or
@@ -30,7 +30,7 @@ from . import models
 from . import legacy
 
 
-def useRules(rules, userinput, rpack, rback=False):
+def useRules(rules: list, userinput: models.DroitUserinput, rpack: models.DroitResourcePackage, rback=False):
 	"""
 	Uses a parsed Droit Database and runs every rule onto the userinput.
 	Returns all possible DroitRulesOutput sorted by relevance.
@@ -90,7 +90,7 @@ def useRules(rules, userinput, rpack, rback=False):
 
 
 
-def formatOut(outputRules, variables, rpack, rback=False):
+def formatOut(outputRules: list, variables: dict, rpack: models.DroitResourcePackage, rback=False):
 	"""Evaluates a DroitRuleOutput"""
 	output = ""
 	
@@ -154,7 +154,7 @@ def formatOut(outputRules, variables, rpack, rback=False):
 
 
 
-def simpleIO(rawInput, databasePath):
+def simpleIO(rawInput: str, databasePath: str):
 	"""
 	Simple function to test a database and to create simple bots.
 	The use is restricted and not recommended because no resources

@@ -63,28 +63,6 @@ class DroitCache:
 		return value
 
 
-class DroitHistory:
-	"""List of inputs and outputs of python-droit."""
-	def __init__(self):
-		self.inputs = []
-		self.outputs = []
-		self.rules = []
-
-	def newEntry(self, userinput, rule, output):
-		self.inputs.append(userinput)
-		self.rules.append(rule)
-		self.outputs.append(output)
-
-	def saveHistory(self, filename):
-		m = {"inputs": self.inputs, "outputs": self.outputs}
-		open(filename, "w").write(json.dumps(m))
-	
-	def loadHistory(self, filename):
-		m = json.loads(open(filename, "r").read())
-		self.inputs = m["inputs"]
-		self.outputs = m["outputs"]
-
-
 class DroitResourcePackage:
 	"""Provides useful tools and information to any part of python-droit"""
 	def __init__(self, settings=DroitSettings(), plugins=[]):
@@ -103,7 +81,7 @@ class DroitGmrResource:
 
 class DroitRuleInOut:
 	"""Stores an input-rule or an output-rule"""
-	def __init__(self, tag, attrib, children, mode):
+	def __init__(self, tag: str, attrib: dict, children: list, mode: str):
 		self.mode = mode
 		self.tag = tag
 		self.attrib = attrib
@@ -112,7 +90,7 @@ class DroitRuleInOut:
 
 class DroitRule:
 	"""Stores a list of inputRules and a list of outputRules."""
-	def __init__(self, inputRules, outputRules):
+	def __init__(self, inputRules: list, outputRules: list):
 		self.input = inputRules
 		self.output = outputRules
 
@@ -122,7 +100,7 @@ class DroitUserinput:
 	Stores the raw userinput as well as a list of the words the userinput
 	consists of. The list is created on init.
 	"""
-	def __init__(self, rawInput):
+	def __init__(self, rawInput: str):
 		self.rawInput = rawInput
 		pin = rawInput
 		rmchars = [",", ":", "!", ".", "-", "?", ";", "'", "\"", "(", ")", "$"]
@@ -136,7 +114,7 @@ class DroitUserinput:
 
 class DroitPlugin:
 	"""Loads a plugin."""
-	def __init__(self, mode, name, path=os.path.dirname(__file__)+"/"):
+	def __init__(self, mode: str, name: str, path=os.path.dirname(__file__)+"/"):
 		self.mode = mode.lower()
 		self.name = name.lower()
 		spec = importlib.util.spec_from_file_location("main", path + "plugins/" + mode + "/" + name + "/main.py")
@@ -147,7 +125,7 @@ class DroitPlugin:
 
 class DroitPluginInfo:
 	"""Contains information about a DroitPlugin"""
-	def __init__(self, mode, name, path=os.path.dirname(__file__)+"/"):
+	def __init__(self, mode: str, name: str, path=os.path.dirname(__file__)+"/"):
 		self.mode = mode
 		self.name = name
 		if(mode == "input"):
@@ -158,7 +136,29 @@ class DroitPluginInfo:
 
 class DroitSearchHit:
 	"""Object returned by useRules()"""
-	def __init__(self, rule, variables, ranking):
+	def __init__(self, rule: DroitRule, variables: dict, ranking: int):
 		self.rule = rule
 		self.variables = variables
 		self.ranking = ranking
+
+
+class DroitHistory:
+	"""List of inputs and outputs of python-droit."""
+	def __init__(self):
+		self.inputs = []
+		self.outputs = []
+		self.rules = []
+
+	def newEntry(self, userinput: DroitUserinput, rule: DroitRule, output: str):
+		self.inputs.append(userinput)
+		self.rules.append(rule)
+		self.outputs.append(output)
+
+	def saveHistory(self, filename: str):
+		m = {"inputs": self.inputs, "outputs": self.outputs}
+		open(filename, "w").write(json.dumps(m))
+	
+	def loadHistory(self, filename: str):
+		m = json.loads(open(filename, "r").read())
+		self.inputs = m["inputs"]
+		self.outputs = m["outputs"]

@@ -3,10 +3,12 @@ All notable changes to this project will be documented in this file.
 
 | Latest release | Version of master branch |  
 |----------------|--------------------------|
-| 1.0.1          | 1.0.2 non-release        |
+| 1.0.2          | 1.0.2 release            |
 
-## master
+## 1.0.2 release
 ### Added
+- [#24](https://github.com/jarinox/python-droit/issues/24) type annotations added
+- test "tools" added
 - test "io" added
 - tests introduced: "convert", "models" and "rules" tests added
 
