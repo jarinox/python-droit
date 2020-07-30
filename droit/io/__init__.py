@@ -4,7 +4,8 @@
 # This file is part of python-droit (https://github.com/jarinox/python-droit)
 
 
-import importlib, os
+import os as _os
+import importlib as _importlib
 
 
 class DroitIO:
@@ -12,13 +13,13 @@ class DroitIO:
 
 	def __init__(self, mode="console"):
 		self.mode = mode
-		self.activeModule = importlib.import_module("droit.io." + self.mode)
-		self.moduleList = os.listdir(os.path.dirname(__file__))
+		self.activeModule = _importlib.import_module("droit.io." + self.mode)
+		self.moduleList = _os.listdir(_os.path.dirname(__file__))
 	
 	def activateModule(self, name):
 		"""Change the currently active input/output module"""
 		if(name in self.moduleList or name + ".py" in self.moduleList):
-			self.activeModule = importlib.import_module("droit.io." + name)
+			self.activeModule = _importlib.import_module("droit.io." + name)
 			self.mode = name
 		
 	def output(self, text):

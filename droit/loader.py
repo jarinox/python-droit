@@ -4,14 +4,15 @@
 # This file is part of python-droit (https://github.com/jarinox/python-droit)
 
 
-import xml.etree.cElementTree as ET
-from droit import models, legacy, tools
-
+import xml.etree.cElementTree as _ET
+import droit.models as _models
+import droit.legacy as _legacy
+import droit.tools as _tools
 
 
 def parseDroitXML(filename):
 	"""Parse a Droit XML Database"""
-	tree = ET.parse(filename)
+	tree = _ET.parse(filename)
 	root = tree.getroot()
 	rules = []
 	for child in root:
@@ -27,7 +28,7 @@ def parseDroitXML(filename):
 								for inchild in inrule:
 									if(inchild.text != None):
 										children.append(inchild.text)
-								dri = models.DroitRuleInOut(inrule.tag.upper(), inrule.attrib, children, "input")
+								dri = _models.DroitRuleInOut(inrule.tag.upper(), inrule.attrib, children, "input")
 								inputrules.append(dri)
 					for outrules in rule:
 						if(outrules.tag == "output"):
@@ -36,18 +37,18 @@ def parseDroitXML(filename):
 								for outchild in outrule:
 									if(outchild.text != None):
 										children.append(outchild.text)
-								dro = models.DroitRuleInOut(outrule.tag.upper(), outrule.attrib, children, "output")
+								dro = _models.DroitRuleInOut(outrule.tag.upper(), outrule.attrib, children, "output")
 								outputrules.append(dro)
-					dr = models.DroitRule(inputrules, outputrules)
+					dr = _models.DroitRule(inputrules, outputrules)
 					rules.append(dr)
 	return rules
 
 
 def parseLegacy(filename):
 	"""Parse a legacy Droit Database (.dda)"""
-	dda = legacy.parseDDA(filename)
+	dda = _legacy.parseDDA(filename)
 	rules = []
-	pinfos = tools.loadPluginInfos()
+	pinfos = _tools.loadPluginInfos()
 	for rule in dda:
 		inputrules = []
 		outputrules = []
@@ -67,20 +68,20 @@ def parseLegacy(filename):
 			children = inrule[1].split(",")
 			if(inrule[1] == ""):
 				children = []
-			dri = models.DroitRuleInOut(inrule[0], attr, children, "input")
+			dri = _models.DroitRuleInOut(inrule[0], attr, children, "input")
 			inputrules.append(dri)
 		for outrule in rule[1]:
 			attr = {}
 			outrule[1] = outrule[1].replace("&arz;", "!").replace("&dpp;", ":")
 			if(outrule[0].upper() == "EVAL"):
-				dro = models.DroitRuleInOut(outrule[0].upper(), attr, [outrule[1]], "output")
+				dro = _models.DroitRuleInOut(outrule[0].upper(), attr, [outrule[1]], "output")
 			else:
 				children = outrule[1].split(",")
 				if(outrule[1] == ""):
 					children = []
-				dro = models.DroitRuleInOut(outrule[0].upper(), attr, children, "output")
+				dro = _models.DroitRuleInOut(outrule[0].upper(), attr, children, "output")
 			outputrules.append(dro)
-		dr = models.DroitRule(inputrules, outputrules)
+		dr = _models.DroitRule(inputrules, outputrules)
 		rules.append(dr)
 	return rules
 		

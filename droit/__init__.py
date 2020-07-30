@@ -1,7 +1,7 @@
 # python-droit - a simple library for creating bots
 # Copyright 2020 Jakob Stolze <https://github.com/jarinox>
 #
-# Version 1.0.2 release
+# Version 1.0.3
 #
 #
 # This library is free software; you can redistribute it and/or
@@ -21,7 +21,8 @@
 #
 # This file is part of python-droit (https://github.com/jarinox/python-droit)
 
-import os, importlib
+import os as _os
+import importlib as _importlib
 
 from . import loader
 from . import dumper
@@ -46,8 +47,8 @@ def useRules(rules: list, userinput: models.DroitUserinput, rpack: models.DroitR
 			if not(rules[i].input[j].tag in blocks):
 				blocks.append(rules[i].input[j].tag)
 		
-		path = os.path.dirname(__file__)+"/"
-		inPlugs = os.listdir(path+"plugins/input")
+		path = _os.path.dirname(__file__)+"/"
+		inPlugs = _os.listdir(path+"plugins/input")
 		for block in blocks:			
 			if(block.lower() in inPlugs):				
 				plug = None
@@ -59,8 +60,8 @@ def useRules(rules: list, userinput: models.DroitUserinput, rpack: models.DroitR
 							plug = inPlug.plugin
 				
 				if not(useCache):
-					spec = importlib.util.spec_from_file_location("main", path + "plugins/input/" + block.lower() + "/main.py")
-					plug = importlib.util.module_from_spec(spec)
+					spec = _importlib.util.spec_from_file_location("main", path + "plugins/input/" + block.lower() + "/main.py")
+					plug = _importlib.util.module_from_spec(spec)
 					spec.loader.exec_module(plug)
 
 				
@@ -132,8 +133,8 @@ def formatOut(outputRules: list, variables: dict, rpack: models.DroitResourcePac
 						plug = outPlug.plugin
 
 			if not(useCache):
-				spec = importlib.util.spec_from_file_location("main", os.path.dirname(__file__) + "/plugins/output/" + plugin[0] + "/main.py")
-				plug = importlib.util.module_from_spec(spec)
+				spec = _importlib.util.spec_from_file_location("main", _os.path.dirname(__file__) + "/plugins/output/" + plugin[0] + "/main.py")
+				plug = _importlib.util.module_from_spec(spec)
 				spec.loader.exec_module(plug)
 			
 			method = getattr(plug, plugin[1])

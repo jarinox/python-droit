@@ -3,7 +3,11 @@ All notable changes to this project will be documented in this file.
 
 | Latest release | Version of master branch |  
 |----------------|--------------------------|
-| 1.0.2          | 1.0.2 release            |
+| 1.0.2          | 1.0.3 non-release        |
+
+## master
+### Changed
+- imports fixed
 
 ## 1.0.2 release
 ### Added

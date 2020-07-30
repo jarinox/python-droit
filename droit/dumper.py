@@ -3,37 +3,37 @@
 #
 # This file is part of python-droit (https://github.com/jarinox/python-droit)
 
-import xml.etree.cElementTree as ET
-import xml.dom.minidom
+import xml.etree.cElementTree as _ET
+import xml.dom.minidom as _minidom
 
 
 def writeDroitXML(dda, filename):
 	"""Write a parse Droit Database to XML"""
-	droitdb = ET.Element("droitdb")
-	droitxml = ET.SubElement(droitdb, "droitxml")
+	droitdb = _ET.Element("droitdb")
+	droitxml = _ET.SubElement(droitdb, "droitxml")
 	
 	for rule in dda:
-		r = ET.SubElement(droitxml, "rule")
-		inp = ET.SubElement(r, "input")
-		out = ET.SubElement(r, "output")
+		r = _ET.SubElement(droitxml, "rule")
+		inp = _ET.SubElement(r, "input")
+		out = _ET.SubElement(r, "output")
 		for inRule in rule.input:
-			sub = ET.SubElement(inp, inRule.tag, attrib=inRule.attrib)
+			sub = _ET.SubElement(inp, inRule.tag, attrib=inRule.attrib)
 			for child in inRule.children:
-				ET.SubElement(sub, "item").text = child
+				_ET.SubElement(sub, "item").text = child
 		for outRule in rule.output:
-			sub = ET.SubElement(out, outRule.tag, attrib=outRule.attrib)
+			sub = _ET.SubElement(out, outRule.tag, attrib=outRule.attrib)
 			for child in outRule.children:
-				ET.SubElement(sub, "item").text = child
+				_ET.SubElement(sub, "item").text = child
 		
 	
-	tree = ET.ElementTree(droitdb)
+	tree = _ET.ElementTree(droitdb)
 	tree.write(filename)
 
 
-def prettifyXML(filename):
-	dom = xml.dom.minidom.parse(filename)
-	pretty = dom.toprettyxml()
-	open(filename, "w").write(pretty)
+def pr_ETtifyXML(filename):
+	dom = _minidom.parse(filename)
+	pr_ETty = dom.topr_ETtyxml()
+	open(filename, "w").write(pr_ETty)
 
 
 def writeLegacy(dda, filename):

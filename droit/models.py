@@ -4,7 +4,9 @@
 # This file is part of python-droit (https://github.com/jarinox/python-droit)
 
 
-import importlib, json, os
+import os as _os
+import importlib as _importlib
+import json as _json
 
 from .io import DroitIO
 
@@ -12,7 +14,7 @@ from .io import DroitIO
 class DroitSettings:
 	"""Read and write settings from and to config.json"""
 
-	def __init__(self, location=os.path.dirname(__file__)+"/"):
+	def __init__(self, location=_os.path.dirname(__file__)+"/"):
 		self.location = location
 		self.loadSettings()
 	
@@ -20,14 +22,14 @@ class DroitSettings:
 		"""load settings from config.json"""
 		try:
 			raw = open(self.location + "config.json", "r").read()
-			self.settings = json.loads(raw)
+			self.settings = _json.loads(raw)
 			return True
 		except:
 			return False
 		
 	def saveSettings(self):
 		"""save settings to config.json"""
-		data = json.dumps(self.settings)
+		data = _json.dumps(self.settings)
 		open(self.location + "config.json", "w").write(data)
 	
 	def initSettings(self):
@@ -114,22 +116,22 @@ class DroitUserinput:
 
 class DroitPlugin:
 	"""Loads a plugin."""
-	def __init__(self, mode: str, name: str, path=os.path.dirname(__file__)+"/"):
+	def __init__(self, mode: str, name: str, path=_os.path.dirname(__file__)+"/"):
 		self.mode = mode.lower()
 		self.name = name.lower()
-		spec = importlib.util.spec_from_file_location("main", path + "plugins/" + mode + "/" + name + "/main.py")
-		self.plugin = importlib.util.module_from_spec(spec)
+		spec = _importlib.util.spec_from_file_location("main", path + "plugins/" + mode + "/" + name + "/main.py")
+		self.plugin = _importlib.util.module_from_spec(spec)
 		spec.loader.exec_module(self.plugin)
 		self.info = DroitPluginInfo(mode, name, path=path)
 
 
 class DroitPluginInfo:
 	"""Contains information about a DroitPlugin"""
-	def __init__(self, mode: str, name: str, path=os.path.dirname(__file__)+"/"):
+	def __init__(self, mode: str, name: str, path=_os.path.dirname(__file__)+"/"):
 		self.mode = mode
 		self.name = name
 		if(mode == "input"):
-			info = json.loads(open(path+ "plugins/" + mode + "/" + name + "/info.json", "r").read())
+			info = _json.loads(open(path+ "plugins/" + mode + "/" + name + "/info.json", "r").read())
 			self.description = info["description"]
 			self.attrib = info["attributes"]
 
@@ -156,9 +158,9 @@ class DroitHistory:
 
 	def saveHistory(self, filename: str):
 		m = {"inputs": self.inputs, "outputs": self.outputs}
-		open(filename, "w").write(json.dumps(m))
+		open(filename, "w").write(_json.dumps(m))
 	
 	def loadHistory(self, filename: str):
-		m = json.loads(open(filename, "r").read())
+		m = _json.loads(open(filename, "r").read())
 		self.inputs = m["inputs"]
 		self.outputs = m["outputs"]
