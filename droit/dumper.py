@@ -30,10 +30,10 @@ def writeDroitXML(dda, filename):
 	tree.write(filename)
 
 
-def pr_ETtifyXML(filename):
+def prettifyXML(filename):
 	dom = _minidom.parse(filename)
-	pr_ETty = dom.topr_ETtyxml()
-	open(filename, "w").write(pr_ETty)
+	pretty = dom.toprettyxml()
+	open(filename, "w").write(pretty)
 
 
 def writeLegacy(dda, filename):

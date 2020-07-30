@@ -1,1 +1,1 @@
-from tests import convert, rules, models, io
+from tests import convert, rules, models, io, tools
