@@ -23,7 +23,7 @@ pip install .
 ## About
 Version 1.0 has been released! This new version of python-droit comes with many new features. Beside implementing new features and restructuring python-droit developer-friendliness was also improved. There is a documentation for the code as well as some tutorials on how to use python-droit. The Droit Database Script will still be supported and even extended. It won't be abolished because it has a lot of advantages compared to Droit XML.
 
-Droit v1.0 ([release](https://github.com/jarinox/python-droit/releases/tag/v1.0.2-release)):
+Droit v1.0.3:
 
 - [Wiki > Getting started](https://github.com/jarinox/python-droit/wiki)
 - [Documentation](https://github.com/jarinox/python-droit/blob/master/docs/docs.md)

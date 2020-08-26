@@ -142,12 +142,12 @@ def formatOut(outputRules: list, variables: dict, rpack: models.DroitResourcePac
 			method = getattr(plug, plugin[1])
 			
 			if(isMethod):
+				outadd = ""
 				if(plugin[1][1] != ""):
-					output, rpack = method(params, rpack)
-					break
+					outadd, rpack = method(params, rpack)
 				else:
-					output, rpack = method(rpack)
-					break				
+					outadd, rpack = method(rpack)
+				output += outadd
 
 
 	if(rback):

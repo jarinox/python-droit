@@ -3,10 +3,12 @@ All notable changes to this project will be documented in this file.
 
 | Latest release | Version of master branch |  
 |----------------|--------------------------|
-| 1.0.2          | 1.0.3 non-release        |
+| 1.0.3          | 1.0.3                    |
 
-## master
+## 1.0.3 release
 ### Changed
+- fix [#25](https://github.com/jarinox/python-droit/issues/25) formatOut bug when using EVAL
+- test "rules" improved
 - test "tools" improved
 - imports fixed
 
