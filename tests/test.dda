@@ -12,7 +12,7 @@ TEXT!du:TEXT!bist:TEXT!toll,nett,cool:NOTX!nicht,garnicht->TEXT!Danke, du auch&a
 TEXT!ich:TEXT!mag,gern,liebe:TEXT!dich:NOTX!nicht->TEXT!Ich hab dich auch gern
 SRTX!magst du mich,sind wir freunde->TEXT!Klar&arz;
 SRTX!tschüss,bis bald,auf wiedersehen->EVAL!rand.text("Bis bald", "Tschüss", "Auf wiedersehen")
-TEXT!tut:TEXT!mir:TEXT!leid:NOTX!nicht,garnicht->EVAL!rand.text("Ist ok", "Kein Problem")
+TEXT!tut:TEXT!mir:TEXT!leid:NOTX!nicht,garnicht->EVAL!rand.text("Ist ok", "Kein Problem"):TEXT!&arz;
 SRTX!danke,thx->EVAL!rand.text("Bitte", "Gern geschehen", "Bitteschön", "Kein Problem")
 
 SIMT*90!wie viel uhr ist es,wie viel uhr haben wir,welche uhrzeit haben wir->TEXT!Es ist :VAR!global.time:TEXT! Uhr.

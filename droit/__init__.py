@@ -30,6 +30,8 @@ from . import tools
 from . import models
 from . import legacy
 
+__version__ = "1.0.3"
+__author__ = "Jakob Stolze"
 
 def useRules(rules: list, userinput: models.DroitUserinput, rpack: models.DroitResourcePackage, rback=False):
 	"""
