@@ -31,14 +31,14 @@ def createVariables(inpVars={}, username="", droitname="Droit", userinput=None):
 	return variables
 
 
-def loadPlugins(location=_os.path.dirname(__file__)+"/"):
+def loadPlugins(location=_os.path.dirname(__file__)+"/plugins"):
 	"""
 	Loads all plugins from the given location and returns them in a
 	list containing DroitPlugin items.
 	"""
 	plugins = []
-	inList = _os.listdir(path=location+"plugins/input")
-	outList = _os.listdir(path=location+"plugins/output")
+	inList = _os.listdir(path=(location+"/input").replace("//", "/"))
+	outList = _os.listdir(path=(location+"/output").replace("//", "/"))
 	
 	for name in inList:
 		plugins.append(_DroitPlugin("input", name, path=location))
@@ -49,14 +49,14 @@ def loadPlugins(location=_os.path.dirname(__file__)+"/"):
 	return plugins
 
 
-def loadPluginInfos(location=_os.path.dirname(__file__)+"/"):
+def loadPluginInfos(location=_os.path.dirname(__file__)+"/plugins"):
 	"""
 	Loads all plugin infos from the given location and returns them in a
 	list containing DroitPluginInfo items.
 	"""
 	infos = []
-	inList = _os.listdir(path=location+"plugins/input")
-	outList = _os.listdir(path=location+"plugins/output")
+	inList = _os.listdir(path=(location+"/input").replace("//", "/"))
+	outList = _os.listdir(path=(location+"/output").replace("//", "/"))
 	
 	for name in inList:
 		infos.append(_DroitPluginInfo("input", name, path=location))

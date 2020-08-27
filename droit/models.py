@@ -16,7 +16,7 @@ class DroitSettings:
 
 	def __init__(self, location=_os.path.dirname(__file__)+"/"):
 		self.location = location
-		self.loadSettings()
+		self.settings = {"droitname": "Droit", "ioMode": "console", "username":""}
 	
 	def loadSettings(self):
 		"""load settings from config.json"""
@@ -116,10 +116,10 @@ class DroitUserinput:
 
 class DroitPlugin:
 	"""Loads a plugin."""
-	def __init__(self, mode: str, name: str, path=_os.path.dirname(__file__)+"/"):
+	def __init__(self, mode: str, name: str, path=_os.path.dirname(__file__)+"/plugins"):
 		self.mode = mode.lower()
 		self.name = name.lower()
-		spec = _importlib.util.spec_from_file_location("main", path + "plugins/" + mode + "/" + name + "/main.py")
+		spec = _importlib.util.spec_from_file_location("main", (path + "/" + mode + "/" + name + "/main.py").replace("//", "/"))
 		self.plugin = _importlib.util.module_from_spec(spec)
 		spec.loader.exec_module(self.plugin)
 		self.info = DroitPluginInfo(mode, name, path=path)
@@ -127,11 +127,11 @@ class DroitPlugin:
 
 class DroitPluginInfo:
 	"""Contains information about a DroitPlugin"""
-	def __init__(self, mode: str, name: str, path=_os.path.dirname(__file__)+"/"):
+	def __init__(self, mode: str, name: str, path=_os.path.dirname(__file__)+"/plugins"):
 		self.mode = mode
 		self.name = name
 		if(mode == "input"):
-			info = _json.loads(open(path+ "plugins/" + mode + "/" + name + "/info.json", "r").read())
+			info = _json.loads(open((path+"/"+mode+"/"+name+"/info.json").replace("//", "/"), "r").read())
 			self.description = info["description"]
 			self.attrib = info["attributes"]
 

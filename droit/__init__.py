@@ -1,7 +1,7 @@
 # python-droit - a simple library for creating bots
 # Copyright 2020 Jakob Stolze <https://github.com/jarinox>
 #
-# Version 1.0.3
+# Version 1.1.0:1 alpha
 #
 #
 # This library is free software; you can redistribute it and/or
@@ -22,153 +22,186 @@
 # This file is part of python-droit (https://github.com/jarinox/python-droit)
 
 import os as _os
+import time as _time
 import importlib as _importlib
 
-from . import loader
-from . import dumper
-from . import tools
 from . import models
-from . import legacy
 
-__version__ = "1.0.3"
+from . import loader as _loader
+from . import dumper as _dumper
+from . import tools as _tools
+
+__version__ = "1.1.0:1"
 __author__ = "Jakob Stolze"
 
-def useRules(rules: list, userinput: models.DroitUserinput, rpack: models.DroitResourcePackage, rback=False):
-	"""
-	Uses a parsed Droit Database and runs every rule onto the userinput.
-	Returns all possible DroitRulesOutput sorted by relevance.
-	"""
-	hits = []
-
-	for i in range(0, len(rules)): # use all rules
-		variables = {}
-		ranking = 0
-		blocks = []
-		ruleOk = True
-		for j in range(0, len(rules[i].input)):
-			if not(rules[i].input[j].tag in blocks):
-				blocks.append(rules[i].input[j].tag)
-		
-		path = _os.path.dirname(__file__)+"/"
-		inPlugs = _os.listdir(path+"plugins/input")
-		for block in blocks:			
-			if(block.lower() in inPlugs):				
-				plug = None
-				useCache = False
-				if(rpack != None):
-					for inPlug in rpack.plugins:
-						if(inPlug.name == block.lower() and inPlug.mode == "input"):
-							useCache = True
-							plug = inPlug.plugin
-				
-				if not(useCache):
-					spec = _importlib.util.spec_from_file_location("main", path + "plugins/input/" + block.lower() + "/main.py")
-					plug = _importlib.util.module_from_spec(spec)
-					spec.loader.exec_module(plug)
-
-				
-				passRule, newVars, rankMod, rpack = plug.block(userinput, rules[i].input, block, rpack)
-				for var in newVars:
-					variables[var] = newVars[var]
-				if(passRule):
-					ranking = ranking + rankMod
-				else:
-					ruleOk = False
-					break
-			else:
-				ruleOk = False
-		
-		if(ruleOk):
-			rankmod = len(rules[i].input) * 0.3 + ranking
-			hit = models.DroitSearchHit(rules[i], variables, rankmod)
-			hits.append(hit)
-
-	if(hits != []):
-		hits = sorted(hits, key=lambda hit: hit.ranking, reverse=True)
-
-	if(rback):
-		return hits, rpack
-	else:
-		return hits
 
 
-
-def formatOut(outputRules: list, variables: dict, rpack: models.DroitResourcePackage, rback=False):
-	"""Evaluates a DroitRuleOutput"""
-	output = ""
-	
-	for i in range(0, len(outputRules)):
-		if("TEXT" == outputRules[i].tag.upper()):
-			for text in outputRules[i].children:
-				output += text
-		
-		if("VAR" == outputRules[i].tag.upper()):
-			for var in variables:
-				if(var in outputRules[i].children):
-					output += variables[var]
-		
-		if("EVAL" == outputRules[i].tag.upper()):
-			plugin = ""
-			for plug in outputRules[i].children:
-				plugin += plug
-			plugin = plugin.split(".", 1)
-			for var in variables:
-				if("*" + var in plugin[1]):
-					plugin[1] = plugin[1].replace("*" + var, "\"" + variables[var] + "\"")
-
-			isMethod = False
-			if("(" in plugin[1]):
-				isMethod = True
-				plugin.append(plugin[1].split("(")[1][:-1].replace('"', "").replace(", ", ",").split(","))
-				plugin[1] = plugin[1].split("(")[0]
-
-			params = []
-			for i in range(0, len(plugin[2])):
-				params.append(plugin[2][i])
-			
-			plug = None
-			useCache = False
-			if(rpack != None):
-				for outPlug in rpack.plugins:
-					if(outPlug.name == plugin[0] and outPlug.mode == "output"):
-						useCache = True
-						plug = outPlug.plugin
-
-			if not(useCache):
-				spec = _importlib.util.spec_from_file_location("main", _os.path.dirname(__file__) + "/plugins/output/" + plugin[0] + "/main.py")
-				plug = _importlib.util.module_from_spec(spec)
-				spec.loader.exec_module(plug)
-			
-			method = getattr(plug, plugin[1])
-			
-			if(isMethod):
-				outadd = ""
-				if(plugin[1][1] != ""):
-					outadd, rpack = method(params, rpack)
-				else:
-					outadd, rpack = method(rpack)
-				output += outadd
+class Database:
+    """A Droit Database that can be used to process rules."""
+    def __init__(self):
+        self.rules = models.DroitRule(inputRules=[], outputRules=[])
+        self.settings = models.DroitSettings()
+        self.plugins = []
+        self.cache = models.DroitCache()
+        self.history = models.DroitHistory()
 
 
-	if(rback):
-		return output, rpack
-	else:
-		return output
+    def parseLegacy(self, filename: str):
+        """Parse a legacy Droit Database (.dda)"""
+        self.rules = _loader.parseLegacy(filename)
+    
+    def parseDroitXML(self, filename: str):
+        """Parse a Droit XML Database"""
+        self.rules = _loader.parseDroitXML(filename)
+    
+    def writeLegacy(self, filename: str):
+        """Write a parsed Droit Database to Droit Database Script"""
+        _dumper.writeLegacy(self.rules, filename)
+    
+    def writeDroitXML(self, filename: str):
+        """Write a parsed Droit Database to XML"""
+        _dumper.writeDroitXML(self.rules, filename)
 
 
+    def loadPlugins(self, location=_os.path.dirname(__file__)+"/plugins"):
+        """
+        Loads all plugins from the given location and returns them in a
+        list containing DroitPlugin items.
+        """
+        self.plugins = _tools.loadPlugins(location=location)
+    
 
-def simpleIO(rawInput: str, databasePath: str):
-	"""
-	Simple function to test a database and to create simple bots.
-	The use is restricted and not recommended because no resources
-	can be provided. This function is intended to be used for testing.
-	Use an own script to create more complex bots.
-	"""
-	userinput = models.DroitUserinput(rawInput)
-	rpack = models.DroitResourcePackage()
-	hits = useRules(loader.parseDroitXML(databasePath), userinput, rpack)
-	if(len(hits) > 0):
-		return formatOut(hits[0].rule.output, tools.createVariables(inpVars=hits[0].variables, userinput=userinput), rpack)
-	else:
-		return ""
+    def createVariables(self, vars={}, userinput=None):
+        """
+        Create a dict of variables containing all necessary pieces of data
+        for formatOut
+        """
+        variables = {}
+        variables["global.time"] = _time.strftime("%H:%M")
+        variables["global.date"] = _time.strftime("%d.%m.%Y")
+        variables["global.username"] = self.settings.settings["username"]
+        variables["global.droitname"] = self.settings.settings["droitname"]
+        
+        if userinput:
+            variables["global.userinput"] = userinput.rawInput
+        else:
+            variables["global.userinput"] = ""
+        
+        for var in vars:
+            variables[var] = vars[var]
+            
+        return variables
+    
 
+    def useRules(self, userinput: models.DroitUserinput):
+        """
+        Runs every rule onto the userinput.
+        Returns all possible DroitRulesOutput sorted by relevance.
+        """
+        hits = []
+
+        for i in range(0, len(self.rules)): # use all rules
+            variables = {}
+            ranking = 0
+            blocks = []
+            ruleOk = True
+            for j in range(0, len(self.rules[i].input)):
+                if not(self.rules[i].input[j].tag in blocks):
+                    blocks.append(self.rules[i].input[j].tag)
+            
+            for block in blocks:
+                plug = None
+                for inPlug in self.plugins:
+                    if(inPlug.name == block.lower() and inPlug.mode == "input"):
+                        plug = inPlug.plugin
+                
+                if(plug):
+                    passRule, newVars, rankMod, self = plug.block(userinput, i, block, self)
+                    for var in newVars:
+                        variables[var] = newVars[var]
+                    if(passRule):
+                        ranking = ranking + rankMod
+                    else:
+                        ruleOk = False
+                        break
+                else:
+                    ruleOk = False
+            
+            if(ruleOk):
+                rankmod = len(self.rules[i].input) * 0.3 + ranking
+                hit = models.DroitSearchHit(self.rules[i], variables, rankmod)
+                hits.append(hit)
+
+        if(hits != []):
+            hits = sorted(hits, key=lambda hit: hit.ranking, reverse=True)
+        
+        return hits
+
+
+    def formatOut(self, outputRules: list, variables: dict):
+        """Evaluates a DroitRuleOutput"""
+        output = ""
+
+        for i in range(0, len(outputRules)):
+            if(outputRules[i].tag.lower() == "EVAL"):
+                plugin = ""
+
+                for plug in outputRules[i].children:
+                    plugin += plug
+                plugin = plugin.split(".", 1)
+                for var in variables:
+                    if("*" + var in plugin[1]):
+                        plugin[1] = plugin[1].replace("*" + var, "\"" + variables[var] + "\"")
+
+                if("(" in plugin[1]):
+                    plugin.append(plugin[1].split("(")[1][:-1].replace('"', "").replace(", ", ",").split(","))
+                    plugin[1] = plugin[1].split("(")[0]
+
+                params = []
+                for i in range(0, len(plugin[2])):
+                    params.append(plugin[2][i])
+                
+                plug = None
+                for outPlug in self.plugins:
+                    if(outPlug.name == "eval."+plugin[0] and outPlug.mode == "output"):
+                        plug = outPlug.plugin
+                
+                if(plug):
+                    method = getattr(plug, plugin[1])
+                    
+                    outadd = ""
+                    outadd, self = method(params, self)
+
+                    output += outadd
+            
+            
+            else:
+                plug = None
+                for plugin in self.plugins:
+                    if(plugin.mode == "output" and outputRules[i].tag.lower() == plugin.name.lower()):
+                        plug = plugin.plugin
+                
+                if(plug):
+                    outadd = ""
+                    outadd, self = plug.block(outputRules[i], variables, self)
+                    output += outadd
+        
+        return output
+    
+
+    def simpleIO(self, text: str, history=True):
+        userinput = models.DroitUserinput(text)
+
+        hits = self.useRules(userinput)
+        if(hits):
+            hit = hits[0]
+
+            variables = self.createVariables(vars=hit.variables)
+            output = self.formatOut(hit.rule.output, variables)
+
+            if(history):
+                self.history.newEntry(userinput, hit.rule, output)
+            
+            return output
+        else:
+            return None
