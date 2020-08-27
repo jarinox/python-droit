@@ -3,10 +3,10 @@ All notable changes to this project will be documented in this file.
 
 | Latest release | Version of this branch |  
 |----------------|------------------------|
-| 1.0.3          | 1.1.0:1 alpha          |
+| 1.0.3          | 1.1.0:2 alpha          |
 
 
-## 1.1.0:1 alpha
+## 1.1.0 alpha
 Droit v1.1 and v1.0 are not compatible. The Database formats haven't changed but the library uses different commands and objects so you will have to rewrite you bot but you will still be able to use your old databases.
 ### 1. Database object
 A new object called `Database` will be now the core of python-droit. It combines the functionallity of `__init__.py`, `tools.py`, `loader.py` and `dumper.py` from Droit v1.0. You can use it to parse and dump a Database, you can load plugins into it and run `useRules()` and `formatOut()` from it. It replaces `rpack` as it also stores the `settings`, `cache` and `history` objects.

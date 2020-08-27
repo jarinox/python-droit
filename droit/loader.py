@@ -5,9 +5,8 @@
 
 
 import xml.etree.cElementTree as _ET
-import droit.models as _models
-import droit.legacy as _legacy
-import droit.tools as _tools
+from . import models as _models
+from . import legacy as _legacy
 
 
 def parseDroitXML(filename):
@@ -44,11 +43,13 @@ def parseDroitXML(filename):
 	return rules
 
 
-def parseLegacy(filename):
+def parseLegacy(filename, plugins):
 	"""Parse a legacy Droit Database (.dda)"""
 	dda = _legacy.parseDDA(filename)
 	rules = []
-	pinfos = _tools.loadPluginInfos()
+	pinfos = []
+	for plugin in plugins:
+		pinfos.append(plugin.info)
 	for rule in dda:
 		inputrules = []
 		outputrules = []

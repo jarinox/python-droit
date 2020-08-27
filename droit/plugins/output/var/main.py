@@ -4,4 +4,4 @@
 # This file is part of python-droit (https://github.com/jarinox/python-droit)
 
 def block(rule, variables, db):
-    return variables[rule.children[0]]
+    return variables[rule.children[0]], db

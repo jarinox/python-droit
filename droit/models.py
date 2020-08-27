@@ -8,20 +8,18 @@ import os as _os
 import importlib as _importlib
 import json as _json
 
-from .io import DroitIO
-
 
 class DroitSettings:
 	"""Read and write settings from and to config.json"""
 
-	def __init__(self, location=_os.path.dirname(__file__)+"/"):
+	def __init__(self, location=_os.path.dirname(__file__)+"/config.json"):
 		self.location = location
 		self.settings = {"droitname": "Droit", "ioMode": "console", "username":""}
 	
 	def loadSettings(self):
 		"""load settings from config.json"""
 		try:
-			raw = open(self.location + "config.json", "r").read()
+			raw = open(self.location, "r").read()
 			self.settings = _json.loads(raw)
 			return True
 		except:
@@ -63,22 +61,6 @@ class DroitCache:
 		
 		self.storage.append({"name": name, "params": params, "value": value})
 		return value
-
-
-class DroitResourcePackage:
-	"""Provides useful tools and information to any part of python-droit"""
-	def __init__(self, settings=DroitSettings(), plugins=[]):
-		self.io = DroitIO()
-		self.settings = settings
-		self.plugins = plugins
-		self.cache = DroitCache()
-		self.history = DroitHistory()
-
-
-class DroitGmrResource:
-	def __init__(self, gmrModule=None, gmrDatabase=None):
-		self.gmrModule = gmrModule
-		self.gmrDatabase = gmrDatabase
 
 
 class DroitRuleInOut:

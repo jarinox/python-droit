@@ -1,7 +1,7 @@
 # python-droit - a simple library for creating bots
 # Copyright 2020 Jakob Stolze <https://github.com/jarinox>
 #
-# Version 1.1.0:1 alpha
+# Version 1.1.0:2 alpha
 #
 #
 # This library is free software; you can redistribute it and/or
@@ -29,9 +29,8 @@ from . import models
 
 from . import loader as _loader
 from . import dumper as _dumper
-from . import tools as _tools
 
-__version__ = "1.1.0:1"
+__version__ = "1.1.0:2"
 __author__ = "Jakob Stolze"
 
 
@@ -48,7 +47,7 @@ class Database:
 
     def parseLegacy(self, filename: str):
         """Parse a legacy Droit Database (.dda)"""
-        self.rules = _loader.parseLegacy(filename)
+        self.rules = _loader.parseLegacy(filename, self.plugins)
     
     def parseDroitXML(self, filename: str):
         """Parse a Droit XML Database"""
@@ -68,7 +67,17 @@ class Database:
         Loads all plugins from the given location and returns them in a
         list containing DroitPlugin items.
         """
-        self.plugins = _tools.loadPlugins(location=location)
+        plugins = []
+        inList = _os.listdir(path=location+"/input")
+        outList = _os.listdir(path=location+"/output")
+        
+        for name in inList:
+            plugins.append(models.DroitPlugin("input", name, path=location))
+        
+        for name in outList:
+            plugins.append(models.DroitPlugin("output", name, path=location))
+        
+        self.plugins = plugins
     
 
     def createVariables(self, vars={}, userinput=None):
