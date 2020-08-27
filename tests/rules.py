@@ -1,7 +1,8 @@
 import droit
 
-rules = droit.loader.parseLegacy("tests/test.dda")
-rpack = droit.models.DroitResourcePackage()
+db = droit.Database()
+db.loadPlugins()
+db.parseLegacy("tests/test.dda")
 
 success = True
 
@@ -12,13 +13,13 @@ try:
 
     for inp in uips:
         userinput = droit.models.DroitUserinput(inp)
-        hits = droit.useRules(rules, userinput, rpack)
+        hits = db.useRules(userinput)
 
         if(len(hits) > 0):
             hit = hits[0]
 
-            variables = droit.tools.createVariables(inpVars=hit.variables, userinput=userinput)
-            answer = droit.formatOut(hit.rule.output, variables, rpack)
+            variables = db.createVariables(vars=hit.variables, userinput=userinput)
+            answer = db.formatOut(hit.rule.output, variables)
             answers.append(answer)
         else:
             answers.append(None)

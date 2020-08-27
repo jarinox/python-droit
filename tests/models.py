@@ -1,44 +1,44 @@
 import droit
 
-rules = droit.loader.parseLegacy("tests/test.dda")
+db = droit.Database()
+db.loadPlugins()
+db.parseLegacy("tests/test.dda")
 
-settings = droit.models.DroitSettings(location="tests/")
-plugins = droit.tools.loadPlugins()
-rpack = droit.models.DroitResourcePackage(settings=settings, plugins=plugins)
+db.settings.location = "tests/config.json"
+db.settings.loadSettings()
 
 success = True
 
 def sio(inp):
-    global rpack
     userinput = droit.models.DroitUserinput(inp)
-    hits, rpack = droit.useRules(rules, userinput, rpack, rback=True)
+    hits = db.useRules(userinput)
 
     if(len(hits) > 0):
         hit = hits[0]
 
-        variables = droit.tools.createVariables(inpVars=hit.variables, userinput=userinput, username=rpack.settings.settings["username"])
-        answer, rpack = droit.formatOut(hit.rule.output, variables, rpack, rback=True)
-        rpack.history.newEntry(userinput, hit, answer)
+        variables = db.createVariables(vars=hit.variables, userinput=userinput)
+        answer = db.formatOut(hit.rule.output, variables)
+        db.history.newEntry(userinput, hit, answer)
         return answer
     else:
-        rpack.history.newEntry(userinput, None, None)
+        db.history.newEntry(userinput, None, None)
         return None
 
 
 # Test cache
-answer1 = rpack.cache.run(sio, param1="Wer bin ich")
-answer2 = rpack.cache.run(sio, param1="Wer bin ich")
+answer1 = db.cache.run(sio, param1="Wer bin ich")
+answer2 = db.cache.run(sio, param1="Wer bin ich")
 
 if not(answer1 == answer2 and answer2 == "Du bist Max Mustermann"):
     success = False
 
 # Test history and cache
-if(len(rpack.history.outputs) != 1):
+if(len(db.history.outputs) != 1):
     success = False
 
 # Test history
 sio("Wie geht es dir")
-if(rpack.history.outputs[1] != "Sehr gut!"):
+if(db.history.outputs[1] != "Sehr gut!"):
     success = False
 
 

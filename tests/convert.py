@@ -1,16 +1,20 @@
 import droit
 
+db = droit.Database()
+
 # Droit Database Script -> Droit XML
-rules1 = droit.loader.parseLegacy("tests/test.dda")
-droit.dumper.writeDroitXML(rules1, "tests/dump.xml")
-droit.dumper.prettifyXML("tests/dump.xml")
+db.parseLegacy("tests/test.dda")
+rules1 = db.rules
+db.writeDroitXML("tests/dump.xml")
 
 # Droit XML -> Droit Database Script
-rules2 = droit.loader.parseDroitXML("tests/dump.xml")
-droit.dumper.writeLegacy(rules2, "tests/dump.dda")
+db.parseDroitXML("tests/dump.xml")
+rules2 = db.rules
+db.writeLegacy("tests/dump.dda")
 
 # Compare converted databases
-rules3 = droit.loader.parseLegacy("tests/dump.dda")
+db.parseLegacy("tests/dump.dda")
+rules3 = db.rules
 
 success = True
 
