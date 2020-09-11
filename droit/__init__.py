@@ -152,7 +152,7 @@ class Database:
         output = ""
 
         for i in range(0, len(outputRules)):
-            if(outputRules[i].tag.lower() == "EVAL"):
+            if(outputRules[i].tag.upper() == "EVAL"):
                 plugin = ""
 
                 for plug in outputRules[i].children:

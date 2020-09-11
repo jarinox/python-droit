@@ -105,6 +105,9 @@ class DroitPlugin:
 		self.plugin = _importlib.util.module_from_spec(spec)
 		spec.loader.exec_module(self.plugin)
 		self.info = DroitPluginInfo(mode, name, path=path)
+		if(self.mode == "input"):
+			if("preload" in self.info.info):
+				_importlib.reload((path + "/" + mode + "/" + name + "/" + self.info.info["preload"]).replace("//", "/"))
 
 
 class DroitPluginInfo:
@@ -113,9 +116,9 @@ class DroitPluginInfo:
 		self.mode = mode
 		self.name = name
 		if(mode == "input"):
-			info = _json.loads(open((path+"/"+mode+"/"+name+"/info.json").replace("//", "/"), "r").read())
-			self.description = info["description"]
-			self.attrib = info["attributes"]
+			self.info = _json.loads(open((path+"/"+mode+"/"+name+"/info.json").replace("//", "/"), "r").read())
+			self.description = self.info["description"]
+			self.attrib = self.info["attributes"]
 
 
 class DroitSearchHit:
