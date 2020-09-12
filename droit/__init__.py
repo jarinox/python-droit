@@ -1,7 +1,7 @@
 # python-droit - a simple library for creating bots
 # Copyright 2020 Jakob Stolze <https://github.com/jarinox>
 #
-# Version 1.1.0:2 alpha
+# Version 1.1.0:3 alpha
 #
 #
 # This library is free software; you can redistribute it and/or
@@ -30,7 +30,7 @@ from . import models
 from . import loader as _loader
 from . import dumper as _dumper
 
-__version__ = "1.1.0:2"
+__version__ = "1.1.0:3"
 __author__ = "Jakob Stolze"
 
 
@@ -46,16 +46,30 @@ class Database:
 
 
     def parseLegacy(self, filename: str):
-        """Parse a legacy Droit Database (.dda)"""
+        """Legacy parsing algorithm for Droit Database Script (.dda)"""
         self.rules = _loader.parseLegacy(filename, self.plugins)
+
+    def parseScript(self, filename: str, plugins=True):
+        """Parse a Droit Database Script file (.dda)"""
+        if(self.plugins and plugins):
+                self.rules = _loader.parseScript(filename, plugins=self.plugins)
+        else:
+            self.rules = _loader.parseScript(filename)
+    
+    def parseScriptString(self, text: str, plugins=True):
+        """Parse Droit Database Script from a string"""
+        if(self.plugins and plugins):
+            self.rules = _loader.parseScriptString(text, plugins=self.plugins)
+        else:
+            self.rules = _loader.parseScriptString(text)
     
     def parseDroitXML(self, filename: str):
         """Parse a Droit XML Database"""
         self.rules = _loader.parseDroitXML(filename)
     
-    def writeLegacy(self, filename: str):
+    def writeScript(self, filename: str):
         """Write a parsed Droit Database to Droit Database Script"""
-        _dumper.writeLegacy(self.rules, filename)
+        _dumper.writeScript(self.rules, filename)
     
     def writeDroitXML(self, filename: str):
         """Write a parsed Droit Database to XML"""

@@ -3,8 +3,19 @@ All notable changes to this project will be documented in this file.
 
 | Latest release | Version of this branch |  
 |----------------|------------------------|
-| 1.0.3          | 1.1.0:2 alpha          |
+| 1.0.3          | 1.1.0:3 alpha          |
 
+
+## 1.1.0:1-3
+### Added
+- new DDS parsing algorithm used by the new functions `parseScript` and `parseScriptString`
+- `writeScriptString` makes it possible dump a Droit Database to a DDS string
+
+### Changed
+- `writeLegacy` method name was changed to `writeScript`
+- `DroitRuleInOut` was split up to `DroitRuleInput` and `DroitRuleOutput`
+- `legacy.checkValidLine()` improved
+- tests changed to use `parseScript`
 
 ## 1.1.0 alpha
 Droit v1.1 and v1.0 are not compatible. The Database formats haven't changed but the library uses different commands and objects so you will have to rewrite you bot but you will still be able to use your old databases.

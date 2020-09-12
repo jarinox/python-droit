@@ -27,7 +27,7 @@ def parseDroitXML(filename):
 								for inchild in inrule:
 									if(inchild.text != None):
 										children.append(inchild.text)
-								dri = _models.DroitRuleInOut(inrule.tag.upper(), inrule.attrib, children, "input")
+								dri = _models.DroitRuleInput(inrule.tag.upper(), inrule.attrib, children)
 								inputrules.append(dri)
 					for outrules in rule:
 						if(outrules.tag == "output"):
@@ -36,7 +36,7 @@ def parseDroitXML(filename):
 								for outchild in outrule:
 									if(outchild.text != None):
 										children.append(outchild.text)
-								dro = _models.DroitRuleInOut(outrule.tag.upper(), outrule.attrib, children, "output")
+								dro = _models.DroitRuleOutput(outrule.tag.upper(), children)
 								outputrules.append(dro)
 					dr = _models.DroitRule(inputrules, outputrules)
 					rules.append(dr)
@@ -69,20 +69,79 @@ def parseLegacy(filename, plugins):
 			children = inrule[1].split(",")
 			if(inrule[1] == ""):
 				children = []
-			dri = _models.DroitRuleInOut(inrule[0], attr, children, "input")
+			dri = _models.DroitRuleInput(inrule[0], attr, children)
 			inputrules.append(dri)
 		for outrule in rule[1]:
-			attr = {}
 			outrule[1] = outrule[1].replace("&arz;", "!").replace("&dpp;", ":")
 			if(outrule[0].upper() == "EVAL"):
-				dro = _models.DroitRuleInOut(outrule[0].upper(), attr, [outrule[1]], "output")
+				dro = _models.DroitRuleOutput(outrule[0].upper(), [outrule[1]])
 			else:
 				children = outrule[1].split(",")
 				if(outrule[1] == ""):
 					children = []
-				dro = _models.DroitRuleInOut(outrule[0].upper(), attr, children, "output")
+				dro = _models.DroitRuleOutput(outrule[0].upper(), children)
 			outputrules.append(dro)
 		dr = _models.DroitRule(inputrules, outputrules)
 		rules.append(dr)
 	return rules
 		
+
+def parseScript(filename: str, plugins=False):
+	plain = open(filename, "r").read().split("\n")
+	return parseScriptString(plain, plugins=plugins)
+
+def parseScriptString(plain, plugins=False):
+	rules = []
+	
+	for line in plain:
+		if(_legacy.isValidLine(line)):
+			rule = _models.DroitRule([], [])
+			inp, out = line.split("->")
+
+			inp = inp.split(":")
+			out = out.split(":")
+
+			for inpx in inp:
+				inpx = inpx.split("!")
+				inpx[0] = inpx[0].replace("NOTX", "TEXT*true")
+				
+				if(inpx[1] != ""):
+					children = inpx[1].replace("&arz;", "!").replace("&dpp;", ":").split(",")
+				else:
+					children = []
+
+				if("*" in inpx[0]):
+					attr = {}
+					block, atnm = inpx[0].split("*")
+					block = block.upper()
+
+					if(plugins):
+						for plugin in plugins:
+							if(plugin.mode == "input" and plugin.name.upper() == block):
+								attr[list(plugin.info.attrib.keys())[0]] = atnm
+					else:
+						if(block == "INP"):
+							attr["var"] = atnm
+						elif(block == "SIMT"):
+							attr["limit"] = atnm
+						elif(block == "TEXT"):
+							attr["not"] = atnm
+					
+					rule.input.append(_models.DroitRuleInput(block, attr, children))
+				else:
+					rule.input.append(_models.DroitRuleInput(inpx[0], {}, children))
+			
+			for outx in out:
+				outx = outx.split("!")
+				if(outx[1] != ""):
+					if(outx[0].upper() == "EVAL"):
+						children = [outx[1].replace("&arz;", "!").replace("&dpp;", ":")]
+					else:
+						children = outx[1].replace("&arz;", "!").replace("&dpp;", ":").split(",")
+				else:
+					children = []
+				rule.output.append(_models.DroitRuleOutput(outx[0], children))
+
+			rules.append(rule)	
+
+	return rules

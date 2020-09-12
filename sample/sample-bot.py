@@ -4,7 +4,7 @@ import droit
 
 db = droit.Database()
 db.loadPlugins()
-db.parseDroitXML("german-sample.xml")
+db.parseScript("german-sample.dda") # or using DroitXML: db.parseDroitXML("german-sample.xml")
 
 running = True
 

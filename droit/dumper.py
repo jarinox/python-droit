@@ -21,7 +21,7 @@ def writeDroitXML(dda, filename):
 			for child in inRule.children:
 				_ET.SubElement(sub, "item").text = child
 		for outRule in rule.output:
-			sub = _ET.SubElement(out, outRule.tag, attrib=outRule.attrib)
+			sub = _ET.SubElement(out, outRule.tag)
 			for child in outRule.children:
 				_ET.SubElement(sub, "item").text = child
 		
@@ -36,8 +36,13 @@ def prettifyXML(filename):
 	open(filename, "w").write(pretty)
 
 
-def writeLegacy(dda, filename):
-	"""Write a parse Droit Database to Droit Database Script"""
+def writeScript(dda, filename):
+	"""Write a parse Droit Database to a Droit Database Script file"""
+	out = writeScriptString(dda)
+	open(filename, "w").write(out)
+
+def writeScriptString(dda):
+	"""Write a parse Droit Database to a Droit Database Script string"""
 	out = "Created using python-droit and 'writeLegacy'\n\n"
 
 	for rule in dda:
@@ -59,9 +64,6 @@ def writeLegacy(dda, filename):
 
 		for outRule in rule.output:
 			out += outRule.tag.upper()
-			
-			if(outRule.attrib):
-				out += "*" + list(outRule.attrib.items())[0][1]
 			out += "!"
 			
 			for value in outRule.children:
@@ -74,4 +76,4 @@ def writeLegacy(dda, filename):
 		out = out[0:len(out) - 1] + "\n"
 	
 	out = out.replace("TEXT*true!", "NOTX!")
-	open(filename, "w").write(out)
+	return out

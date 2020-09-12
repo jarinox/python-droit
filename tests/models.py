@@ -2,7 +2,7 @@ import droit
 
 db = droit.Database()
 db.loadPlugins()
-db.parseLegacy("tests/test.dda")
+db.parseScript("tests/test.dda")
 
 db.settings.location = "tests/config.json"
 db.settings.loadSettings()

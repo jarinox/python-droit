@@ -63,12 +63,20 @@ class DroitCache:
 		return value
 
 
-class DroitRuleInOut:
-	"""Stores an input-rule or an output-rule"""
-	def __init__(self, tag: str, attrib: dict, children: list, mode: str):
-		self.mode = mode
-		self.tag = tag
+class DroitRuleInput:
+	"""Stores an input-rule"""
+	def __init__(self, tag: str, attrib: dict, children: list):
+		self.mode = "input"
+		self.tag = tag.upper()
 		self.attrib = attrib
+		self.children = children
+
+
+class DroitRuleOutput:
+	"""Stores an output-rule"""
+	def __init__(self, tag: str, children: list):
+		self.mode = "input"
+		self.tag = tag.upper()
 		self.children = children
 
 
