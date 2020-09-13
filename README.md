@@ -2,7 +2,7 @@
 Droit is a simple library for creating bots
 
 **THIS BRANCH CONTAINS AN EXPERIMENTAL VERSION OF DROIT**  
-Droit 1.1.0:1 alpha  
+Droit 1.1.0 alpha  
 
 ## What's new about Droit v1.1?
 ### 1. Database object

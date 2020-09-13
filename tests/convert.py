@@ -5,10 +5,10 @@ db = droit.Database()
 # Droit Database Script -> Droit XML
 db.parseScript("tests/test.dda")
 rules1 = db.rules
-db.writeDroitXML("tests/dump.xml")
+droit.legacy.writeDroitXML(db.rules, "tests/dump.xml")
 
 # Droit XML -> Droit Database Script
-db.parseDroitXML("tests/dump.xml")
+db.rules = droit.legacy.parseDroitXML("tests/dump.xml")
 rules2 = db.rules
 db.writeScript("tests/dump.dda")
 

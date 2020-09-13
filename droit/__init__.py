@@ -26,6 +26,7 @@ import time as _time
 import importlib as _importlib
 
 from . import models
+from . import legacy
 
 from . import loader as _loader
 from . import dumper as _dumper
@@ -49,32 +50,42 @@ class Database:
         """Legacy parsing algorithm for Droit Database Script (.dda)"""
         self.rules = _loader.parseLegacy(filename, self.plugins)
 
-    def parseScript(self, filename: str, plugins=True):
+    def parseScript(self, filename: str, plugins=True, append=False):
         """Parse a Droit Database Script file (.dda)"""
+        newRules = []
         if(self.plugins and plugins):
-                self.rules = _loader.parseScript(filename, plugins=self.plugins)
+            newRules = _loader.parseScript(filename, plugins=self.plugins)
         else:
-            self.rules = _loader.parseScript(filename)
+            newRules = _loader.parseScript(filename)
+        
+        if(append):
+            for rule in newRules:
+                self.rules.append(rule)
+        else:
+            self.rules = newRules
     
-    def parseScriptString(self, text: str, plugins=True):
+    def parseScriptString(self, text: str, plugins=True, append=False):
         """Parse Droit Database Script from a string"""
+        newRules = []
+
         if(self.plugins and plugins):
-            self.rules = _loader.parseScriptString(text, plugins=self.plugins)
+            newRules = _loader.parseScriptString(text, plugins=self.plugins)
         else:
-            self.rules = _loader.parseScriptString(text)
-    
-    def parseDroitXML(self, filename: str):
-        """Parse a Droit XML Database"""
-        self.rules = _loader.parseDroitXML(filename)
+            newRules = _loader.parseScriptString(text)
+        
+        if(append):
+            for rule in newRules:
+                self.rules.append(rule)
+        else:
+            self.rules = newRules
     
     def writeScript(self, filename: str):
-        """Write a parsed Droit Database to Droit Database Script"""
+        """Write a parsed Droit Database to a Droit Database Script file"""
         _dumper.writeScript(self.rules, filename)
     
-    def writeDroitXML(self, filename: str):
-        """Write a parsed Droit Database to XML"""
-        _dumper.writeDroitXML(self.rules, filename)
-
+    def writeScriptString(self):
+        """Write a parsed Droit Database to a Droit Database Script string"""
+        return _dumper.writeScriptString(self.rules)
 
     def loadPlugins(self, location=_os.path.dirname(__file__)+"/plugins"):
         """

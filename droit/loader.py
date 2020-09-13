@@ -4,43 +4,9 @@
 # This file is part of python-droit (https://github.com/jarinox/python-droit)
 
 
-import xml.etree.cElementTree as _ET
+
 from . import models as _models
 from . import legacy as _legacy
-
-
-def parseDroitXML(filename):
-	"""Parse a Droit XML Database"""
-	tree = _ET.parse(filename)
-	root = tree.getroot()
-	rules = []
-	for child in root:
-		if(child.tag == "droitxml"):
-			for rule in child:
-				if(rule.tag == "rule"):
-					inputrules = []
-					outputrules = []
-					for inrules in rule:
-						if(inrules.tag == "input"):
-							for inrule in inrules:
-								children = []
-								for inchild in inrule:
-									if(inchild.text != None):
-										children.append(inchild.text)
-								dri = _models.DroitRuleInput(inrule.tag.upper(), inrule.attrib, children)
-								inputrules.append(dri)
-					for outrules in rule:
-						if(outrules.tag == "output"):
-							for outrule in outrules:
-								children = []
-								for outchild in outrule:
-									if(outchild.text != None):
-										children.append(outchild.text)
-								dro = _models.DroitRuleOutput(outrule.tag.upper(), children)
-								outputrules.append(dro)
-					dr = _models.DroitRule(inputrules, outputrules)
-					rules.append(dr)
-	return rules
 
 
 def parseLegacy(filename, plugins):

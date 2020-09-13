@@ -3,8 +3,15 @@ All notable changes to this project will be documented in this file.
 
 | Latest release | Version of this branch |  
 |----------------|------------------------|
-| 1.0.3          | 1.1.0:3 alpha          |
+| 1.0.3          | 1.1.0:4 alpha          |
 
+
+## v1.1 branch
+### Changed
+- all parsing functions have the new optional parameter `append=False` which allows to append the parsed rules to the current rules
+
+### Removed
+- `parseDroitXML` and `writeDroitXML` were removed. However they will still be available in the legacy submodule (`legacy.parseDroitXML`)
 
 ## 1.1.0:1-3
 ### Added
