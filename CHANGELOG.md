@@ -3,7 +3,12 @@ All notable changes to this project will be documented in this file.
 
 | Latest release | Version of master branch |  
 |----------------|--------------------------|
-| 1.0.3          | 1.0.3                    |
+| 1.0.4          | 1.0.4                    |
+
+## 1.0.4 release
+### Changed
+- improved `legacy.isValidLine()`
+- `models.DroitUsername()` doesnt remove specific characters anymore but only allows specific characters (a-z A-Z 0-9)
 
 ## 1.0.3 release
 ### Changed

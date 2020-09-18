@@ -15,15 +15,11 @@ def isValidLine(ddaFileLine):
 	if valid:
 		lin = ddaFileLine.split("->")[0].split(":")
 		for i in range(0, len(lin)):
-			block = lin[i].split("!")[0]
-			if("*" in block):
-				block = block.split("*")[0]
 			if(len(lin[i].split("!")) != 2):
 				valid = False
 	if valid:
 		lout = ddaFileLine.split("->")[1].split(":")
 		for i in range(0, len(lout)):
-			block = lout[i].split("!")[0]
 			if(len(lout[i].split("!")) != 2):
 				valid = False
 	return valid

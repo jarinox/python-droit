@@ -104,12 +104,16 @@ class DroitUserinput:
 	"""
 	def __init__(self, rawInput: str):
 		self.rawInput = rawInput
-		pin = rawInput
-		rmchars = [",", ":", "!", ".", "-", "?", ";", "'", "\"", "(", ")", "$"]
-		for i in range(0, len(rmchars)): # remove unnecessary characters
-			pin = pin.replace(rmchars[i], "")
+		pin = ""
+		valchars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZäöüÄÖÜ1234567890 "
+		for char in rawInput: # remove unnecessary characters
+			if(char in valchars):
+				pin += char
+
 		while("  " in pin):
 			pin = pin.replace("  ", " ") # double blank to single blank
+		
+		pin = pin.rstrip()
 		self.simpleInput = pin.lower()
 		self.words = self.simpleInput.split(" ") # split up words at blank
 
