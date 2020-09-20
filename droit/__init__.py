@@ -1,7 +1,7 @@
 # python-droit - a simple library for creating bots
 # Copyright 2020 Jakob Stolze <https://github.com/jarinox>
 #
-# Version 1.1.0:3 alpha
+# Version 1.1.0:4 alpha
 #
 #
 # This library is free software; you can redistribute it and/or
@@ -31,7 +31,7 @@ from . import legacy
 from . import loader as _loader
 from . import dumper as _dumper
 
-__version__ = "1.1.0:3"
+__version__ = "1.1.0:4"
 __author__ = "Jakob Stolze"
 
 
@@ -97,10 +97,12 @@ class Database:
         outList = _os.listdir(path=location+"/output")
         
         for name in inList:
-            plugins.append(models.DroitPlugin("input", name, path=location))
+            if(_os.path.isdir(location+"/input/"+name)):
+                plugins.append(models.DroitPlugin("input", name, path=location))
         
         for name in outList:
-            plugins.append(models.DroitPlugin("output", name, path=location))
+            if(_os.path.isdir(location+"/output/"+name)):
+                plugins.append(models.DroitPlugin("output", name, path=location))
         
         self.plugins = plugins
     

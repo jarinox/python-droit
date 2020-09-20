@@ -6,8 +6,9 @@ All notable changes to this project will be documented in this file.
 | 1.0.3          | 1.1.0:4 alpha          |
 
 
-## v1.1 branch
+## 1.1.0:4
 ### Changed
+- `preloadScript` was added to input plugins
 - all parsing functions have the new optional parameter `append=False` which allows to append the parsed rules to the current rules
 
 ### Removed

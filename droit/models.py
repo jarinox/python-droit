@@ -114,8 +114,8 @@ class DroitPlugin:
 		spec.loader.exec_module(self.plugin)
 		self.info = DroitPluginInfo(mode, name, path=path)
 		if(self.mode == "input"):
-			if("preload" in self.info.info):
-				_importlib.reload((path + "/" + mode + "/" + name + "/" + self.info.info["preload"]).replace("//", "/"))
+			if("preloadScript" in self.info.info.keys()):
+				_os.system("python3 " + path+"/input/"+name+"/"+self.info.info["preloadScript"])
 
 
 class DroitPluginInfo:
