@@ -87,24 +87,24 @@ class Database:
         """Write a parsed Droit Database to a Droit Database Script string"""
         return _dumper.writeScriptString(self.rules)
 
-    def loadPlugins(self, location=_os.path.dirname(__file__)+"/plugins"):
+    def loadPlugins(self, location=_os.path.dirname(__file__)+"/plugins", append=True):
         """
         Loads all plugins from the given location and returns them in a
         list containing DroitPlugin items.
         """
-        plugins = []
+        if not(append):
+            self.plugins = []
+
         inList = _os.listdir(path=location+"/input")
         outList = _os.listdir(path=location+"/output")
         
         for name in inList:
             if(_os.path.isdir(location+"/input/"+name)):
-                plugins.append(models.DroitPlugin("input", name, path=location))
+                self.plugins.append(models.DroitPlugin("input", name, path=location))
         
         for name in outList:
             if(_os.path.isdir(location+"/output/"+name)):
-                plugins.append(models.DroitPlugin("output", name, path=location))
-        
-        self.plugins = plugins
+                self.plugins.append(models.DroitPlugin("output", name, path=location))
     
 
     def createVariables(self, vars={}, userinput=None):
