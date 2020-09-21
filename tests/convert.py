@@ -1,20 +1,22 @@
 import droit
+import copy
 
 db = droit.Database()
 
 # Droit Database Script -> Droit XML
 db.parseScript("tests/test.dda")
-rules1 = db.rules
+rules1 = copy.deepcopy(db.rules)
 droit.legacy.writeDroitXML(db.rules, "tests/dump.xml")
 
 # Droit XML -> Droit Database Script
 db.rules = droit.legacy.parseDroitXML("tests/dump.xml")
-rules2 = db.rules
+rules2 = copy.deepcopy(db.rules)
 db.writeScript("tests/dump.dda")
 
 # Compare converted databases
-db.parseScript("tests/dump.dda")
-rules3 = db.rules
+db.parseScriptString(open("tests/dump.dda", "r"), plugins=False)
+rules3 = copy.deepcopy(db.rules)
+
 
 success = True
 
@@ -36,6 +38,13 @@ else:
             if not(rules1[i].input[j].mode == rules2[i].input[j].mode and rules1[i].input[j].mode == rules3[i].input[j].mode):
                 success = False
                 print("test: 'convert' invalid modes")
+
+
+db.parseScript("tests/dump.dda", append=True)
+if not(len(db.rules) == len(rules3) * 2):
+    print("test: 'convert' append doesn't work")
+    success = False
+
 
 if success:
     print("test: 'convert' successful")

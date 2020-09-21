@@ -28,6 +28,19 @@ try:
         if not(answers[i] in dops[i]):
             print("test: 'rules' got '" + str(answers[i]) + "', expected '" + str(dops[i]) + "'")
             success = False
+
+    answers = []
+
+    # testing it with simpleIO
+    for inp in uips:
+        answers.append(db.simpleIO(inp))
+
+    for i in range(0, len(answers)):
+        if not(answers[i] in dops[i]):
+            print("test: 'rules' got '" + str(answers[i]) + "', expected '" + str(dops[i]) + "' (simpleIO)")
+            success = False
+
+
 except:
     success = False
     raise

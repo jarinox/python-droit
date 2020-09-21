@@ -30,6 +30,7 @@ answer1 = db.cache.run(sio, param1="Wer bin ich")
 answer2 = db.cache.run(sio, param1="Wer bin ich")
 
 if not(answer1 == answer2 and answer2 == "Du bist Max Mustermann"):
+    print("test: 'models' cache not working")
     success = False
 
 # Test history and cache
@@ -39,6 +40,7 @@ if(len(db.history.outputs) != 1):
 # Test history
 sio("Wie geht es dir")
 if(db.history.outputs[1] != "Sehr gut!"):
+    print("test: 'models' history not working")
     success = False
 
 

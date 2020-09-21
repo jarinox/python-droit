@@ -44,7 +44,8 @@ class Database:
         self.plugins = []
         self.cache = models.DroitCache()
         self.history = models.DroitHistory()
-
+        self.custom = {}
+        self.pluginData = {}
 
     def parseLegacy(self, filename: str):
         """Legacy parsing algorithm for Droit Database Script (.dda)"""
