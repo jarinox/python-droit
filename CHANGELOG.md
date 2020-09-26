@@ -3,16 +3,21 @@ All notable changes to this project will be documented in this file.
 
 | Latest release | Version of this branch |  
 |----------------|------------------------|
-| 1.0.3          | 1.1.0:4 alpha          |
+| 1.0.3          | 1.1.0:5 alpha          |
 
 
-## 1.1.0:4
+## 1.1.0:4-5
+### Added
+- `models.DroitSession` which contains a username and can store user data
+- `models.DroitMultiSession` which stores a list of `DroitSession` objects
+
 ### Changed
 - `preloadScript` was added to input plugins
 - all parsing functions have the new optional parameter `append=False` which allows to append the parsed rules to the current rules
 
 ### Removed
 - `parseDroitXML` and `writeDroitXML` were removed. However they will still be available in the legacy submodule (`legacy.parseDroitXML`)
+- `models.DroitSettings` which was also located within `Database.settings`
 
 ## 1.1.0:1-3
 ### Added

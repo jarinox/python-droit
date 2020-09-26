@@ -1,7 +1,7 @@
 # python-droit - a simple library for creating bots
 # Copyright 2020 Jakob Stolze <https://github.com/jarinox>
 #
-# Version 1.1.0:4 alpha
+# Version 1.1.0:5 alpha
 #
 #
 # This library is free software; you can redistribute it and/or
@@ -31,21 +31,24 @@ from . import legacy
 from . import loader as _loader
 from . import dumper as _dumper
 
-__version__ = "1.1.0:4"
+__version__ = "1.1.0:5"
 __author__ = "Jakob Stolze"
 
 
 
 class Database:
     """A Droit Database that can be used to process rules."""
-    def __init__(self):
+    def __init__(self, multiSession=False):
         self.rules = models.DroitRule(inputRules=[], outputRules=[])
-        self.settings = models.DroitSettings()
         self.plugins = []
         self.cache = models.DroitCache()
         self.history = models.DroitHistory()
-        self.custom = {}
-        self.pluginData = {}
+        self.temp = {"plugins": {}}
+
+        if(multiSession):
+            self.sessions = models.DroitMultiSession()
+        else:
+            self.sessions = False
 
     def parseLegacy(self, filename: str):
         """Legacy parsing algorithm for Droit Database Script (.dda)"""
@@ -116,8 +119,19 @@ class Database:
         variables = {}
         variables["global.time"] = _time.strftime("%H:%M")
         variables["global.date"] = _time.strftime("%d.%m.%Y")
-        variables["global.username"] = self.settings.settings["username"]
-        variables["global.droitname"] = self.settings.settings["droitname"]
+        variables["global.droitname"] = "Droit"
+        variables["global.username"] = ""
+
+        if(self.sessions):
+            active = self.sessions.getActive()
+            if(active):
+                variables["global.username"] = active.username
+
+                if(self.sessions.droitname):
+                    variables["global.droitname"] = self.sessions.droitname
+                else:
+                    variables["global.droitname"] = active.droitname
+
         
         if userinput:
             variables["global.userinput"] = userinput.rawInput
@@ -237,7 +251,13 @@ class Database:
             output = self.formatOut(hit.rule.output, variables)
 
             if(history):
-                self.history.newEntry(userinput, hit.rule, output)
+                if(self.sessions):
+                    if(self.sessions.getActive()):
+                        self.history.newEntry(userinput, hit.rule, output, userId=self.sessions.getActive().id)
+                    else:
+                        self.history.newEntry(userinput, hit.rule, output)
+                else:
+                    self.history.newEntry(userinput, hit.rule, output)
             
             return output
         else:

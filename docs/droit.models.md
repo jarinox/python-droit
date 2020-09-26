@@ -3,7 +3,6 @@ You can find the source-code of python-droit and this documentation on [Github](
 
 
 ## Classes
-- **DroitSettings**(location="")
 - **DroitCache**()
 - **DroitRule**(inputRules, outputRules)
 - **DroitRuleInput**(tag, attrib, children)
@@ -13,21 +12,11 @@ You can find the source-code of python-droit and this documentation on [Github](
 - **DroitPluginInfo**(mode, name, path="droit/")
 - **DroitSearchHit**(rule, variables, ranking)
 - **DroitHistory**()
+- **DroitSession**(username, droitname=False, ident=RANDOM)
+- **DroitMultiSession**(path=None, droitname=False)
+
 
 ### Classes documentation
-#### DroitSettings(location="")
-Read and write settings from and to config.json  
-  
-**Functions**
-
-- loadSettings() - loads settings from file to the settings attribute
-- saveSettings() - saves the settings from the attribute to the file
-- initSettings() - creates a config file to store the settings inside
-
-**Attribute**
-
-- settings - a dict containing some settings
-
 #### DroitCache()
 Cache the return value of slow functions.
 

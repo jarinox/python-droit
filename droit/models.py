@@ -7,34 +7,82 @@
 import os as _os
 import importlib as _importlib
 import json as _json
+import random as _random
 
 
-class DroitSettings:
-	"""Read and write settings from and to config.json"""
 
-	def __init__(self, location=_os.path.dirname(__file__)+"/config.json"):
-		self.location = location
-		self.settings = {"droitname": "Droit", "ioMode": "console", "username":""}
+class DroitSession:
+	def __init__(self, username, droitname=False, ident=_random.randint(0, 100000000000000)):
+		self.username = username
+		self.droitname = droitname
+		self.userData = {}
+		self.id = ident
+
+	def fromDict(self, var):
+		self.id = var["id"]
+		self.username = var["username"]
+		self.droitname = var["droitname"]
+		self.userData = var["userData"]
 	
-	def loadSettings(self):
-		"""load settings from config.json"""
-		try:
-			raw = open(self.location, "r").read()
-			self.settings = _json.loads(raw)
-			return True
-		except:
+	def toDict(self):
+		return {
+			"id": self.id,
+			"username": self.username,
+			"droitname": self.droitname,
+			"userData": self.userData
+		}
+
+class DroitMultiSession:
+	def __init__(self, path=None, droitname=False):
+		self.sessions = []
+		self.active = -1
+		self.path = None
+		self.droitname=droitname
+	
+	def activateByUsername(self, username):
+		for i in range(0, len(self.sessions)):
+			if(self.sessions[i].username == username):
+				self.active = i
+				break
+	
+	def activateById(self, ident):
+		for i in range(0, len(self.sessions)):
+			if(self.sessions[i].id == ident):
+				self.active = i
+				break
+	
+	def getActive(self):
+		if(self.active != -1 and self.active < len(self.sessions)):
+			return self.sessions[self.active]
+		else:
 			return False
-		
-	def saveSettings(self):
-		"""save settings to config.json"""
-		data = _json.dumps(self.settings)
-		open(self.location + "config.json", "w").write(data)
 	
-	def initSettings(self):
-		"""create basic config.json file"""
-		self.settings = {"username": "", "droitname": "", "ioMode": "console"}
-		self.saveSettings()
+	def setActive(self, session):
+		if(self.active != -1 and self.active < len(self.sessions)):
+			self.sessions[self.active] = session
+	
+	def loadSessions(self, append=False):
+		if not(append):
+			self.sessions = []
+		
+		with open(self.path, "r") as f:
+			data = _json.load(f)
+			self.droitname = data["droitname"]
+			self.active = data["active"]
 
+			sessions = data["sessions"]
+			for session in sessions:
+				s = DroitSession("")
+				s.fromDict(session)
+				self.sessions.append(s)
+
+	def saveSessions(self):
+		dump = []
+		for session in self.sessions:
+			dump.append(session.toDict())
+		
+		with open(self.path, "w") as f:
+			_json.dump({"sessions": dump, "droitname": self.droitname, "active": self.active}, f)
 
 class DroitCache:
 	"""Cache the return value of slow functions"""
@@ -143,17 +191,10 @@ class DroitHistory:
 		self.inputs = []
 		self.outputs = []
 		self.rules = []
+		self.userIds = []
 
-	def newEntry(self, userinput: DroitUserinput, rule: DroitRule, output: str):
+	def newEntry(self, userinput: DroitUserinput, rule: DroitRule, output: str, userId=False):
 		self.inputs.append(userinput)
 		self.rules.append(rule)
 		self.outputs.append(output)
-
-	def saveHistory(self, filename: str):
-		m = {"inputs": self.inputs, "outputs": self.outputs}
-		open(filename, "w").write(_json.dumps(m))
-	
-	def loadHistory(self, filename: str):
-		m = _json.loads(open(filename, "r").read())
-		self.inputs = m["inputs"]
-		self.outputs = m["outputs"]
+		self.userIds.append(userId)

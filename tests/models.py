@@ -1,11 +1,14 @@
 import droit
 
-db = droit.Database()
+# Init database
+db = droit.Database(multiSession=True)
 db.loadPlugins()
 db.parseScript("tests/test.dda")
 
-db.settings.location = "tests/config.json"
-db.settings.loadSettings()
+# Load sessions
+db.sessions.path = "tests/sessions.json"
+db.sessions.loadSessions()
+db.sessions.activateByUsername("Max Mustermann")
 
 success = True
 
@@ -29,8 +32,12 @@ def sio(inp):
 answer1 = db.cache.run(sio, param1="Wer bin ich")
 answer2 = db.cache.run(sio, param1="Wer bin ich")
 
-if not(answer1 == answer2 and answer2 == "Du bist Max Mustermann"):
+if not(answer1 == answer2):
     print("test: 'models' cache not working")
+    success = False
+
+if not(answer1 == "Du bist Max Mustermann"):
+    print("test: 'models' got '" + answer1 + "', expected 'Du bist Max Mustermann'")
     success = False
 
 # Test history and cache
