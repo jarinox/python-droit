@@ -92,6 +92,8 @@ def parseScriptString(plain, plugins=False):
 							attr["limit"] = atnm
 						elif(block == "TEXT"):
 							attr["not"] = atnm
+						elif(block == "SESSION"):
+							attr["cmd"] = atnm
 					
 					rule.input.append(_models.DroitRuleInput(block, attr, children))
 				else:

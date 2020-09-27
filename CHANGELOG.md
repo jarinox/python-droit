@@ -3,11 +3,12 @@ All notable changes to this project will be documented in this file.
 
 | Latest release | Version of this branch |  
 |----------------|------------------------|
-| 1.0.3          | 1.1.0:5 alpha          |
+| 1.0.3          | 1.1.0:6 alpha          |
 
 
-## 1.1.0:4-5
+## 1.1.0:4-6
 ### Added
+- `SESSION` plugins added
 - `models.DroitSession` which contains a username and can store user data
 - `models.DroitMultiSession` which stores a list of `DroitSession` objects
 

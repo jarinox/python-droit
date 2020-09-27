@@ -20,6 +20,17 @@ db.sessions.activateByUsername("Maxine Mustermann")
 if not(db.simpleIO("Wer bin ich") == "Du bist Maxine Mustermann"):
     success = False
 
+if not(db.simpleIO("brief") == "Sehr geehrte Damen und Herren Mustermann"):
+    success = False
+
+db.sessions.active = -1
+
+if not(db.simpleIO("brief") == None):
+    success = False
+
+if not(db.simpleIO("Wer bin ich") == None):
+    success = False
+
 if success:
     print("test: 'session' successful")
 else:

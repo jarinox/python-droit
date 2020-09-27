@@ -1,7 +1,7 @@
 # python-droit - a simple library for creating bots
 # Copyright 2020 Jakob Stolze <https://github.com/jarinox>
 #
-# Version 1.1.0:5 alpha
+# Version 1.1.0:6 alpha
 #
 #
 # This library is free software; you can redistribute it and/or
@@ -31,7 +31,7 @@ from . import legacy
 from . import loader as _loader
 from . import dumper as _dumper
 
-__version__ = "1.1.0:5"
+__version__ = "1.1.0:6"
 __author__ = "Jakob Stolze"
 
 
@@ -57,6 +57,7 @@ class Database:
     def parseScript(self, filename: str, plugins=True, append=False):
         """Parse a Droit Database Script file (.dda)"""
         newRules = []
+
         if(self.plugins and plugins):
             newRules = _loader.parseScript(filename, plugins=self.plugins)
         else:
@@ -131,6 +132,9 @@ class Database:
                     variables["global.droitname"] = self.sessions.droitname
                 else:
                     variables["global.droitname"] = active.droitname
+            else:
+                if(self.sessions.droitname):
+                    variables["global.droitname"] = self.sessions.droitname
 
         
         if userinput:
@@ -150,6 +154,9 @@ class Database:
         Returns all possible DroitRulesOutput sorted by relevance.
         """
         hits = []
+
+        if not(self.plugins):
+            print("Warning: no plugins loaded")
 
         for i in range(0, len(self.rules)): # use all rules
             variables = {}
@@ -192,6 +199,9 @@ class Database:
     def formatOut(self, outputRules: list, variables: dict):
         """Evaluates a DroitRuleOutput"""
         output = ""
+
+        if not(self.plugins):
+            print("Warning: no plugins loaded")
 
         for i in range(0, len(outputRules)):
             if(outputRules[i].tag.upper() == "EVAL"):

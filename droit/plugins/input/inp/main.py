@@ -44,7 +44,7 @@ def block(userinput, iN, name, db):
 
 	variables = {}
 	for pText in pTexts:
-		results = parse(pText.lower(), userinput.rawInput.lower())
+		results = parse(pText, userinput.rawInput)
 		if(results != None):
 			passRule = True
 			
