@@ -1,8 +1,32 @@
 # python-droit
-Droit is a simple library for creating bots
+Droit is a simple library for creating bots.
 
-**EXPERIMENTAL VERSION OF DROIT**  
-Droit 1.1.0 alpha  
+**BETA VERSION - UNDER HEAVY DEVELOPMENT**  
+If you are looking for a more stable version of python-droit we recommend to use the [v1.0.3 release](https://github.com/jarinox/python-droit/releases/tag/v1.0.3).
+
+## Features
+- Advanced definition of question-to-answer rules using Droit Database Script
+- Multiple users supported
+- Integrated history functionallity to understand references to previous inputs
+- Extendable: create your own sub-rules ("plugins")
+
+## Learn
+- [Documentation](https://github.com/jarinox/python-droit/blob/master/docs/docs.md)
+- [Examples](https://github.com/jarinox/python-droit/blob/master/sample/)
+
+The wiki will be modified for v1.1 soon.
+
+## Installation
+Easy installation using pip (v1.0.3):
+```
+pip install droit
+```
+Alternatively you can clone this repository and install it to get the most recent version of `droit`:
+```
+git clone https://github.com/jarinox/python-droit
+cd python-droit
+pip install .
+```
 
 ## What's new about Droit v1.1?
 ### 1. Database object
@@ -17,9 +41,6 @@ DroitIO will be removed as it is the task of the person who writes the bot to im
 ### 4. Sessions
 Droit v1.1 is the first version to support multiple users. Therefore so called sessions can be created. The `Database` object stores a `DroitMultiSession` object in it's parameter `sessions`. Using this object you can load and save sessions and switch between users. Plugins can access sessions and store data separately for each user.
   
-## Stable version of python-droit
-This branch is under heavy development. Please use a stable version of python-droit!
-- Latest stable release: [Version 1.0.3](https://github.com/jarinox/python-droit/releases/tag/v1.0.3)
-
-This library is published under the terms of the GNU LESSER GENERAL PUBLIC LICENSE. Please see LICENCE for more information.  
+## License
+This library is published under the terms of the GNU LESSER GENERAL PUBLIC LICENSE. Please see LICENSE for more information.  
 Copyright 2019-2020 Jakob Stolze

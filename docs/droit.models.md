@@ -102,3 +102,33 @@ List item returned by `useRules()`
 - rule: a [DroitRule()](#droitruleinputrules-outputrules)
 - variables: dict containing variables
 - ranking: int index showing relevancen
+
+#### DroitSession(username, droitname=False, ident=RANDOM)
+Stores a user-session.
+
+**Attributes**
+- id: identifier of user
+- username
+- droitname: optional, only use if not set within DroitMultiSession
+- userData: dict that can be used to store some data about the user between sessions
+
+**Functions**
+- fromDict(var)
+- toDict()
+
+#### DroitMultiSession(path=None, droitname=False)
+Stores sessions.
+
+**Attributes**
+- sessions: list containing `DroitSession` objects
+- active: list index of active session (or `-1` when inactive)
+- droitname
+- path: path to file to store sessions in
+
+**Functions**
+- loadSessions()
+- saveSessions()
+- getActive()
+- activateById(id)
+- activateByUsername(username)
+- setActive(session)
