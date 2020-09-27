@@ -45,6 +45,11 @@ DroitIO will be removed as it is the task of the person who writes the bot to im
 ### 4. Sessions
 Droit v1.1 is the first version to support multiple users. Therefore so called sessions can be created. The `Database` object stores a `DroitMultiSession` object in it's parameter `sessions`. Using this object you can load and save sessions and switch between users. Plugins can access sessions and store data separately for each user.
 
+## 1.0.4 release
+### Changed
+- improved `legacy.isValidLine()`
+- `models.DroitUsername()` doesnt remove specific characters anymore but only allows specific characters (a-z A-Z 0-9)
+
 ## 1.0.3 release
 ### Changed
 - fix [#25](https://github.com/jarinox/python-droit/issues/25) formatOut bug when using EVAL

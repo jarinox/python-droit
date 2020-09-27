@@ -6,7 +6,7 @@
 import difflib
 
 def block(userinput, iN, block, db):
-    passRule = True
+    passRule = False
     variables = []
     rankMod = 0
 
@@ -23,7 +23,7 @@ def block(userinput, iN, block, db):
 
             for child in inputRules[j].children:
                 difference = difflib.SequenceMatcher(None, child, userinput.simpleInput).ratio()
-                if(difference < limit):
-                    passRule = False
+                if(difference >= limit):
+                    passRule = True
 
     return passRule, variables, rankMod, db
