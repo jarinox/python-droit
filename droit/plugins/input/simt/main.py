@@ -5,10 +5,12 @@
 
 import difflib
 
-def block(userinput, inputRules, block, rpack):
+def block(userinput, iN, block, db):
     passRule = False
     variables = []
     rankMod = 0
+
+    inputRules = db.rules[iN].input
 
     for j in range(0, len(inputRules)):
         if(block == inputRules[j].tag):
@@ -24,4 +26,4 @@ def block(userinput, inputRules, block, rpack):
                 if(difference >= limit):
                     passRule = True
 
-    return passRule, variables, rankMod, rpack
+    return passRule, variables, rankMod, db

@@ -1,32 +1,22 @@
 # Documentation - droit.models
-You can find the source-code of python-droit and this documentation on [Github](https://github.com/jaybeejs/python-droit).
+You can find the source-code of python-droit and this documentation on [Github](https://github.com/jarinox/python-droit).
 
 
 ## Classes
-- **DroitSettings**(location="")
 - **DroitCache**()
-- **DroitResourcePackage**(settings=None, plugins=[])
 - **DroitRule**(inputRules, outputRules)
-- **DroitRuleInOut**(tag, attrib, children, mode)
+- **DroitRuleInput**(tag, attrib, children)
+- **DroitRuleOutput**(tag, children)
 - **DroitUserinput**(rawInput)
 - **DroitPlugin**(mode, name, path="droit/")
 - **DroitPluginInfo**(mode, name, path="droit/")
 - **DroitSearchHit**(rule, variables, ranking)
+- **DroitHistory**()
+- **DroitSession**(username, droitname=False, ident=RANDOM)
+- **DroitMultiSession**(path=None, droitname=False)
+
 
 ### Classes documentation
-#### DroitSettings(location="")
-Read and write settings from and to config.json  
-  
-**Functions**
-
-- loadSettings() - loads settings from file to the settings attribute
-- saveSettings() - saves the settings from the attribute to the file
-- initSettings() - creates a config file to store the settings inside
-
-**Attribute**
-
-- settings - a dict containing some settings
-
 #### DroitCache()
 Cache the return value of slow functions.
 
@@ -51,33 +41,30 @@ List of inputs and outputs of python-droit.
   Save history to a json file
 
 
-#### DroitResourcePackage(settings=None, plugins=[])
-Provides useful tools and information to any part of python-droit.
-
-**Attributes**
-
-- settings: [droit.models.DroitSettings()](#droitsettingslocation)
-- io: [droit.io.DroitIO()](https://github.com/jaybeejs/python-droit/blob/master/docs/io.md)
-- tools: [droit.tools](https://github.com/jaybeejs/python-droit/blob/master/docs/tools.md)
-- plugins: a list containing [droit.models.DroitPlugin()](#droitpluginmode-name) items
-
 #### DroitRule(inputRules, outputRules)
 Stores a list of inputRules and a list of outputRules.
 
 **Attributes**
 
-- input: a list containing [droit.models.DroitRuleInOut()](#droitruleinouttag-attrib-children-mode) items
-- output: a list containing [droit.models.DroitRuleInOut()](#droitruleinouttag-attrib-children-mode) items
+- input: a list containing `droit.models.DroitRuleInput()` objects
+- output: a list containing `droit.models.DroitRuleOutput()` objects
 
-#### DroitRuleInOut(tag, attrib, children, mode)
-Stores an input-rule or an output-rule.
+#### DroitRuleInput(tag, attrib, children)
+Stores an input rule.
 
 **Attributes**
 
-- mode: specifies wether this object contains an input-rule or an output-rule (String "input" or String "output")
-- tag: tag of the rule e.g. TEXT, INP or EVAL
+- tag: tag of the rule e.g. TEXT or INP
 - attrib: dict containing the attributes of the rule
-- children: a list containing the children of the rule
+- mode: contains String "input"
+
+#### DroitRuleOutput(tag, attrib, children)
+Stores an output rule.
+
+**Attributes**
+
+- tag: tag of the rule e.g. VAR or EVAL
+- mode: contains String "output"
 
 #### DroitUserinput(rawInput)
 Stores the raw userinput as well as a list of the words the userinput consists of. The list is created on init.
@@ -115,3 +102,33 @@ List item returned by `useRules()`
 - rule: a [DroitRule()](#droitruleinputrules-outputrules)
 - variables: dict containing variables
 - ranking: int index showing relevancen
+
+#### DroitSession(username, droitname=False, ident=RANDOM)
+Stores a user-session.
+
+**Attributes**
+- id: identifier of user
+- username
+- droitname: optional, only use if not set within DroitMultiSession
+- userData: dict that can be used to store some data about the user between sessions
+
+**Functions**
+- fromDict(var)
+- toDict()
+
+#### DroitMultiSession(path=None, droitname=False)
+Stores sessions.
+
+**Attributes**
+- sessions: list containing `DroitSession` objects
+- active: list index of active session (or `-1` when inactive)
+- droitname
+- path: path to file to store sessions in
+
+**Functions**
+- loadSessions()
+- saveSessions()
+- getActive()
+- activateById(id)
+- activateByUsername(username)
+- setActive(session)

@@ -6,11 +6,13 @@
 from parse import parse
 
 
-def block(userinput, inputRules, name, rpack):
+def block(userinput, iN, name, db):
 	pTexts = []
 	passRule = False
 	rankMod = 0
 	varChildren = {}
+
+	inputRules = db.rules[iN].input
 
 	for rule in inputRules:
 		if(rule.tag == "TEXT"):
@@ -42,7 +44,7 @@ def block(userinput, inputRules, name, rpack):
 
 	variables = {}
 	for pText in pTexts:
-		results = parse(pText.lower(), userinput.rawInput.lower())
+		results = parse(pText, userinput.rawInput)
 		if(results != None):
 			passRule = True
 			
@@ -55,6 +57,6 @@ def block(userinput, inputRules, name, rpack):
 	
 	outVars = {}
 	for variable in variables:
-		outVars[variable.replace("strict.", "")] = variables[variable]
+		outVars["inp."+variable.replace("strict.", "")] = variables[variable]
 
-	return passRule, outVars, rankMod, rpack
+	return passRule, outVars, rankMod, db

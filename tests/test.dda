@@ -4,7 +4,6 @@ SRTX!hallo,guten tag,hi,na->TEXT!Hi
 SIMT*90!wie gehts dir->TEXT!Sehr gut&arz;
 SRTX!wie gehts->TEXT!Gut&arz;
 TEXT!ich:TEXT!bin,heiße:INP*name!->TEXT!Hallo :VAR!inp.name
-SRTX!wer bin ich->TEXT!Du bist :VAR!global.username
 SRTX!wer bist du,wie heißt du->TEXT!Ich bin :VAR!global.droitname
 TEXT!guten:INP*zeit!morgen,mittag,abend,tag->TEXT!Dir auch einen schönen :VAR!inp.zeit
 
@@ -19,3 +18,7 @@ SIMT*90!wie viel uhr ist es,wie viel uhr haben wir,welche uhrzeit haben wir->TEX
 SRTX!uhrzeit->VAR!global.time:TEXT! Uhr
 TEXT!datum,wievielten,wievielte:TEXT!welches,was,haben,wie,ist->TEXT!Heute ist der :VAR!global.date
 SRTX!datum->TEXT!Heute ist der :VAR!global.date
+
+TEXT!ich:TEXT!bin,heiße:INP*name!->TEXT!Hallo :VAR!inp.name:EVAL!session.activateByUsername(*inp.name)
+SESSION*isActive!:TEXT!wer,wie:TEXT!bin,heiße:TEXT!ich->TEXT!Du bist :EVAL!session.getUsername()
+SESSION*isUsername!Max Mustermann,Maxine Mustermann:TEXT!brief->TEXT!Sehr geehrte Damen und Herren Mustermann

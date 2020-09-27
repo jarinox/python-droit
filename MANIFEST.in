@@ -1,5 +1,6 @@
 include README.md
+include CHANGELOG.md
 include LICENCE
-include droit/config.json
 include droit/plugins/input/*/*
 include droit/plugins/output/*/*
+include docs/*.md
