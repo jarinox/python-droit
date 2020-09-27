@@ -11,10 +11,9 @@ If you are looking for a more stable version of python-droit we recommend to use
 - Extendable: create your own sub-rules ("plugins")
 
 ## Learn
-- [Documentation](https://github.com/jarinox/python-droit/blob/master/docs/docs.md)
+- [Wiki > Introduction to Droit v1.1](https://github.com/jarinox/python-droit/wiki/Introduction-to-Droit-v1.1)
+- [Documentation](https://github.com/jarinox/python-droit/blob/master/docs/droit.md)
 - [Examples](https://github.com/jarinox/python-droit/blob/master/sample/)
-
-The wiki will be modified for v1.1 soon.
 
 ## Installation
 Easy installation using pip (v1.0.3):
