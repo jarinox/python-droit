@@ -3,7 +3,6 @@ Droit Database for testing
 SRTX!hallo,guten tag,hi,na->TEXT!Hi
 SIMT*90!wie gehts dir->TEXT!Sehr gut&arz;
 SRTX!wie gehts->TEXT!Gut&arz;
-TEXT!ich:TEXT!bin,heiße:INP*name!->TEXT!Hallo :VAR!inp.name
 SRTX!wer bist du,wie heißt du->TEXT!Ich bin :VAR!global.droitname
 TEXT!guten:INP*zeit!morgen,mittag,abend,tag->TEXT!Dir auch einen schönen :VAR!inp.zeit
 

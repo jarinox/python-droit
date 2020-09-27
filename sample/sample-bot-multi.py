@@ -19,9 +19,7 @@ while(running):
 
         if(len(hits) > 0):
             hit = hits[0] # Select the first (best fitting) rule
-            variables = db.createVariables(vars=hit.variables, userinput=userinput) #  Create a dict containig variables
-
-            output = db.formatOut(hit.rule.output, variables) #  Generate the output from using an output-rule
+            output = db.formatOut(hit, userinput) #  Generate the output from using an output-rule
 
             print(output)
 

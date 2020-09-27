@@ -143,7 +143,7 @@ class DroitUserinput:
 	def __init__(self, rawInput: str):
 		self.rawInput = rawInput
 		pin = ""
-		valchars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZäöüÄÖÜ1234567890 "
+		valchars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZäöüÄÖÜ1234567890ß "
 		for char in rawInput: # remove unnecessary characters
 			if(char in valchars):
 				pin += char

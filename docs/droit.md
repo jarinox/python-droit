@@ -18,7 +18,7 @@ You can find the source-code of python-droit and this documentation on [Github](
 - loadPlugins(*location=default*)
 - createVariables(*vars={}*, *userinput=None*)
 - useRules(*userinput*)
-- formatOut(*outputRules*, *variables*):
+- formatOut(*hit*, *userinput*):
 - simpleIO(*text*, *history=True*)
 
 ### Methods
@@ -53,10 +53,10 @@ Returns a dict containing variables needed by `formatOut()`
 Runs parsed rules onto the userinput and returns all fitting rules sorted by relevance as a list of `models.DroitSearchHit` objects.
 - userinput: a `models.DroitUserinput` object
 
-#### formatOut(outputRules, variables)
-Evaluates a DroitOutputRule.
-- outputRules: a list of `models.DroitOutputRule` objects (e.g. from `models.DroitSearchHit().rules.output`)
-- variables: a dict of variables created by `createVariables()`
+#### formatOut(hit, userinput)
+Evaluates a DroitSearchHit and returns an output string.
+- hit: a `models.DroitSearchHit` object
+- userinput: a `models.DroitUserinput` object
 
 #### simpleIO(text, history=True)
 Simple function for testing databases. Works like a simple bot.

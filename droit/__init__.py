@@ -195,18 +195,19 @@ class Database:
         return hits
 
 
-    def formatOut(self, outputRules: list, variables: dict):
+    def formatOut(self, hit: models.DroitSearchHit, userinput: models.DroitUserinput):
         """Evaluates a DroitRuleOutput"""
         output = ""
+        variables = self.createVariables(vars=hit.variables, userinput=userinput)
 
         if not(self.plugins):
             print("Warning: no plugins loaded")
 
-        for i in range(0, len(outputRules)):
-            if(outputRules[i].tag.upper() == "EVAL"):
+        for i in range(0, len(hit.rule.output)):
+            if(hit.rule.output[i].tag.upper() == "EVAL"):
                 plugin = ""
 
-                for plug in outputRules[i].children:
+                for plug in hit.rule.output[i].children:
                     plugin += plug
                 plugin = plugin.split(".", 1)
                 for var in variables:
@@ -238,12 +239,12 @@ class Database:
             else:
                 plug = None
                 for plugin in self.plugins:
-                    if(plugin.mode == "output" and outputRules[i].tag.lower() == plugin.name.lower()):
+                    if(plugin.mode == "output" and hit.rule.output[i].tag.lower() == plugin.name.lower()):
                         plug = plugin.plugin
                 
                 if(plug):
                     outadd = ""
-                    outadd, self = plug.block(outputRules[i], variables, self)
+                    outadd, self = plug.block(hit.rule.output[i], variables, self)
                     output += outadd
         
         return output
@@ -256,8 +257,7 @@ class Database:
         if(hits):
             hit = hits[0]
 
-            variables = self.createVariables(vars=hit.variables)
-            output = self.formatOut(hit.rule.output, variables)
+            output = self.formatOut(hit, userinput)
 
             if(history):
                 if(self.sessions):

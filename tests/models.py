@@ -18,9 +18,7 @@ def sio(inp):
 
     if(len(hits) > 0):
         hit = hits[0]
-
-        variables = db.createVariables(vars=hit.variables, userinput=userinput)
-        answer = db.formatOut(hit.rule.output, variables)
+        answer = db.formatOut(hit, userinput)
         db.history.newEntry(userinput, hit, answer)
         return answer
     else:
