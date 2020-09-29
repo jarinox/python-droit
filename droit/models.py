@@ -202,3 +202,40 @@ class DroitHistory:
 		self.rules.append(rule)
 		self.outputs.append(output)
 		self.userIds.append(userId)
+
+
+class DroitDatabaseInfo:
+	"Information about a Droit Datbase"
+	def __init__(self, author=None, license=None, ddsVersion=None, attrib={}):
+		if(author):
+			self.author = [author]
+		else:
+			self.author = []
+		
+		if(ddsVersion):
+			self.ddsVersion = [ddsVersion]
+		else:
+			self.ddsVersion = []
+
+		if(license):
+			self.license = [license]
+		else:
+			self.license = []
+
+		self.attrib = attrib
+
+
+	def add(self, attribs):
+		for key in attribs:
+			lkey = key.lower()
+			if(lkey == "author"):
+				if not(attribs[key] in self.author):
+					self.author.append(attribs[key])	
+			elif(lkey =="license" or lkey == "licence"):
+				if(not license in self.license):
+					self.license.append(attribs[key])		
+			elif(lkey == "dds" or lkey == "ddsversion"):
+				if not(attribs[key] in self.ddsVersion):
+					self.ddsVersion.append(attribs[key])
+			else:
+				self.attrib[lkey] = attribs[key]

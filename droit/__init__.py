@@ -1,7 +1,7 @@
 # python-droit - a simple library for creating bots
 # Copyright 2020 Jakob Stolze <https://github.com/jarinox>
 #
-# Version 1.1.0:6 beta
+# Version 1.1.0:7 beta
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -30,7 +30,7 @@ from . import legacy
 from . import loader as _loader
 from . import dumper as _dumper
 
-__version__ = "1.1.0:6"
+__version__ = "1.1.0:7"
 __author__ = "Jakob Stolze"
 
 
@@ -38,7 +38,8 @@ __author__ = "Jakob Stolze"
 class Database:
     """A Droit Database that can be used to process rules."""
     def __init__(self, multiSession=False):
-        self.rules = models.DroitRule(inputRules=[], outputRules=[])
+        self.rules = []
+        self.info = models.DroitDatabaseInfo()
         self.plugins = []
         self.cache = models.DroitCache()
         self.history = models.DroitHistory()
@@ -57,10 +58,15 @@ class Database:
         """Parse a Droit Database Script file (.dda)"""
         newRules = []
 
+        string = open(filename, "r").read()
+
         if(self.plugins and plugins):
-            newRules = _loader.parseScript(filename, plugins=self.plugins)
+            newRules = _loader.parseScriptString(string, plugins=self.plugins)
         else:
-            newRules = _loader.parseScript(filename)
+            newRules = _loader.parseScriptString(string)
+
+        infos = _loader.parseScriptInfoString(string)
+        self.info.add(infos)
         
         if(append):
             for rule in newRules:
@@ -76,6 +82,9 @@ class Database:
             newRules = _loader.parseScriptString(text, plugins=self.plugins)
         else:
             newRules = _loader.parseScriptString(text)
+        
+        infos = _loader.parseScriptInfoString(text)
+        self.info.add(infos)
         
         if(append):
             for rule in newRules:

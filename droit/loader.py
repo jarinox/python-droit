@@ -53,10 +53,11 @@ def parseLegacy(filename, plugins):
 		
 
 def parseScript(filename: str, plugins=False):
-	plain = open(filename, "r").read().split("\n")
+	plain = open(filename, "r").read()
 	return parseScriptString(plain, plugins=plugins)
 
-def parseScriptString(plain, plugins=False):
+def parseScriptString(string, plugins=False):
+	plain = string.split("\n")
 	rules = []
 	
 	for line in plain:
@@ -113,3 +114,17 @@ def parseScriptString(plain, plugins=False):
 			rules.append(rule)	
 
 	return rules
+
+
+def parseScriptInfoString(string):
+	data = string.split("\n")
+	ret = {}
+	for line in data:
+		if(len(line) > 3):
+			if(line[0] == "@" and " " in line):
+				parts = line.split(" ")
+				if(len(parts) > 0):
+					if(" ".join(parts[1:]).replace(" ", "") != ""):
+						ret[parts[0][1:]] = " ".join(parts[1:])
+	
+	return ret

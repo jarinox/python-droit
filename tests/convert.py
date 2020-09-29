@@ -14,11 +14,16 @@ rules2 = copy.deepcopy(db.rules)
 db.writeScript("tests/dump.dda")
 
 # Compare converted databases
-db.parseScriptString(open("tests/dump.dda", "r"), plugins=False)
+db.parseScriptString(open("tests/dump.dda", "r").read(), plugins=False)
 rules3 = copy.deepcopy(db.rules)
 
-
 success = True
+
+# Test info parsing
+if not(db.info.license == ["CC0"] and db.info.author == ["Jakob Stolze"]):
+    success = False
+    print("test: 'convert' info parsing failed")
+
 
 if not(len(rules1) == len(rules2) and len(rules1) == len(rules3)):
     success = False

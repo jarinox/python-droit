@@ -1,5 +1,8 @@
 Droit Database for testing
 
+@author Jakob Stolze
+@license CC0
+
 SRTX!hallo,guten tag,hi,na->TEXT!Hi
 SIMT*90!wie gehts dir->TEXT!Sehr gut&arz;
 SRTX!wie gehts->TEXT!Gut&arz;

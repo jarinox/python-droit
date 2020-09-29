@@ -3,8 +3,16 @@ All notable changes to this project will be documented in this file.
 
 | Latest release | Version of master branch |  
 |----------------|--------------------------|
-| 1.0.3          | 1.1.0:6 beta             |
+| 1.0.3          | 1.1.0:7 beta             |
 
+
+## 1.1.0:7
+### Added
+- new Droit Database Script props allow to define author, license, ...
+- new DroitDatbaseInfo object that stores information of props of the DDS
+
+## Changed
+- parseScriptString bug fixed
 
 ## 1.1.0:4-6
 ### Added
