@@ -13,18 +13,11 @@ def block(userinput, iN, name, db):
 	varChildren = {}
 
 	inputRules = db.rules[iN].input
+	reqs = db.getPluginRequirements(name, "placeholder")
 
 	for rule in inputRules:
-		if(rule.tag == "TEXT"):
-			if(pTexts == []):
-				for child in rule.children:
-					pTexts.append(child + " ")
-			else:
-				pNew = []
-				for i in range(0, len(pTexts)):
-					for child in rule.children:
-						pNew.append(pTexts[i] + child + " ")
-				pTexts = pNew
+		for function in reqs:
+			pTexts = function(rule, pTexts)
 		
 		if(rule.tag == name.upper()):
 			varname = rule.attrib["var"]

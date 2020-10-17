@@ -1,7 +1,7 @@
 # python-droit - a simple library for creating bots
 # Copyright 2020 Jakob Stolze <https://github.com/jarinox>
 #
-# Version 1.1.0:7 beta
+# Version 1.1.0:8 beta
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -23,6 +23,7 @@
 import os as _os
 import time as _time
 import importlib as _importlib
+import inspect as _inspect
 
 from . import models
 from . import legacy
@@ -30,7 +31,7 @@ from . import legacy
 from . import loader as _loader
 from . import dumper as _dumper
 
-__version__ = "1.1.0:7"
+__version__ = "1.1.0:8"
 __author__ = "Jakob Stolze"
 
 
@@ -41,6 +42,7 @@ class Database:
         self.rules = []
         self.info = models.DroitDatabaseInfo()
         self.plugins = []
+        self.pluginReq = {}
         self.cache = models.DroitCache()
         self.history = models.DroitHistory()
         self.temp = {"plugins": {}}
@@ -113,12 +115,35 @@ class Database:
         
         for name in inList:
             if(_os.path.isdir(location+"/input/"+name)):
-                self.plugins.append(models.DroitPlugin("input", name, path=location))
+                plugin = models.DroitPlugin("input", name, path=location)
+                if(plugin.info.req):
+                    spec = _importlib.util.spec_from_file_location("pluginReq", (location + "/input/" + name + "/req.py").replace("//", "/"))
+                    pl = _importlib.util.module_from_spec(spec)
+                    spec.loader.exec_module(pl)
+                    members = _inspect.getmembers(pl, predicate=_inspect.isclass)
+                    for member in members:
+                        if(member[1].__name__ in self.pluginReq.keys()):
+                            self.pluginReq[members][member[1].__name__].append(member[1])
+                        else:
+                            self.pluginReq[member[1].__name__] = [member[1]]
+
+                self.plugins.append(plugin)
         
         for name in outList:
             if(_os.path.isdir(location+"/output/"+name)):
                 self.plugins.append(models.DroitPlugin("output", name, path=location))
     
+    def getPluginRequirements(self, plugin, func):
+        reqs = []
+        for cl in self.pluginReq[plugin.lower()]:
+            cl = cl()
+            members = _inspect.getmembers(cl, predicate=_inspect.ismethod)
+            for member in members:
+                if(member[0] == func):
+                    function = getattr(cl, func)
+                    reqs.append(function)
+                    break
+        return reqs
 
     def createVariables(self, vars={}, userinput=None):
         """

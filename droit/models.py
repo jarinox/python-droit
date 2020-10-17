@@ -152,6 +152,7 @@ class DroitUserinput:
 			pin = pin.replace("  ", " ") # double blank to single blank
 		
 		pin = pin.rstrip()
+		self.caseInput = pin
 		self.simpleInput = pin.lower()
 		self.words = self.simpleInput.split(" ") # split up words at blank
 
@@ -179,6 +180,8 @@ class DroitPluginInfo:
 			self.info = _json.loads(open((path+"/"+mode+"/"+name+"/info.json").replace("//", "/"), "r").read())
 			self.description = self.info["description"]
 			self.attrib = self.info["attributes"]
+			files = _os.listdir((path + "/" + mode + "/" + name + "/").replace("//", "/"))
+			self.req = ("req.py" in files)
 
 
 class DroitSearchHit:

@@ -3,11 +3,12 @@ All notable changes to this project will be documented in this file.
 
 | Latest release | Version of master branch |  
 |----------------|--------------------------|
-| 1.0.3          | 1.1.0:7 beta             |
+| 1.0.3          | 1.1.0:8 beta             |
 
 
-## 1.1.0:7
+## 1.1.0:7-8
 ### Added
+- plugins can now require functions from other plugins
 - new Droit Database Script props allow to define author, license, ...
 - new DroitDatbaseInfo object that stores information of props of the DDS
 
