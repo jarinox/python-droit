@@ -15,6 +15,7 @@ You can find the source-code of python-droit and this documentation on [Github](
 - parseLegacy(*filename*)
 - writeScript(*filename*)
 - writeScriptString()
+- getPluginRequirements(*plugin*, *func*)
 - loadPlugins(*location=default*)
 - createVariables(*vars={}*, *userinput=None*)
 - useRules(*userinput*)
@@ -40,6 +41,12 @@ Write the parsed rules to a Droit Database Script file.
 
 #### writeScriptString()
 Exports the parsed rules to Droit Database Script and returns it as a string.
+
+#### getPluginRequirements(*plugin*, *func*)
+Load requirements provided by other plugins. Those functions are defined within the `req.py` file some plugins provide.
+
+- plugin: name of your plugin
+- func: name of the functions to load
 
 #### loadPlugins(*location=default*, *append=True*)
 Loads plugins from a plugins folder. Default location points to the internal plugins folder that comes with python-droit

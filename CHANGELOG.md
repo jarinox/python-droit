@@ -3,10 +3,10 @@ All notable changes to this project will be documented in this file.
 
 | Latest release | Version of master branch |  
 |----------------|--------------------------|
-| 1.0.3          | 1.1.0:8 beta             |
+| 1.0.3          | 1.1.0:9 beta             |
 
 
-## 1.1.0:7-8
+## 1.1.0:7-9
 ### Added
 - plugins can now require functions from other plugins
 - new Droit Database Script props allow to define author, license, ...
@@ -14,6 +14,8 @@ All notable changes to this project will be documented in this file.
 
 ## Changed
 - parseScriptString bug fixed
+- hardcoded paths removed (now using `os.path.join()`)
+- typing improved
 
 ## 1.1.0:4-6
 ### Added

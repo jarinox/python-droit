@@ -8,8 +8,10 @@
 from . import models as _models
 from . import legacy as _legacy
 
+from typing import List as _List
 
-def parseLegacy(filename, plugins):
+
+def parseLegacy(filename: str, plugins) -> _List[_models.DroitRule]:
 	"""Parse a legacy Droit Database (.dda)"""
 	dda = _legacy.parseDDA(filename)
 	rules = []
@@ -52,11 +54,11 @@ def parseLegacy(filename, plugins):
 	return rules
 		
 
-def parseScript(filename: str, plugins=False):
+def parseScript(filename: str, plugins=False) -> _List[_models.DroitRule]:
 	plain = open(filename, "r").read()
 	return parseScriptString(plain, plugins=plugins)
 
-def parseScriptString(string, plugins=False):
+def parseScriptString(string: str, plugins=False) -> _List[_models.DroitRule]:
 	plain = string.split("\n")
 	rules = []
 	
@@ -116,7 +118,7 @@ def parseScriptString(string, plugins=False):
 	return rules
 
 
-def parseScriptInfoString(string):
+def parseScriptInfoString(string: str) -> dict:
 	data = string.split("\n")
 	ret = {}
 	for line in data:

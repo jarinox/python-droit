@@ -1,7 +1,7 @@
 # python-droit - a simple library for creating bots
 # Copyright 2020 Jakob Stolze <https://github.com/jarinox>
 #
-# Version 1.1.0:8 beta
+# Version 1.1.0:9 beta
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -31,7 +31,9 @@ from . import legacy
 from . import loader as _loader
 from . import dumper as _dumper
 
-__version__ = "1.1.0:8"
+from typing import List as _List
+
+__version__ = "1.1.0:9"
 __author__ = "Jakob Stolze"
 
 
@@ -98,11 +100,11 @@ class Database:
         """Write a parsed Droit Database to a Droit Database Script file"""
         _dumper.writeScript(self.rules, filename)
     
-    def writeScriptString(self):
+    def writeScriptString(self) -> str:
         """Write a parsed Droit Database to a Droit Database Script string"""
         return _dumper.writeScriptString(self.rules)
 
-    def loadPlugins(self, location=_os.path.dirname(__file__)+"/plugins", append=True):
+    def loadPlugins(self, location=_os.path.join(_os.path.dirname(__file__), "plugins"), append=True):
         """
         Loads all plugins from the given location and returns them in a
         list containing DroitPlugin items.
@@ -110,14 +112,14 @@ class Database:
         if not(append):
             self.plugins = []
 
-        inList = _os.listdir(path=location+"/input")
-        outList = _os.listdir(path=location+"/output")
+        inList = _os.listdir(path=_os.path.join(location, "input"))
+        outList = _os.listdir(path=_os.path.join(location, "output"))
         
         for name in inList:
-            if(_os.path.isdir(location+"/input/"+name)):
+            if(_os.path.isdir(_os.path.join(location, "input", name))):
                 plugin = models.DroitPlugin("input", name, path=location)
                 if(plugin.info.req):
-                    spec = _importlib.util.spec_from_file_location("pluginReq", (location + "/input/" + name + "/req.py").replace("//", "/"))
+                    spec = _importlib.util.spec_from_file_location("pluginReq", _os.path.join(location, "input", name, "req.py"))
                     pl = _importlib.util.module_from_spec(spec)
                     spec.loader.exec_module(pl)
                     members = _inspect.getmembers(pl, predicate=_inspect.isclass)
@@ -130,10 +132,11 @@ class Database:
                 self.plugins.append(plugin)
         
         for name in outList:
-            if(_os.path.isdir(location+"/output/"+name)):
+            if(_os.path.isdir(_os.path.join(location, "output", name))):
                 self.plugins.append(models.DroitPlugin("output", name, path=location))
     
-    def getPluginRequirements(self, plugin, func):
+    def getPluginRequirements(self, plugin: str, func: str):
+        """Load requirements provided by other plugins."""
         reqs = []
         for cl in self.pluginReq[plugin.lower()]:
             cl = cl()
@@ -145,7 +148,7 @@ class Database:
                     break
         return reqs
 
-    def createVariables(self, vars={}, userinput=None):
+    def createVariables(self, vars={}, userinput=None) -> dict:
         """
         Create a dict of variables containing all necessary pieces of data
         for formatOut
@@ -181,7 +184,7 @@ class Database:
         return variables
     
 
-    def useRules(self, userinput: models.DroitUserinput):
+    def useRules(self, userinput: models.DroitUserinput) -> _List[models.DroitSearchHit]:
         """
         Runs every rule onto the userinput.
         Returns all possible DroitRulesOutput sorted by relevance.
@@ -229,7 +232,7 @@ class Database:
         return hits
 
 
-    def formatOut(self, hit: models.DroitSearchHit, userinput: models.DroitUserinput):
+    def formatOut(self, hit: models.DroitSearchHit, userinput: models.DroitUserinput) -> str:
         """Evaluates a DroitRuleOutput"""
         output = ""
         variables = self.createVariables(vars=hit.variables, userinput=userinput)
@@ -284,7 +287,7 @@ class Database:
         return output
     
 
-    def simpleIO(self, text: str, history=True):
+    def simpleIO(self, text: str, history=True) -> str:
         userinput = models.DroitUserinput(text)
 
         hits = self.useRules(userinput)

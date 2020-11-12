@@ -10,7 +10,7 @@ def writeScript(dda, filename):
 	out = writeScriptString(dda)
 	open(filename, "w").write(out)
 
-def writeScriptString(dda):
+def writeScriptString(dda) -> str:
 	"""Write a parse Droit Database to a Droit Database Script string"""
 	out = "Created using python-droit and 'writeScript'\n\n"
 

@@ -10,7 +10,7 @@ import xml.dom.minidom as _minidom
 from . import models as _models
 
 
-def isValidLine(ddaFileLine):
+def isValidLine(ddaFileLine: str) -> bool:
 	"""Checks whether a Droit Database rule is valid or e.g. a comment."""
 	valid = True
 	if not("->" in ddaFileLine) or (len(ddaFileLine.split("->")) != 2):
@@ -31,7 +31,7 @@ def isValidLine(ddaFileLine):
 	return valid
 
 
-def parseDDA(filename):
+def parseDDA(filename: str) -> list:
 	"""Parses a Droit Database Script file to the legacy list standard"""
 	ddaFile = open(filename, "r").read().split("\n")
 	ddaData = []
@@ -51,7 +51,7 @@ def parseDDA(filename):
 	return ddaData
 
 
-def parseDroitXML(filename):
+def parseDroitXML(filename: str):
 	"""Parse a Droit XML Database"""
 	tree = _ET.parse(filename)
 	root = tree.getroot()
@@ -85,7 +85,7 @@ def parseDroitXML(filename):
 	return rules
 
 
-def writeDroitXML(dda, filename):
+def writeDroitXML(dda, filename: str):
 	"""Write a parse Droit Database to XML"""
 	droitdb = _ET.Element("droitdb")
 	droitxml = _ET.SubElement(droitdb, "droitxml")
@@ -108,7 +108,7 @@ def writeDroitXML(dda, filename):
 	tree.write(filename)
 
 
-def prettifyXML(filename):
+def prettifyXML(filename: str):
 	dom = _minidom.parse(filename)
 	pretty = dom.toprettyxml()
 	open(filename, "w").write(pretty)

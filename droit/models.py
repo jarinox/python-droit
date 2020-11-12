@@ -12,19 +12,19 @@ import random as _random
 
 
 class DroitSession:
-	def __init__(self, username, droitname=False, ident=_random.randint(0, 100000000000000)):
+	def __init__(self, username: str, droitname=False, ident=_random.randint(0, 100000000000000)):
 		self.username = username
 		self.droitname = droitname
 		self.userData = {}
 		self.id = ident
 
-	def fromDict(self, var):
+	def fromDict(self, var: dict):
 		self.id = var["id"]
 		self.username = var["username"]
 		self.droitname = var["droitname"]
 		self.userData = var["userData"]
 	
-	def toDict(self):
+	def toDict(self) -> dict:
 		return {
 			"id": self.id,
 			"username": self.username,
@@ -51,7 +51,7 @@ class DroitMultiSession:
 				self.active = i
 				break
 	
-	def getActive(self):
+	def getActive(self) -> DroitSession:
 		if(self.active != -1 and self.active < len(self.sessions)):
 			return self.sessions[self.active]
 		else:
@@ -159,28 +159,28 @@ class DroitUserinput:
 
 class DroitPlugin:
 	"""Loads a plugin."""
-	def __init__(self, mode: str, name: str, path=_os.path.dirname(__file__)+"/plugins"):
+	def __init__(self, mode: str, name: str, path=_os.path.join(_os.path.dirname(__file__), "plugins")):
 		self.mode = mode.lower()
 		self.name = name.lower()
-		spec = _importlib.util.spec_from_file_location("main", (path + "/" + mode + "/" + name + "/main.py").replace("//", "/"))
+		spec = _importlib.util.spec_from_file_location("main", _os.path.join(path, mode, name, "main.py"))
 		self.plugin = _importlib.util.module_from_spec(spec)
 		spec.loader.exec_module(self.plugin)
 		self.info = DroitPluginInfo(mode, name, path=path)
 		if(self.mode == "input"):
 			if("preloadScript" in self.info.info.keys()):
-				_os.system("python3 " + path+"/input/"+name+"/"+self.info.info["preloadScript"])
+				_os.system("python3 " + _os.path.join(path, "input", name, self.info.info["preloadScript"]))
 
 
 class DroitPluginInfo:
 	"""Contains information about a DroitPlugin"""
-	def __init__(self, mode: str, name: str, path=_os.path.dirname(__file__)+"/plugins"):
+	def __init__(self, mode: str, name: str, path=_os.path.join(_os.path.dirname(__file__), "plugins")):
 		self.mode = mode
 		self.name = name
 		if(mode == "input"):
-			self.info = _json.loads(open((path+"/"+mode+"/"+name+"/info.json").replace("//", "/"), "r").read())
+			self.info = _json.loads(open(_os.path.join(path, mode, name, "info.json"), "r").read())
 			self.description = self.info["description"]
 			self.attrib = self.info["attributes"]
-			files = _os.listdir((path + "/" + mode + "/" + name + "/").replace("//", "/"))
+			files = _os.listdir(_os.path.join(path, mode, name))
 			self.req = ("req.py" in files)
 
 
