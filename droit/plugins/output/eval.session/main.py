@@ -31,3 +31,13 @@ def getUsername(data, db):
 def setDroitname(data, db):
     db.sessions.droitname = data[0]
     return "", db
+
+def setUsername(data, db):
+    try:
+        active = db.sessions.getActive()
+        active.username = data[0]
+        active.userData["customUsername"] = True
+        db.session.setActive(active)
+    except:
+        pass
+    return "", db

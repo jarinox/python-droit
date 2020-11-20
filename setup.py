@@ -5,10 +5,10 @@ with open("README.md", "r") as fh:
 
 setup(
 	name='droit',
-	version='1.1.0:9 beta',
+	version='1.1.0',
 	description='Simple library for creating bots',
 	long_description=long_description,
-    long_description_content_type="text/markdown",
+	long_description_content_type="text/markdown",
 	url='https://github.com/jarinox/python-droit',
 	author='Jakob Stolze',
 	author_email='jarinox@wolke7.de',

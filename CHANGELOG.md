@@ -3,8 +3,13 @@ All notable changes to this project will be documented in this file.
 
 | Latest release | Version of master branch |  
 |----------------|--------------------------|
-| 1.0.3          | 1.1.0:9 beta             |
+| 1.1.0          | 1.1.0                    |
 
+
+## 1.1.0 release
+### Changed
+- preload scripts can now be disabled in `loadPlugins()`
+- `sessions.activateByUsername()` and `sessions.activateById()` return `true` if the user exists and was activated or `false` in case the user doesn't exist
 
 ## 1.1.0:7-9
 ### Added

@@ -43,13 +43,15 @@ class DroitMultiSession:
 		for i in range(0, len(self.sessions)):
 			if(self.sessions[i].username == username):
 				self.active = i
-				break
+				return True
+		return False
 	
 	def activateById(self, ident):
 		for i in range(0, len(self.sessions)):
 			if(self.sessions[i].id == ident):
 				self.active = i
-				break
+				return True
+		return False
 	
 	def getActive(self) -> DroitSession:
 		if(self.active != -1 and self.active < len(self.sessions)):
@@ -159,7 +161,7 @@ class DroitUserinput:
 
 class DroitPlugin:
 	"""Loads a plugin."""
-	def __init__(self, mode: str, name: str, path=_os.path.join(_os.path.dirname(__file__), "plugins")):
+	def __init__(self, mode: str, name: str, path=_os.path.join(_os.path.dirname(__file__), "plugins"), preloadScript=True):
 		self.mode = mode.lower()
 		self.name = name.lower()
 		spec = _importlib.util.spec_from_file_location("main", _os.path.join(path, mode, name, "main.py"))
@@ -167,7 +169,7 @@ class DroitPlugin:
 		spec.loader.exec_module(self.plugin)
 		self.info = DroitPluginInfo(mode, name, path=path)
 		if(self.mode == "input"):
-			if("preloadScript" in self.info.info.keys()):
+			if("preloadScript" in self.info.info.keys() and preloadScript):
 				_os.system("python3 " + _os.path.join(path, "input", name, self.info.info["preloadScript"]))
 
 
