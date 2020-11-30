@@ -4,6 +4,8 @@
 # This file is part of python-droit (https://github.com/jarinox/python-droit)
 
 
+def escapeCharacters(string: str) -> str:
+	return string.replace("\\", "\\\\").replace(":", "\\:").replace("!", "\\!").replace("->", "-\\>")
 
 def writeScript(dda, filename):
 	"""Write a parse Droit Database to a Droit Database Script file"""
@@ -19,13 +21,15 @@ def writeScriptString(dda) -> str:
 			out += inRule.tag.upper()
 
 			if(inRule.attrib):
-				out += "*" + list(inRule.attrib.items())[0][1]
+				attribs = list(inRule.attrib.items())
+				for attrib in attribs:
+					out += "*" + attrib[1]
 			out += "!"
 
 			for value in inRule.children:
 				if(out[-1] != "!"):
 					out += ","
-				out += value.replace(":", "&dpp;").replace("!", "&arz;")
+				out += escapeCharacters(value)
 			
 			out += ":"
 		
@@ -38,7 +42,7 @@ def writeScriptString(dda) -> str:
 			for value in outRule.children:
 				if(out[-1] != "!"):
 					out += ","
-				out += value.replace(":", "&dpp;").replace("!", "&arz;")
+				out += escapeCharacters(value)
 			
 			out += ":"
 		

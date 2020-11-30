@@ -1,1 +1,1 @@
-from tests import convert, rules, models, session
+from tests import convert, rules, models, session, analyzer

@@ -12,6 +12,7 @@ from . import models as _models
 
 def isValidLine(ddaFileLine: str) -> bool:
 	"""Checks whether a Droit Database rule is valid or e.g. a comment."""
+	ddaFileLine = ddaFileLine.replace("\\:", "").replace("\\!", "").replace("\\>", "")
 	valid = True
 	if not("->" in ddaFileLine) or (len(ddaFileLine.split("->")) != 2):
 		valid = False

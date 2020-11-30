@@ -3,8 +3,28 @@ All notable changes to this project will be documented in this file.
 
 | Latest release | Version of master branch |  
 |----------------|--------------------------|
-| 1.1.0          | 1.1.0                    |
+| 1.1.0          | 1.1.1:1 dev              |
 
+
+
+## 1.1.1:1 developement version
+### Added
+- new character-escape system - you can now escape the characters `!`, `:` and `>` using e.g. `\!`. To display `\` use `\\`.
+- english sample database added
+- analyzer module
+
+### Changed
+- input plugins now support multiple parameters
+- `parseScript` functions can now choose between legacy and the new `isValidLine`. Warnings when parsing invalid Droit Database Script are enabled by default.
+
+### Droit Database Script
+The new character-escape system and the support of multiple paramters for input plugins define the new Droit Database Script Version 1.2. It is from now on strongly recommended to add a DDS Version tag (`@dds 1.2`) to your Database to make sure Droit will automatically migrate your script when future changes are done to the Droit Database Script.
+
+### Analyzer
+The analyzer helps you to find errors within your Droit Datbase Script and to fix them. New functions:
+- `upgradeScript`: this function upgrades a legacy Droit Database Script to the current version. This function will be extended with every change in the Droit Database Script.
+- `parseScriptInfoString`: this function was previously located within the `loader` module
+- `isValidLine` from analyzer is better than the legacy `isValidLine` function. It is possible to get information about why a line isn't valid
 
 ## 1.1.0 release
 ### Changed

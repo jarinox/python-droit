@@ -4,17 +4,17 @@ Droit Database for testing
 @license CC0
 
 SRTX!hallo,guten tag,hi,na->TEXT!Hi
-SIMT*90!wie gehts dir->TEXT!Sehr gut&arz;
-SRTX!wie gehts->TEXT!Gut&arz;
+SIMT*90!wie gehts dir->TEXT!Sehr gut\!
+SRTX!wie gehts->TEXT!Gut\!
 SRTX!wer bist du,wie heißt du->TEXT!Ich bin :VAR!global.droitname
 TEXT!guten:INP*zeit!morgen,mittag,abend,tag->TEXT!Dir auch einen schönen :VAR!inp.zeit
 TXT!guten:INP*zeit!->TEXT!Dir auch einen schönen :VAR!inp.zeit
 
-TEXT!du:TEXT!bist:TEXT!toll,nett,cool:NOTX!nicht,garnicht->TEXT!Danke, du auch&arz;
+TEXT!du:TEXT!bist:TEXT!toll,nett,cool:NOTX!nicht,garnicht->TEXT!Danke, du auch\!
 TEXT!ich:TEXT!mag,gern,liebe:TEXT!dich:NOTX!nicht->TEXT!Ich hab dich auch gern
-SRTX!magst du mich,sind wir freunde->TEXT!Klar&arz;
+SRTX!magst du mich,sind wir freunde->TEXT!Klar\!
 SRTX!tschüss,bis bald,auf wiedersehen->EVAL!rand.text("Bis bald", "Tschüss", "Auf wiedersehen")
-TEXT!tut:TEXT!mir:TEXT!leid:NOTX!nicht,garnicht->EVAL!rand.text("Ist ok", "Kein Problem"):TEXT!&arz;
+TEXT!tut:TEXT!mir:TEXT!leid:NOTX!nicht,garnicht->EVAL!rand.text("Ist ok", "Kein Problem"):TEXT!\!
 SRTX!danke,thx->EVAL!rand.text("Bitte", "Gern geschehen", "Bitteschön", "Kein Problem")
 
 SIMT*90!wie viel uhr ist es,wie viel uhr haben wir,welche uhrzeit haben wir->TEXT!Es ist :VAR!global.time:TEXT! Uhr.

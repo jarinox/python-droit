@@ -2,18 +2,18 @@ Datenbank fuer Droit: Beispiel auf Deutsch
 
 @author Jakob Stolze
 @licence CC0
-@dds 1.1
+@dds 1.2
 
 SRTX!hallo,guten tag,hi->TEXT!Hallo
-TEXT!wie:TEXT!geht,gehts,geht's:TEXT!dir->TEXT!Mir geht es gut&arz;
-SRTX!wie gehts->TEXT!Gut&arz;
+TEXT!wie:TEXT!geht,gehts:TEXT!dir->TEXT!Mir geht es gut\!
+SRTX!wie gehts->TEXT!Gut\!
 TEXT!wer,wie:TEXT!bist,heißt:TEXT!du->TEXT!Ich bin :VAR!global.droitname
-SRTX!guten abend,gute nacht,guten mittag,guten morgen->TEXT!Wünsche ich dir auch&arz;
+SRTX!guten abend,gute nacht,guten mittag,guten morgen->TEXT!Wünsche ich dir auch\!
 
-TEXT!du:TEXT!bist:TEXT!toll,nett:NOTX!nicht->TEXT!Danke, du auch&arz;
+TEXT!du:TEXT!bist:TEXT!toll,nett:NOTX!nicht->TEXT!Danke, du auch\!
 TEXT!ich:TEXT!mag,gern,liebe:TEXT!dich:NOTX!nicht->TEXT!Ich hab dich auch gern
-SRTX!magst du mich,sind wir freunde->TEXT!Klar&arz;
-SRTX!tschüss,bis bald->TEXT!Auf wiedersehen&arz;
+SRTX!magst du mich,sind wir freunde->TEXT!Klar\!
+SRTX!tschüss,bis bald->TEXT!Auf wiedersehen\!
 SRTX!lol,haha->TEXT!lustig
 TEXT!tut:TEXT!mir:TEXT!leid:NOTX!nicht,garnicht->TEXT!Kein Problem
 SRTX!ja,jep->TEXT!ok

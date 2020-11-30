@@ -1,7 +1,7 @@
 # python-droit - a simple library for creating bots
 # Copyright 2020 Jakob Stolze <https://github.com/jarinox>
 #
-# Version 1.1.0:9 beta
+# Version 1.1.1:1
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -27,13 +27,14 @@ import inspect as _inspect
 
 from . import models
 from . import legacy
+from . import analyzer
 
 from . import loader as _loader
 from . import dumper as _dumper
 
 from typing import List as _List
 
-__version__ = "1.1.0:9"
+__version__ = "1.1.1:1"
 __author__ = "Jakob Stolze"
 
 
@@ -58,18 +59,18 @@ class Database:
         """Legacy parsing algorithm for Droit Database Script (.dda)"""
         self.rules = _loader.parseLegacy(filename, self.plugins)
 
-    def parseScript(self, filename: str, plugins=True, append=False):
+    def parseScript(self, filename: str, plugins=True, append=False, legacyValid=False, warnings=True):
         """Parse a Droit Database Script file (.dda)"""
         newRules = []
 
         string = open(filename, "r").read()
 
         if(self.plugins and plugins):
-            newRules = _loader.parseScriptString(string, plugins=self.plugins)
+            newRules = _loader.parseScriptString(string, plugins=self.plugins, legacyValid=legacyValid, warnings=warnings)
         else:
-            newRules = _loader.parseScriptString(string)
+            newRules = _loader.parseScriptString(string, legacyValid=legacyValid, warnings=warnings)
 
-        infos = _loader.parseScriptInfoString(string)
+        infos = analyzer.parseScriptInfoString(string)
         self.info.add(infos)
         
         if(append):
@@ -78,16 +79,16 @@ class Database:
         else:
             self.rules = newRules
     
-    def parseScriptString(self, text: str, plugins=True, append=False):
+    def parseScriptString(self, text: str, plugins=True, append=False, legacyValid=False, warnings=True):
         """Parse Droit Database Script from a string"""
         newRules = []
 
         if(self.plugins and plugins):
-            newRules = _loader.parseScriptString(text, plugins=self.plugins)
+            newRules = _loader.parseScriptString(text, plugins=self.plugins, legacyValid=legacyValid, warnings=warnings)
         else:
-            newRules = _loader.parseScriptString(text)
+            newRules = _loader.parseScriptString(text, legacyValid=legacyValid, warnings=warnings)
         
-        infos = _loader.parseScriptInfoString(text)
+        infos = analyzer.parseScriptInfoString(text)
         self.info.add(infos)
         
         if(append):
