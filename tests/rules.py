@@ -7,8 +7,8 @@ db.parseScript("tests/test.dda")
 success = True
 
 try:
-    uips = ["hallo", "wie gehts dir", "wie geht es dir", "wie gehts", "ich heiße max mustermann", "wer bist du", "guten mittag", "du bist cool", "ich mag dich nicht", "ich habe dich gern", "bis bald", "tut mir leid"]
-    dops = [['Hi'], ['Sehr gut!'], ['Sehr gut!'], ['Gut!'], ['Hallo max mustermann'], ['Ich bin Droit'], ['Dir auch einen schönen mittag'], ['Danke, du auch!'], [None], ['Ich hab dich auch gern'], ['Tschüss', 'Bis bald', 'Auf wiedersehen'], ["Kein Problem!", "Ist ok!"]]
+    uips = ["hallo", "wie gehts dir", "wie geht es dir", "wie gehts", "ich heiße max mustermann", "wer bist du", "guten mittag", "du bist cool", "ich mag dich nicht", "ich habe dich gern", "bis bald", "tut mir leid", "eine option"]
+    dops = [['Hi'], ['Sehr gut!'], ['Sehr gut!'], ['Gut!'], ['Hallo max mustermann'], ['Ich bin Droit'], ['Dir auch einen schönen mittag'], ['Danke, du auch!'], [None], ['Ich hab dich auch gern'], ['Tschüss', 'Bis bald', 'Auf wiedersehen'], ["Kein Problem!", "Ist ok!"], ["Option 2"]]
     answers = []
 
     for inp in uips:

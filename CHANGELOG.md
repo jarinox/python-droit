@@ -3,11 +3,21 @@ All notable changes to this project will be documented in this file.
 
 | Latest release | Version of master branch |  
 |----------------|--------------------------|
-| 1.1.0          | 1.1.1:1 dev              |
+| 1.1.0          | 1.1.1:2 dev              |
 
 
 
-## 1.1.1:1 developement version
+## 1.1.1:2 dev
+### Added
+- rank input-block added
+- line number added to DDS warnings
+
+### Changed
+- english sample database fixed
+- docs updated
+- `DroitRuleOutput` bug fixed
+
+## 1.1.1:1 dev
 ### Added
 - new character-escape system - you can now escape the characters `!`, `:` and `>` using e.g. `\!`. To display `\` use `\\`.
 - english sample database added
@@ -31,7 +41,7 @@ The analyzer helps you to find errors within your Droit Datbase Script and to fi
 - preload scripts can now be disabled in `loadPlugins()`
 - `sessions.activateByUsername()` and `sessions.activateById()` return `true` if the user exists and was activated or `false` in case the user doesn't exist
 
-## 1.1.0:7-9
+## 1.1.0:7-9 dev
 ### Added
 - plugins can now require functions from other plugins
 - new Droit Database Script props allow to define author, license, ...
@@ -42,7 +52,7 @@ The analyzer helps you to find errors within your Droit Datbase Script and to fi
 - hardcoded paths removed (now using `os.path.join()`)
 - typing improved
 
-## 1.1.0:4-6
+## 1.1.0:4-6 dev
 ### Added
 - `SESSION` plugins added
 - `models.DroitSession` which contains a username and can store user data
@@ -56,7 +66,7 @@ The analyzer helps you to find errors within your Droit Datbase Script and to fi
 - `parseDroitXML` and `writeDroitXML` were removed. However they will still be available in the legacy submodule (`legacy.parseDroitXML`)
 - `models.DroitSettings` which was also located within `Database.settings`
 
-## 1.1.0:1-3
+## 1.1.0:1-3 dev
 ### Added
 - new DDS parsing algorithm used by the new functions `parseScript` and `parseScriptString`
 - `writeScriptString` makes it possible dump a Droit Database to a DDS string

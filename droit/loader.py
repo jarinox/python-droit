@@ -89,7 +89,9 @@ def parseScriptString(string: str, plugins=False, legacyValid=False, warnings=Tr
 	plain = string.split("\n")
 	rules = []
 	
+	lnum = 0
 	for line in plain:
+		lnum += 1
 		if(legacyValid):
 			isValid = _legacy.isValidLine(line)
 		else:
@@ -153,6 +155,5 @@ def parseScriptString(string: str, plugins=False, legacyValid=False, warnings=Tr
 			rules.append(rule)	
 		
 		elif(info != "comment" and warnings and not(legacyValid)):
-			print("warning: python-droit: parseScript: " + info)
-
+			print("warning: python-droit: parseScript: " + info + " [" + str(lnum) + "]")
 	return rules

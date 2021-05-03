@@ -1,5 +1,6 @@
 Droit Database for testing
 
+@dds 1.2
 @author Jakob Stolze
 @license CC0
 
@@ -25,3 +26,6 @@ SRTX!datum->TEXT!Heute ist der :VAR!global.date
 TEXT!ich:TEXT!bin,heiße:INP*name!->TEXT!Hallo :VAR!inp.name:EVAL!session.activateByUsername(*inp.name)
 SESSION*isActive!:TEXT!wer,wie:TEXT!bin,heiße:TEXT!ich->TEXT!Du bist :EVAL!session.getUsername()
 SESSION*isUsername!Max Mustermann,Maxine Mustermann:TEXT!brief->TEXT!Sehr geehrte Damen und Herren Mustermann
+
+TEXT!eine:TEXT!option:RANK!1->TEXT!Option 1
+TEXT!eine:TEXT!option:RANK!2->TEXT!Option 2

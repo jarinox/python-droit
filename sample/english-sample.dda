@@ -5,13 +5,13 @@ Droit Database: Example in english
 @dds 1.2
 
 
-SRTX!hello,hi->TEXT!Hi&arz;
-SRTX!how are you->TEXT!I'm fine, thank you&arz;
+SRTX!hello,hi->TEXT!Hi\!
+SRTX!how are you->TEXT!I'm fine, thank you\!
 SIMT*90!whats the time please,what time is it->TEXT!It's :VAR!global.time
 SIMT*90!who are you,whats your name->TEXT!I'm :VAR!global.droitname
-TEXT!good:INP*time!morning,evening,afternoon,night->TEXT!Good :VAR!inp.time:TEXT! :VAR!global.username:TEXT!&arz;
+TEXT!good:INP*time!morning,evening,afternoon,night->TEXT!Good :VAR!inp.time:TEXT! :VAR!global.username:TEXT!\!
 SRTX!who am i,whats my name->TEXT!I guess you are :VAR!global.username
-SRTX!thank you,thanks->TEXT!You're welcome&arz;
+SRTX!thank you,thanks->TEXT!You're welcome\!
 SRTX!lol,haha->TEXT!funny
 
 SIMT*85!whats the time please->TEXT!It's :VAR!global.time

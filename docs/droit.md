@@ -10,8 +10,8 @@ You can find the source-code of python-droit and this documentation on [Github](
 ## Class
 ### droit.Database()
 **Methods overview**
-- parseScript(*filename*, *plugins=True*, *append=False*)
-- parseScriptString(*string*, *plugins=True*, *append=False*)
+- parseScript(*filename*, *plugins=True*, *append=False*, *legacyValid=False*, *warnings=True*)
+- parseScriptString(*string*, *plugins=True*, *append=False*, *legacyValid=False*, *warnings=True*)
 - parseLegacy(*filename*)
 - writeScript(*filename*)
 - writeScriptString()
@@ -23,13 +23,15 @@ You can find the source-code of python-droit and this documentation on [Github](
 - simpleIO(*text*, *history=True*)
 
 ### Methods
-#### parseScript(*filename*, *plugins=True*, *append=False*)
+#### parseScript(*filename*, *plugins=True*, *append=False*, *legacyValid=False*, *warnings=True*)
 Parses a Droit Database Script file.
 - filename: path to file
 - plugins: use loaded plugins (if false only supports default plugins), if enabled it is required to run `loadPlugins()` before usage
 - append: append to already loaded rules
+- legacyValid: use a faster but inaccurate Droit Database Script validator
+- warnings: enables warnings when parsing a damaged Droit Datbase Script
 
-#### parseScriptString(*string*, *plugins=True*, *append=False*)
+#### parseScriptString(*string*, *plugins=True*, *append=False*, *legacyValid=False*, *warnings=True*)
 Parse Droit Database Script from a string.
 Works like `parseScript()`.
 

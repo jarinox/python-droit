@@ -1,7 +1,8 @@
 # python-droit - a simple library for creating bots
-# Copyright 2020 Jakob Stolze <https://github.com/jarinox>
+# Copyright 2020 Jakob Stolze <https://github.com/jarinox> 
+# Email: c4ehhehfa@relay.firefox.com
 #
-# Version 1.1.1:1
+# Version 1.1.1:2
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -34,7 +35,7 @@ from . import dumper as _dumper
 
 from typing import List as _List
 
-__version__ = "1.1.1:1"
+__version__ = "1.1.1:2"
 __author__ = "Jakob Stolze"
 
 

@@ -125,7 +125,7 @@ class DroitRuleInput:
 class DroitRuleOutput:
 	"""Stores an output-rule"""
 	def __init__(self, tag: str, children: list):
-		self.mode = "input"
+		self.mode = "output"
 		self.tag = tag.upper()
 		self.children = children
 
