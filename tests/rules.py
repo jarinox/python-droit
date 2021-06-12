@@ -48,3 +48,9 @@ if success:
     print("test: 'rules' successful")
 else:
     print("test: 'rules' failed")
+
+
+def getTester():
+    userinput = droit.models.DroitUserinput("run getname")
+    hits = db.useRules(userinput)
+    print(db.formatOut(hits[0], userinput))

@@ -29,3 +29,5 @@ SESSION*isUsername!Max Mustermann,Maxine Mustermann:TEXT!brief->TEXT!Sehr geehrt
 
 TEXT!eine:TEXT!option:RANK!1->TEXT!Option 1
 TEXT!eine:TEXT!option:RANK!2->TEXT!Option 2
+
+SRTX!run getname->GET!name,Who are you? :TEXT!Hi :VAR!get.name:EVAL!session.setUsername(*get.name)

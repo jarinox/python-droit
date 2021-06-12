@@ -1,8 +1,8 @@
 # python-droit - a simple library for creating bots
-# Copyright 2020 Jakob Stolze <https://github.com/jarinox> 
+# Copyright 2020-2021 Jakob Stolze <https://github.com/jarinox> 
 # Email: c4ehhehfa@relay.firefox.com
 #
-# Version 1.1.1:2
+# Version 1.1.1
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -35,7 +35,7 @@ from . import dumper as _dumper
 
 from typing import List as _List
 
-__version__ = "1.1.1:2"
+__version__ = "1.1.1"
 __author__ = "Jakob Stolze"
 
 
@@ -50,6 +50,8 @@ class Database:
         self.cache = models.DroitCache()
         self.history = models.DroitHistory()
         self.temp = {"plugins": {}}
+        self.input = input
+        self.output = print
 
         if(multiSession):
             self.sessions = models.DroitMultiSession()
@@ -270,7 +272,7 @@ class Database:
                     method = getattr(plug, plugin[1])
                     
                     outadd = ""
-                    outadd, self = method(params, self)
+                    outadd, variables, self = method(params, variables, self)
 
                     output += outadd
             
@@ -283,7 +285,7 @@ class Database:
                 
                 if(plug):
                     outadd = ""
-                    outadd, self = plug.block(hit.rule.output[i], variables, self)
+                    outadd, variables, self = plug.block(hit.rule.output[i], variables, self)
                     output += outadd
         
         return output

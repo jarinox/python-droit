@@ -1,38 +1,38 @@
 # main.py - plugins.output - EVAL.session plugin for python-droit
-# Copyright 2020 - Jakob Stolze
+# Copyright 2020-2021 - Jakob Stolze
 #
 # This file is part of python-droit (https://github.com/jarinox/python-droit)
 
 
-def activateByUsername(data, db):
+def activateByUsername(data, variables, db):
     if(db.sessions):
         db.sessions.activateByUsername(data[0])
-    return "", db
+    return "", variables, db
 
-def activateById(data, db):
+def activateById(data, variables, db):
     if(db.sessions):
         db.sessions.activateById(data[0])
-    return "", db
+    return "", variables, db
 
-def saveSessions(data, db):
+def saveSessions(data, variables, db):
     if(db.sessions):
         db.sessions.saveSessions()
-    return "", db
+    return "", variables, db
 
-def getUsername(data, db):
+def getUsername(data, variables, db):
     if(db.sessions):
         if(db.sessions.getActive()):
-            return db.sessions.getActive().username, db
+            return db.sessions.getActive().username, variables, db
         else:
-            return "", db
+            return "", variables, db
     else:
-        return "", db
+        return "", variables, db
 
-def setDroitname(data, db):
+def setDroitname(data, variables, db):
     db.sessions.droitname = data[0]
-    return "", db
+    return "", variables, db
 
-def setUsername(data, db):
+def setUsername(data, variables, db):
     try:
         active = db.sessions.getActive()
         active.username = data[0]
@@ -40,4 +40,4 @@ def setUsername(data, db):
         db.session.setActive(active)
     except:
         pass
-    return "", db
+    return "", variables, db

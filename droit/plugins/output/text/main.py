@@ -1,5 +1,5 @@
 # main.py - plugins.output - TEXT plugin for python-droit
-# Copyright 2020 - Jakob Stolze
+# Copyright 2020-2021 - Jakob Stolze
 #
 # This file is part of python-droit (https://github.com/jarinox/python-droit)
 
@@ -8,4 +8,4 @@ def block(rule, variables, db):
     for item in rule.children:
         output += item + ","
     output = output[:-1]
-    return output, db
+    return output, variables, db
