@@ -35,7 +35,7 @@ from . import dumper as _dumper
 
 from typing import List as _List
 
-__version__ = "1.1.1"
+__version__ = "1.1.2:1"
 __author__ = "Jakob Stolze"
 
 

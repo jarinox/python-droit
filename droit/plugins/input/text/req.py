@@ -12,6 +12,6 @@ class inp:
                 for i in range(0, len(pTexts)):
                     for child in rule.children:
                         pNew.append(pTexts[i] + child + " ")
-                    pTexts = pNew
+                pTexts = pNew
         
         return pTexts

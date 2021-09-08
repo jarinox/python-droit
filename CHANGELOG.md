@@ -3,12 +3,15 @@ All notable changes to this project will be documented in this file.
 
 | Latest release | Version of master branch |  
 |----------------|--------------------------|
-| 1.1.0          | 1.1.1:2 dev              |
+| 1.1.1          | 1.1.2:1 dev              |
 
+
+## 1.1.2:1 dev
+- TEXT req.py bug fixed
 
 ## 1.1.1 release
 ### Added
-- `input()` and `output()` methods added to `droit.Database()`. They point to pythons `input()` and `print()` functions but can be changed. Plugins use those functions when needed. Therefore you can make sure every output goes to the device you want it to (e.g. when using text-to-speech).
+- `input()` and `output()` methods added to `droit.Database()`. They point to pythons `input()` and `print()` functions but can be changed. Plugins use those functions when needed. Therefore you can make sure every output goes to the device you want it to go to (e.g. when using text-to-speech).
 - get input-block added
 
 ### Changed

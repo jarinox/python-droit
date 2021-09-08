@@ -88,6 +88,7 @@ def parseScript(filename: str, plugins=False, legacyValid=False, warnings=True) 
 def parseScriptString(string: str, plugins=False, legacyValid=False, warnings=True) -> _List[_models.DroitRule]:
 	plain = string.split("\n")
 	rules = []
+	info = ""
 	
 	lnum = 0
 	for line in plain:
