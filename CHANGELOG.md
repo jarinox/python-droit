@@ -3,11 +3,17 @@ All notable changes to this project will be documented in this file.
 
 | Latest release | Version of master branch |  
 |----------------|--------------------------|
-| 1.1.1          | 1.1.2:1 dev              |
+| 1.1.2          | 1.1.2                    |
 
 
-## 1.1.2:1 dev
+## 1.1.2 release
+### Added
+- `getInput()` function added to `droit.Database()`. It calls the `db.input` function and processes to answer to a `droit.models.DroitUserinput` object which will be returned.
+
+### Changed
 - TEXT req.py bug fixed
+- `DroitCache` has been improved
+
 
 ## 1.1.1 release
 ### Added

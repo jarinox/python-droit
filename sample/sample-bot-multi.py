@@ -14,6 +14,9 @@ while(running):
     try:
         rawInput = input("(" + db.sessions.droitname + ") ")
         userinput = droit.models.DroitUserinput(rawInput) # Create DroitUserinput object
+        
+        # for python-droit >= 1.1.2 this is also possible:
+        # userinput = db.getInput("(" + db.sessions.droitname + ") ")
 
         hits = db.useRules(userinput) # Run userinput on database
 

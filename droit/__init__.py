@@ -2,7 +2,7 @@
 # Copyright 2020-2021 Jakob Stolze <https://github.com/jarinox> 
 # Email: c4ehhehfa@relay.firefox.com
 #
-# Version 1.1.1
+# Version 1.1.2
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -35,7 +35,7 @@ from . import dumper as _dumper
 
 from typing import List as _List
 
-__version__ = "1.1.2:1"
+__version__ = "1.1.2"
 __author__ = "Jakob Stolze"
 
 
@@ -290,6 +290,10 @@ class Database:
         
         return output
     
+    def getInput(*args, **kargs) -> models.DroitUserinput:
+        rawInput = self.input(*args, **kargs)
+        userinput = models.DroitUserinput(rawInput)
+        return userinput
 
     def simpleIO(self, text: str, history=True) -> str:
         userinput = models.DroitUserinput(text)

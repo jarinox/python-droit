@@ -21,6 +21,7 @@ You can find the source-code of python-droit and this documentation on [Github](
 - useRules(*userinput*)
 - formatOut(*hit*, *userinput*):
 - simpleIO(*text*, *history=True*)
+- getInput(\**args*, \*\**kargs*)
 
 ### Methods
 #### parseScript(*filename*, *plugins=True*, *append=False*, *legacyValid=False*, *warnings=True*)
@@ -71,3 +72,6 @@ Evaluates a DroitSearchHit and returns an output string.
 Simple function for testing databases. Works like a simple bot.
 - text: some input string from the user
 - history: save result in `self.history` ?
+
+#### getInput(\*args, \*\*kargs)
+Passes \*args and \*\*kargs to the current `self.input` function and returns a `models.DroitUserinput`.

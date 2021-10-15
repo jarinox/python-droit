@@ -10,8 +10,10 @@ running = True
 
 while(running):
     try:
-        rawInput = input("Droit> ")
-        userinput = droit.models.DroitUserinput(rawInput) # Create DroitUserinput object
+        userinput = db.getInput("Droit> ") # Runs db.input (which defaults to the python input() function) and returns a models.DroitUserinput object
+        # The line above is equal to:
+        # rawInput = input("Droit> ")
+        # userinput = droit.models.DroitUserinput(rawInput)
 
         hits = db.useRules(userinput) # Run userinput on database
 

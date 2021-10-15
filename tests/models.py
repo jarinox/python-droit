@@ -27,8 +27,8 @@ def sio(inp):
 
 
 # Test cache
-answer1 = db.cache.run(sio, param1="Wer bin ich")
-answer2 = db.cache.run(sio, param1="Wer bin ich")
+answer1 = db.cache.run(sio, "Wer bin ich")
+answer2 = db.cache.run(sio, "Wer bin ich")
 
 if not(answer1 == answer2):
     print("test: 'models' cache not working")
