@@ -290,7 +290,7 @@ class Database:
         
         return output
     
-    def getInput(*args, **kargs) -> models.DroitUserinput:
+    def getInput(self, *args, **kargs) -> models.DroitUserinput:
         rawInput = self.input(*args, **kargs)
         userinput = models.DroitUserinput(rawInput)
         return userinput
