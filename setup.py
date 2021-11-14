@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
 	name='droit',
-	version='1.1.2',
+	version='1.1.3',
 	description='Simple library for creating bots',
 	long_description=long_description,
 	long_description_content_type="text/markdown",
@@ -14,7 +14,7 @@ setup(
 	author_email='jarinox@wolke7.de',
 	license='LGPLv2.1',
 	packages=['droit'],
-	install_requires=['parse'],
+	install_requires=[],
 	include_package_data=True,
 	python_requires='>=3.6',
 	zip_safe=False

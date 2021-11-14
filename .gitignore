@@ -6,3 +6,4 @@ benchmark.py
 *.pyc
 /*.egg-info
 /dist/
+/build/

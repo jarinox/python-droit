@@ -3,8 +3,13 @@ All notable changes to this project will be documented in this file.
 
 | Latest release | Version of master branch |  
 |----------------|--------------------------|
-| 1.1.2          | 1.1.2                    |
+| 1.1.2          | 1.1.3 beta               |
 
+
+## 1.1.3 beta
+### Changed
+- migrated INP plugin from parse to re (removes dependency "parse")
+- getInput bug fixed
 
 ## 1.1.2 release
 ### Added
