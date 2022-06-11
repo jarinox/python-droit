@@ -1,0 +1,12 @@
+Datenbank fuer Droit: Beispiel auf Deutsch
+
+@author Jakob Stolze
+@license CC0
+@dds 2.0
+
+TEXT|wie:TEXT|geht,gehts:TEXT|dir->TEXT|Mir geht es gut\!
+TEXT|wer,wie:TEXT|bist,heißt:TEXT|du->TEXT|Ich bin :VAR|global.droitname
+TEXT|guten abend,gute nacht,guten mittag,guten morgen->TEXT|Wünsche ich dir auch\!
+
+TEXT|du bist:TEXT|toll,nett:TEXT!nicht->TEXT|Danke, du auch\!
+TEXT|ich:TEXT|mag,gern,liebe:TEXT|dich:TEXT!nicht->TEXT|Ich hab dich auch gern

@@ -1,10 +1,48 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-| Latest release | Version of master branch |  
+| Latest release | Version of this branch   |  
 |----------------|--------------------------|
-| 1.1.2          | 1.1.3 beta               |
+| 1.1.2          | 2.0.0 alpha 1            |
 
+
+## 2.0.0 alpha 1
+Version 2.0 is a complete rewrite of python-droit and completly changes how droit works.
+
+### New features
+- Event-based
+- Introducing enhanced Droit Database Script v2.0
+- New plugins that allow a programming-alike usage of droit (manipulate variables, comparsion, recalling, ...)
+
+#### Event-based bot
+Gathering input or sending/printing output is now done by adding Actions to the corresponding event.  
+Natively there are the following events:
+- `input_await` which is the first event to be triggered
+- `input_received` which has to be triggered as callback by the function that gathers the input
+- `output_ready` which has to be triggered as callback by the function that generates output from input
+- `output_sent` which has to be triggered as callback by the function that sends/prints the output
+- `quit` which can be triggered to quit the bot
+```python
+def getInput(*args, **kwargs) -> str:
+    return input("Droit> ")
+
+bot.events["input_await"].actions.append(
+    Action(getInput, callback="input_received")
+)
+```
+You can define custom events to add additional steps in the evaluation process.
+```python
+bot.createEvent("custom_event")
+```
+For an example check out `sample/sample-bot.py`.
+
+#### Droit Database Script 2.0
+DDS v2.0 introduces so called operators. in DDS < v2.0 rule-name and values were connected by `!`. Now they are connected by an operator that effects the behavior of the rule. Avaliable operators are:  
+- `|` = or
+- `&` = and
+- `!` = nor (true if one is false)
+- `^` = xor
+- `%` = nand (true if all are false)
 
 ## 1.1.3 beta
 ### Changed
